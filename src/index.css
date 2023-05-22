@@ -1,0 +1,195 @@
+body {
+    background-color: #2874f0;
+}
+
+.navbar {
+    background-color: black;
+}
+
+.nav-link {
+    color: whitesmoke;
+}
+
+/* This is for indicators of carousel. */
+#indic {
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border: 3px solid black;
+    border-radius: 100%;
+}
+
+#boximg {
+    width: 100%;
+    border: 5px solid black;
+}
+
+#footer {
+    background-color: black;
+    color: white;
+}
+
+/* This is for storename in Footer. */
+#footerStorename {
+    padding-top: 30px;
+}
+
+#footerlinks {
+    text-decoration: none;
+    font-weight: bold;
+    color: rgba(245, 245, 245, 0.663);
+}
+
+#footbar {
+    background-color: black;
+    color: white;
+}
+
+
+#carticon {
+    background-image: url('D:\VS Code Programs\React Programs\shoestore\public\Images\cart96.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 30px;
+}
+
+#cartbadge {
+    background-color: rgb(215, 0, 0);
+    color: whitesmoke;
+    width: 60%;
+    height: 60%;
+    font-size: small;
+    font-weight: 600;
+}
+
+.buybtn {
+    width: 70%;
+    font-weight: bolder;
+    color: black;
+    background-color: yellow;
+}
+
+.buybtn:hover {
+    background-color: lime;
+    color: black;
+}
+
+.cartbtn {
+    width: 30%;
+    font-weight: bolder;
+    color: black;
+    background-color: white;
+}
+
+.cartbtn:hover {
+    background-color: lime;
+    color: black;
+}
+
+.card-body {
+    background-color: aquamarine;
+}
+
+
+.loginbtn {
+    font-weight: bold;
+    color: aqua;
+    border-color: darkblue;
+}
+
+.loginbtn:hover {
+    border-color: darkblue;
+    background-color: darkblue;
+    color: aqua;
+}
+
+.offcanvas {
+    width: 60%;
+}
+
+/* This is for styling of separating 'OR' in login page. */
+#sepline {
+    display: flex;
+    margin-top: 10px;
+}
+
+#sepline:before,
+#sepline:after {
+    content: "";
+    /* This is for showing text upon line. */
+    flex: 1 1;
+    border-bottom: 1px solid rgb(98, 70, 255);
+    margin: auto;
+}
+
+.modal-content {
+    /* background-image: url('D:\VS Code Programs\React Programs\shoestore\public\Images\BG5.jpg'); */
+    background-image: radial-gradient(circle, rgb(5, 5, 102), rgb(6, 6, 76), rgb(19, 19, 19));
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: fit-content;
+    color: white;
+    opacity: 0.7;
+}
+
+.modal-content:hover {
+    opacity: 0.8;
+}
+
+#modalbox {
+    padding-top: 80px;
+}
+
+#line {
+    border: 2px solid rgb(0, 0, 0);
+}
+
+
+/* Media Query for Mobile Devices */
+@media screen and (max-width: 480px) {
+    #productcard {
+        height: 35vh;
+        width: 50vw;
+        object-fit: fill;
+    }
+
+    #productimg {
+        height: 20vh;
+    }
+}
+
+/* Media Query for low resolution  Tablets, Ipads */
+@media (min-width: 481px) and (max-width: 767px) {}
+
+/* Media Query for Tablets Ipads portrait mode */
+@media (min-width: 768px) and (max-width: 1024px) {}
+
+/* Media Query for Laptops and Desktops */
+@media (min-width: 1025px) and (max-width: 1280px) {}
+
+/* Media Query for Large screens */
+@media screen and (min-width: 1281px) {
+    /* body {
+        background-color: lightgreen;
+    } */
+
+    .carousel .carousel-item {
+        height: 400px;
+    }
+
+    .carousel-item img {
+        height: 400px;
+    }
+
+    #productcard {
+        height: 60vh;
+        width: 21vw;
+        object-fit: fill;
+    }
+
+    #productimg {
+        height: 40vh;
+    }
+
+}
