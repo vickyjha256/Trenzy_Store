@@ -24,6 +24,7 @@ const AdminLogin = (props) => {
             // history.push("/"); // Since, useHistory() is replaced with useNavigate so we have to use navigate() instead of push().
             // props.showAlert("Logged in Successfully.", "success");
             navigate("/admindashboard");
+            window.location.reload(true);
         }
         else {
             // props.showAlert("Invalid email or password !!", "danger");

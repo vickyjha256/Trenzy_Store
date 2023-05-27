@@ -16,13 +16,6 @@ const Navbar = (props) => {
         redirect("/login");
     }
 
-    const handleAdminLogout = () => {
-        sessionStorage.removeItem("token");
-        // sessionStorage.clear();
-        props.showAlert("Admin logged out successfully.", "success");
-        redirect("/");
-    }
-
     const context = useContext(ProductContext);
     const { carts } = context;
 
@@ -72,13 +65,6 @@ const Navbar = (props) => {
                                         <button type="button" onClick={handleLogin} className="btn btn-outline mx-2 loginbtn">Login</button>
                                     </form>}
                                 </div>
-                                <div className='d-flex justify-content-center'>
-                                    {sessionStorage.getItem("token") ? <>
-                                        <Link style={{ backgroundColor: "black" }} className="btn btn-primary mx-3" to="/changepassword" role="button">Change Password</Link>
-                                        <button onClick={handleAdminLogout} className="btn btn-danger">Admin - Log Out</button>
-                                    </> : <form className="d-flex">
-                                    </form>}
-                                </div>
                             </div>
                             <div className="offcanvas offcanvas-start bg-dark" data-bs-scroll="true" tabIndex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
                                 <div className="offcanvas-header">
@@ -105,9 +91,9 @@ const Navbar = (props) => {
                                             </span>
                                         </Link>
                                         {sessionStorage.getItem("usertoken") ? <>
-                                            <button onClick={handleLogout} className="btn btn-danger"> Log Out</button>
-                                        </> : <form className="d-flex">
-                                            <button type="button" onClick={handleLogin} data-bs-dismiss="offcanvas" className="btn btn-outline mx-2 loginbtn">Login</button>
+                                            <button style={{ width: "100%" }} onClick={handleLogout} className="btn btn-danger"> Log Out</button>
+                                        </> : <form style={{ width: "100%" }} className="d-flex">
+                                            <button style={{ width: "100%" }} type="button" onClick={handleLogin} data-bs-dismiss="offcanvas" className="btn btn-outline mx-2 loginbtn">Login</button>
                                         </form>}
                                         {/* <button type="button" onClick={handleLogin} data-bs-dismiss="offcanvas" className="btn btn-outline mx-2 loginbtn">Login</button> */}
                                     </div>
@@ -125,22 +111,6 @@ const Navbar = (props) => {
                                         </> : <form className="d-flex">
                                             {/* <Link className="btn btn-primary mx-1" to="/login" role="button">Login</Link>
                                 <Link className="btn btn-primary mx-1" to="/signup" role="button">Sign Up</Link> */}
-                                        </form>}
-                                    </div>
-
-                                    <div className='d-flex justify-content-center my-2'>
-                                        {sessionStorage.getItem("token") ? <>
-                                            <Link style={{ backgroundColor: "black", width: "100%" }} className="btn btn-primary mx-3" to="/changepassword" role="button">Change Admin Password</Link>
-                                            {/* <button onClick={handleAdminLogout} className="btn btn-danger">Admin - Log Out</button> */}
-                                        </> : <form className="d-flex">
-                                        </form>}
-                                    </div>
-
-                                    <div className='d-flex justify-content-center my-2'>
-                                        {sessionStorage.getItem("token") ? <>
-                                            {/* <Link style={{ backgroundColor: "black" }} className="btn btn-primary mx-3" to="/changepassword" role="button">Change Admin Password</Link> */}
-                                            <button style={{ width: "100%" }} onClick={handleAdminLogout} className="btn btn-danger">Admin - Log Out</button>
-                                        </> : <form className="d-flex">
                                         </form>}
                                     </div>
                                 </div>

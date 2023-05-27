@@ -274,6 +274,7 @@ const CartState = (props) => {
         });
         const cart = await response.json();
         setcarts(carts.concat(cart));
+        showAlert("Product added to cart." , "success");
     }
 
     // Delete Cart()

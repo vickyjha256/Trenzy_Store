@@ -21,7 +21,7 @@ body {
 
 #boximg {
     width: 100%;
-    border: 5px solid black;
+    /* border: 5px solid black; */
 }
 
 #footer {
@@ -157,6 +157,17 @@ body {
     #productimg {
         height: 20vh;
     }
+
+    
+    #adminproductcard {
+        height: 75vh;
+        width: 100vw;
+        object-fit: fill;
+    }
+
+    #adminproductimg {
+        height: 36vh;
+    }
 }
 
 /* Media Query for low resolution  Tablets, Ipads */
@@ -190,6 +201,23 @@ body {
 
     #productimg {
         height: 40vh;
+    }
+
+    #adminproductcard {
+        height: 85vh;
+        width: 21vw;
+        object-fit: fill;
+    }
+
+    #adminproductimg {
+        height: 40vh;
+    }
+
+    #boximg {
+        height: 400px;
+    }
+    #boximg:hover {
+        opacity: 0.9;
     }
 
 }

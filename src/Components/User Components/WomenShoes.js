@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import ProductContext from '../../Context/Products/ProductContext'
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 const WomenShoes = (props) => {
     const context = useContext(ProductContext);
@@ -44,13 +45,14 @@ const WomenShoes = (props) => {
         localStorage.setItem("Number", credentials.number);
         localStorage.setItem("Address", credentials.address);
     }
+    let navigate = useNavigate();
 
     return (
         <>
             <div id='divItem' className='container-fluid'>
                 <div className='row'>
-                   {/* Below code is for modal popup. */}
-                   <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    {/* Below code is for modal popup. */}
+                    <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div className="modal-dialog modal-dialog-centered">
                             <div className="modal-content">
                                 <div className="modal-header">
@@ -101,15 +103,26 @@ const WomenShoes = (props) => {
                     </div>
 
                     {products.map((element) => {
-                        return <div className='col-xxl-3 col-6 my-3' key={element.id}>
+                        return <div className='d-flex justify-content-center col-xxl-3 col-6 my-3' key={element.id}>
                             {/* <img style={{height: "100%", width: "100%"}} src={element.image} alt="" /> */}
-                            <div style={{ height: "100%", width: "100%" }} className="card">
-                                <img style={{ height: "100%", width: "100%" }} src={element.image} className="card-img-top" alt="..." />
+                            <div id='productcard' className="card">
+                                <img id='productimg' src={element.image} className="card-img-top" alt="..." />
                                 <div className="card-body">
                                     <h5 className="card-title">{element.brand}</h5>
                                     <p className="card-text">{element.price}</p>
-                                    <Link onClick={() => { addCart(element._id); /* </div>props.showAlert("Product deleted successfully", "success");*/ }} className="btn btn-info cartbtn">🛒</Link>
-                                    <Link data-bs-toggle="modal" data-bs-target="#exampleModal" className="btn btn-info buybtn">Buy now</Link>
+
+                                    <button onClick={sessionStorage.getItem("usertoken") ? () => {
+                                        addCart(element._id); Swal.fire({
+                                            color: "white",
+                                            title: "Product added to cart successfully !!",
+                                            text: "",
+                                            icon: "success",
+                                            timer: 1000,
+                                            showConfirmButton: false,
+                                            background: "orangered"
+                                        });
+                                    } : () => { navigate("/login"); props.showAlert("Please login first to see your cart items.", "info"); console.log("User not login."); }} className="btn btn-info cartbtn">🛒</button>
+                                    <button data-bs-toggle="modal" data-bs-target="#exampleModal" className="btn btn-info buybtn">Buy now</button>
                                 </div>
                             </div>
                         </div>

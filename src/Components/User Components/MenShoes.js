@@ -1,5 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import ProductContext from '../../Context/Products/ProductContext';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2'
 
 const MenShoes = (props) => {
     const context = useContext(ProductContext);
@@ -44,6 +46,7 @@ const MenShoes = (props) => {
         localStorage.setItem("Number", credentials.number);
         localStorage.setItem("Address", credentials.address);
     }
+    let navigate = useNavigate();
 
     return (
         <>
@@ -110,7 +113,17 @@ const MenShoes = (props) => {
                                     <h5 className="card-title">{element.brand}</h5>
                                     <p className="card-text">{element.price}</p>
 
-                                    <button onClick={() => { addCart(element._id); /* </div>props.showAlert("Product deleted successfully", "success");*/ }} className="btn btn-info cartbtn">🛒</button>
+                                    <button onClick={sessionStorage.getItem("usertoken") ? () => {
+                                        addCart(element._id); Swal.fire({
+                                            color: "white",
+                                            title: "Product added to cart successfully !!",
+                                            text: "",
+                                            icon: "success",
+                                            timer: 1000,
+                                            showConfirmButton: false,
+                                            background: "orangered"
+                                        });
+                                    } : () => { navigate("/login"); props.showAlert("Please login first to see your cart items.", "info"); console.log("User not login."); }} className="btn btn-info cartbtn">🛒</button>
                                     <button data-bs-toggle="modal" data-bs-target="#exampleModal" className="btn btn-info buybtn">Buy now</button>
                                 </div>
                             </div>

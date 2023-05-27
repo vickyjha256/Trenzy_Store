@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from './Components/User Components/Navbar';
@@ -14,7 +14,8 @@ import AdminSignup from './Components/Admin Components/AdminSignup';
 import AdminLogin from './Components/Admin Components/AdminLogin';
 import AdminProducts from './Components/Admin Components/AdminProducts';
 import Alert from './Components/Admin Components/Alert';
-import ProductContext from './Context/Products/ProductContext';
+import AddProducts from './Components/Admin Components/AddProducts';
+import AdminNavbar from './Components/Admin Components/AdminNavbar';
 
 function App() {
   // const context = useContext(ProductContext);
@@ -34,16 +35,16 @@ function App() {
     <>
       <CartState>
         <Router>
-          <Navbar showAlert={showAlert} />
+          {sessionStorage.getItem("token") ? <> <AdminNavbar showAlert={showAlert} /> </> : <> <Navbar showAlert={showAlert} /> </>}
           <Alert alert={alert} />
           {/* <div className=''> */}
           <Routes>
             <Route exact path="/" element={<Home showAlert={showAlert} />} />
-            <Route exact path="/men" element={<MenShoes shoetype="men" />} />
+            <Route exact path="/men" element={<MenShoes showAlert={showAlert} shoetype="men" />} />
             <Route exact path="/women" element={<WomenShoes shoetype="women" />} />
-            <Route exact path="/casualmen" element={<MenShoes shoetype="CasualMen" />} />
-            <Route exact path="/formalmen" element={<MenShoes shoetype="FormalMen" />} />
-            <Route exact path="/ethnicmen" element={<MenShoes shoetype="EthnicMen" />} />
+            <Route exact path="/casualmen" element={<MenShoes showAlert={showAlert} shoetype="CasualMen" />} />
+            <Route exact path="/formalmen" element={<MenShoes showAlert={showAlert} shoetype="FormalMen" />} />
+            <Route exact path="/ethnicmen" element={<MenShoes showAlert={showAlert} shoetype="EthnicMen" />} />
             <Route exact path="/casualwomen" element={<WomenShoes shoetype="CasualWomen" />} />
             <Route exact path="/formalwomen" element={<WomenShoes shoetype="FormalWomen" />} />
             <Route exact path="/ethnicwomen" element={<WomenShoes shoetype="EthnicWomen" />} />
@@ -54,6 +55,7 @@ function App() {
             <Route exact path="/createadmin" element={<AdminSignup showAlert={showAlert} />} />
             <Route exact path="/adminlogin" element={<AdminLogin showAlert={showAlert} />} />
             <Route exact path="/admindashboard" element={<AdminProducts showAlert={showAlert} />} />
+            <Route exact path="/addproducts" element={<AddProducts showAlert={showAlert} />} />
           </Routes>
           {/* </div> */}
         </Router>
