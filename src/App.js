@@ -41,13 +41,13 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Home showAlert={showAlert} />} />
             <Route exact path="/men" element={<MenShoes showAlert={showAlert} shoetype="men" />} />
-            <Route exact path="/women" element={<WomenShoes shoetype="women" />} />
+            <Route exact path="/women" element={<WomenShoes showAlert={showAlert} shoetype="women" />} />
             <Route exact path="/casualmen" element={<MenShoes showAlert={showAlert} shoetype="CasualMen" />} />
             <Route exact path="/formalmen" element={<MenShoes showAlert={showAlert} shoetype="FormalMen" />} />
             <Route exact path="/ethnicmen" element={<MenShoes showAlert={showAlert} shoetype="EthnicMen" />} />
-            <Route exact path="/casualwomen" element={<WomenShoes shoetype="CasualWomen" />} />
-            <Route exact path="/formalwomen" element={<WomenShoes shoetype="FormalWomen" />} />
-            <Route exact path="/ethnicwomen" element={<WomenShoes shoetype="EthnicWomen" />} />
+            <Route exact path="/casualwomen" element={<WomenShoes showAlert={showAlert} shoetype="CasualWomen" />} />
+            <Route exact path="/formalwomen" element={<WomenShoes showAlert={showAlert} shoetype="FormalWomen" />} />
+            <Route exact path="/ethnicwomen" element={<WomenShoes showAlert={showAlert} shoetype="EthnicWomen" />} />
             <Route exact path="/message" element={<Message />} />
             <Route exact path="/register" element={<UserSignup showAlert={showAlert} />} />
             <Route exact path="/login" element={<UserLogin showAlert={showAlert} />} />

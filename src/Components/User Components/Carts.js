@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import CartItems from './CartItems';
 import ProductContext from '../../Context/Products/ProductContext';
 import { useNavigate } from 'react-router-dom';
@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 const Carts = (props) => {
     const context = useContext(ProductContext);
     const { carts, getCart } = context;
+
+    const { showAlert } = props;
 
     const navigate = useNavigate();
     useEffect(() => {
@@ -18,20 +20,6 @@ const Carts = (props) => {
             navigate("/login");
         }
     }, []);
-
-    // const [cart, setcart] = useState({ id: "", quantity: "" });
-    // const updateCart = (currentCart, ) => {
-    //     // ref.current.click();
-    //     setcart({ id: currentCart._id, quantity:  });
-    // }
-
-    // const handleClick = (e) => {
-    //     console.log("Updating Products: " + product);
-    //     e.preventDefault();
-    //     editProduct(product.id, product.uimage, product.ubrand, product.udescription, product.utype, product.ugender, product.uprice, product.uavailability);
-    //     refClose.current.click();
-    //     // props.showAlert("Product updated successfully", "success");
-    // }
 
     let total_cartItems_price = 0;
     let total_Items = 0;
@@ -46,7 +34,7 @@ const Carts = (props) => {
                         total_Items = total_Items + 1;
                         total_cartItems_price = total_cartItems_price + product.price * product.quantity;
                         discount = discount + ((product.price * product.quantity) / 10);
-                        return <CartItems key={product._id} item={product} />
+                        return <CartItems key={product._id} item={product} showAlert={showAlert} />
                     }
                 )}
 

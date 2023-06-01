@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import ProductContext from '../../Context/Products/ProductContext';
 
@@ -16,8 +16,16 @@ const Navbar = (props) => {
         redirect("/login");
     }
 
+    useEffect(() => {
+        if (sessionStorage.getItem("usertoken")) {
+            // navigate("/admindashboard");
+            // navigate("/carts");
+            getCart();
+        }
+    }, []);
+
     const context = useContext(ProductContext);
-    const { carts } = context;
+    const { carts,getCart } = context;
 
     let total_Cart_Items = carts.length;
 
