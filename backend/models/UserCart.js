@@ -22,6 +22,12 @@ const UserCartSchema = new Schema({
         type: Number,
         required: true
     },
+    size: {
+        type: Number,
+        default: 5,
+        required: true,
+        min: [5, "Size can't be less than 1."],
+    },
     quantity: {
         type: Number,
         default: 1,
