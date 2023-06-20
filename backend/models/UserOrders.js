@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
-const UserCartSchema = new Schema({
+const UserOrderSchema = new Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user'
@@ -32,7 +32,15 @@ const UserCartSchema = new Schema({
         default: 1,
         required: true
         // min: [1, "Quantity can't be less than 1."],
+    },
+    contact: {
+        type: Number,
+        required: true
+    },
+    address: {
+        type: String,
+        required: true
     }
 });
 
-module.exports = mongoose.model('usercart', UserCartSchema);
+module.exports = mongoose.model('userorder', UserOrderSchema);

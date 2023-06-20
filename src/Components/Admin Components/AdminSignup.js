@@ -9,8 +9,8 @@ const AdminSignup = (props) => {
         e.preventDefault();
         const { name, email, password, conpassword } = credentials;
         if (password !== conpassword) {
-            // props.showAlert("Passwords are not equal ⚠", "danger");
-            alert("Passwords are not equal ⚠");
+            props.showAlert("Passwords are not equal ⚠", "danger");
+            // alert("Passwords are not equal ⚠");
         }
         else {
             // const response = await fetch("https://skynotes.herokuapp.com/api/auth/createuser", {
@@ -27,7 +27,7 @@ const AdminSignup = (props) => {
             if (json.success) {
                 // Save the auth token and redirect.
                 sessionStorage.setItem('token', json.admintoken); // We use sessionStorage because it destroys data after ending session.
-                // props.showAlert("Account Created Successfully.", "success");
+                props.showAlert("Admin Created Successfully.", "success");
                 // navigate("/");
                 // const response2 = await fetch("https://skynotes.herokuapp.com/api/auth/login", {
                 // const response2 = await fetch("https://notes-backend-render.onrender.com/api/auth/login", {
@@ -67,7 +67,7 @@ const AdminSignup = (props) => {
                     {/* <div style={{ backgroundColor: "aqua" }} className="modal-content"> */}
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title"><b>Create new account</b></h5>
+                            <h5 className="modal-title"><b>Admin - Create new account</b></h5>
                         </div>
                         <div className="modal-body">
                             <div>

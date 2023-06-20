@@ -5,7 +5,7 @@ import Swal from 'sweetalert2'
 
 const MenShoes = (props) => {
     const context = useContext(ProductContext);
-    const { products, menItems, casualMen, formalMen, ethnicMen, addCart } = context;
+    const { products, menItems, casualMen, formalMen, ethnicMen, addCart, sizeFunc, elemIdFunc } = context;
 
     useEffect(() => {
         if (props.shoetype === "CasualMen") {
@@ -22,12 +22,12 @@ const MenShoes = (props) => {
 
     const [credentials, setCredentials] = useState({ number: "", address: "" });
     const onChange = (e) => {
-        setCredentials({ ...credentials, [e.target.name]: e.target.value })
+        setCredentials({ ...credentials, [e.target.name]: e.target.value });
     }
 
     const btmove = (e) => {
         let movingBtn = document.getElementById("outdiv");
-        if (credentials.number || credentials.address === "") {
+        if (credentials.number === "" || credentials.address === "") {
             if (movingBtn.className === "d-flex justify-content-start") {
                 movingBtn.className = Math.floor(Math.random() * 12) > 6 ? "d-flex justify-content-center" : "d-flex justify-content-end"
             } else if (movingBtn.className === "d-flex justify-content-center") {
@@ -56,14 +56,10 @@ const MenShoes = (props) => {
             title: "Product added to cart successfully !!",
             text: "",
             icon: "success",
-            timer: 1000,
+            timer: 1500,
             showConfirmButton: false,
-            background: "orangered"
+            background: "#0080ff"
         });
-    }
-
-    const addToCart = () => {
-        console.log("Added to cart successfully.") // This is for testing only.
     }
 
     return (
@@ -93,7 +89,7 @@ const MenShoes = (props) => {
                                     {/* <button style={{ width: "100%", backgroundColor: "blue" }} type="submit" className="btn btn-primary my-1"><b>Submit</b></button> */}
 
                                     <div id='outdiv' className='d-flex justify-content-center'>
-                                        <div style={{ width: "30%" }} id='indiv' onMouseOver={(credentials.number || credentials.address) === "" ? btmove : ""}>
+                                        <div style={{ width: "30%" }} id='indiv' onMouseOver={(credentials.number === "" || credentials.address === "") ? btmove : ""}>
                                             <button onClick={handleDetails} disabled={credentials.number === "" || credentials.address === ""} style={{ width: "100%", backgroundColor: "blue" }} type="submit" className="btn btn-primary my-1" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#exampleModal2"><b>Submit</b></button>
                                         </div>
                                     </div>
@@ -129,14 +125,10 @@ const MenShoes = (props) => {
                                 <img id='productimg' src={element.image} className="card-img-top" alt="..." />
                                 <div className="card-body">
                                     <h5 className="card-title">{element.brand}</h5>
-                                    <p className="card-text">{element.price}</p>
+                                    <p className="card-text"><b>₹ {element.price} </b></p>
 
 
                                     {/* Cart Size Choosing Modal */}
-                                    {/* <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cart">
-                                        Launch demo modal
-                                    </button> */}
-
                                     <div className="modal fade" id="cart" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div className="modal-dialog modal-dialog-centered">
                                             <div style={{ opacity: "1" }} className="modal-content">
@@ -147,14 +139,15 @@ const MenShoes = (props) => {
                                                 <div style={{ backgroundColor: "white", color: "black" }} className="modal-body">
                                                     <h6>Select Size: UK/India </h6>
                                                     <div className="grid text-center">
-                                                        <button type="button" onClick={addToCart} className="btn btn-warning mx-2">5</button>
-                                                        <button type="button" onClick={addToCart} className="btn btn-warning mx-2">6</button>
-                                                        <button type="button" onClick={addToCart} className="btn btn-warning mx-2">7</button>
-                                                        <button type="button" onClick={addToCart} className="btn btn-warning mx-2">8</button>
-                                                        <button type="button" onClick={addToCart} className="btn btn-warning mx-2">9</button>
-                                                        <button type="button" onClick={addToCart} className="btn btn-warning mx-2">10</button>
-                                                        <button type="button" onClick={addToCart} className="btn btn-warning mx-2">11</button>
-                                                        <button type="button" onClick={addToCart} className="btn btn-warning mx-2">12</button>
+                                                        <button type='button' onClick={() => { sizeFunc(5); addCart(); sweetCartAlert(); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">5</button>
+                                                        <button type='button' onClick={() => { sizeFunc(6); addCart(); sweetCartAlert(); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">6</button>
+                                                        <button type='button' onClick={() => { sizeFunc(7); addCart(); sweetCartAlert(); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">7</button>
+                                                        <button type='button' onClick={() => { sizeFunc(8); addCart(); sweetCartAlert(); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">8</button>
+                                                        <button type='button' onClick={() => { sizeFunc(9); addCart(); sweetCartAlert(); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">9</button>
+                                                        <button type='button' onClick={() => { sizeFunc(10); addCart(); sweetCartAlert(); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">10</button>
+                                                        <button type='button' onClick={() => { sizeFunc(11); addCart(); sweetCartAlert(); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">11</button>
+                                                        <button type='button' onClick={() => { sizeFunc(12); addCart(); sweetCartAlert(); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">12</button>
+
                                                     </div>
                                                 </div>
                                                 {/* <div className="modal-footer">
@@ -163,26 +156,17 @@ const MenShoes = (props) => {
                                             </div>
                                         </div>
                                     </div>
-                                    <button onClick={sessionStorage.getItem("usertoken") ? () => {
-                                        addCart(element._id);
-                                        // Swal.fire({
-                                        //     color: "white",
-                                        //     title: "Product added to cart successfully !!",
-                                        //     text: "",
-                                        //     icon: "success",
-                                        //     timer: 1000,
-                                        //     showConfirmButton: false,
-                                        //     background: "orangered"
-                                        // });
-                                        sweetCartAlert();
-                                    } : () => { navigate("/login"); props.showAlert("Please login first to see your cart items.", "info"); console.log("User not login."); }} data-bs-toggle="modal" data-bs-target="#cart" className="btn btn-info cartbtn">🛒</button>
-                                    <button data-bs-toggle="modal" data-bs-target="#exampleModal" className="btn btn-info buybtn">Buy now</button>
+                                    <button id='crtbtn' onClick={sessionStorage.getItem("usertoken") ? () => {
+                                        elemIdFunc(element._id); // It sets the element id in product state file for passing it into addCart().
+                                    } : () => { navigate("/login"); props.showAlert("Please login first to see your cart items.", "info"); console.log("User not login."); }} data-bs-toggle={sessionStorage.getItem("usertoken") ? "modal" : ""} data-bs-target={sessionStorage.getItem("usertoken") ? "#cart" : ""} className="btn btn-info cartbtn">🛒</button>
+
+                                    <button id='ordbtn' onClick={sessionStorage.getItem('usertoken') ? () => { elemIdFunc(element._id); } : () => { navigate("/login"); props.showAlert("Please login first to make an order.", "info"); console.log("User not login."); }} data-bs-toggle={sessionStorage.getItem("usertoken") ? "modal" : ""} data-bs-target={sessionStorage.getItem("usertoken") ? "#exampleModal" : ""} className="btn btn-info buybtn">Buy now</button>
                                 </div>
                             </div>
                         </div>
                     })}
                 </div>
-            </div>
+            </div >
         </>
     )
 }

@@ -1,5 +1,6 @@
 body {
-    background-color: #2874f0;
+    /* background-color: #2874f0; */
+    background-color: #37455b;
 }
 
 .navbar {
@@ -87,7 +88,8 @@ body {
 }
 
 .card-body {
-    background-color: aquamarine;
+    /* background-color: aquamarine; */
+    background-color: #a2bee8;
 }
 
 
@@ -118,13 +120,16 @@ body {
     content: "";
     /* This is for showing text upon line. */
     flex: 1 1;
-    border-bottom: 1px solid rgb(98, 70, 255);
+    /* border-bottom: 1px solid rgb(98, 70, 255); */
+    border-bottom: 1px solid #aaf3ff;
     margin: auto;
 }
 
 .modal-content {
     /* background-image: url('D:\VS Code Programs\React Programs\shoestore\public\Images\BG5.jpg'); */
-    background-image: radial-gradient(circle, rgb(5, 5, 102), rgb(6, 6, 76), rgb(19, 19, 19));
+    /* background-image: radial-gradient(circle, rgb(5, 5, 102), rgb(6, 6, 76), rgb(19, 19, 19)); */
+
+    background-image: radial-gradient(circle, rgb(84, 84, 142), rgb(75, 75, 129), rgb(56, 106, 106));
 
     background-repeat: no-repeat;
     background-size: cover;
@@ -179,14 +184,198 @@ body {
     }
 }
 
+/* Media Query for Samsung Galaxy S8+ device */
+@media (min-width: 360px) and (max-width: 740px) {
+    #productcard {
+        height: 40vh;
+        width: 50vw;
+        object-fit: fill;
+    }
+
+    #productimg {
+        height: 20vh;
+    }
+
+    .btn {
+        height: 5vh;
+        font-size: small;
+    }
+
+    #adminproductcard {
+        height: 75vh;
+        width: 100vw;
+        object-fit: fill;
+    }
+
+    #adminproductimg {
+        height: 36vh;
+    }
+
+
+    #qtyinput {
+        width: 20%;
+    }
+
+    #qtybtn {
+        width: 80%;
+    }
+}
+
+/* Media Query for Samsung Galaxy Fold device */
+@media (min-width: 280px) and (max-width: 653px) {
+    #productcard {
+        height: 40vh;
+        width: 50vw;
+        object-fit: fill;
+        font-size: smaller;
+    }
+
+    #productimg {
+        height: 20vh;
+    }
+
+    #crtbtn {
+        width: 25%;
+        height: 4vh;
+        font-size: small;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    #ordbtn {
+        width: 75%;
+        height: 4vh;
+        font-size: small;
+        margin: 0;
+        padding: 0;
+    }
+
+    #adminproductcard {
+        height: 75vh;
+        width: 100vw;
+        object-fit: fill;
+    }
+
+    #adminproductimg {
+        height: 36vh;
+    }
+
+
+    #qtyinput {
+        width: 20%;
+    }
+
+    #qtybtn {
+        width: 80%;
+    }
+}
+
 /* Media Query for low resolution  Tablets, Ipads */
-@media (min-width: 481px) and (max-width: 767px) {}
+@media (min-width: 375px) and (max-width: 767px) {
+    #productcard {
+        height: 38vh;
+        width: 50vw;
+        object-fit: fill;
+    }
+
+    #productimg {
+        height: 20vh;
+    }
+
+
+    #adminproductcard {
+        height: 75vh;
+        width: 100vw;
+        object-fit: fill;
+    }
+
+    #adminproductimg {
+        height: 36vh;
+    }
+
+
+    #qtyinput {
+        width: 20%;
+    }
+
+    #qtybtn {
+        width: 80%;
+    }
+}
 
 /* Media Query for Tablets Ipads portrait mode */
-@media (min-width: 768px) and (max-width: 1024px) {}
+@media (min-width: 768px) and (max-width: 1024px) {
+    #productcard {
+        height: 41vh;
+        width: 50vw;
+        object-fit: fill;
+    }
+
+    #productimg {
+        height: 27vh;
+    }
+
+
+    #adminproductcard {
+        height: 75vh;
+        width: 100vw;
+        object-fit: fill;
+    }
+
+    #adminproductimg {
+        height: 36vh;
+    }
+
+
+    #qtyinput {
+        width: 20%;
+    }
+
+    #qtybtn {
+        width: 80%;
+    }
+}
 
 /* Media Query for Laptops and Desktops */
-@media (min-width: 1025px) and (max-width: 1280px) {}
+@media (min-width: 1025px) and (max-width: 1280px) {
+
+    .carousel .carousel-item {
+        height: 400px;
+    }
+
+    .carousel-item img {
+        height: 400px;
+    }
+
+    #productcard {
+        height: 60vh;
+        width: 21vw;
+        object-fit: fill;
+    }
+
+    #productimg {
+        height: 40vh;
+    }
+
+    #adminproductcard {
+        height: 85vh;
+        width: 21vw;
+        object-fit: fill;
+    }
+
+    #adminproductimg {
+        height: 40vh;
+    }
+
+    #boximg {
+        height: 400px;
+    }
+
+    #boximg:hover {
+        opacity: 0.9;
+    }
+}
 
 /* Media Query for Large screens */
 @media screen and (min-width: 1281px) {

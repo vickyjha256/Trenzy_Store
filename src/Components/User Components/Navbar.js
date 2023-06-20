@@ -25,7 +25,7 @@ const Navbar = (props) => {
     }, []);
 
     const context = useContext(ProductContext);
-    const { carts,getCart } = context;
+    const { carts, getCart } = context;
 
     let total_Cart_Items = carts.length;
 

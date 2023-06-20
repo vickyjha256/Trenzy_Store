@@ -38,6 +38,8 @@ router.post('/registerUser', [
             name: req.body.name,
             email: req.body.email,
             password: secPassWord,
+            contact: "",
+            address: ""
         });
 
         // Below code generates the authtoken for verifying user.

@@ -21,9 +21,9 @@ const UserLogin = (props) => {
             // Save the auth token and redirect.
             sessionStorage.setItem('usertoken', json.authtoken); // We use sessionStorage because it destroys data after ending session.
             // history.push("/"); // Since, useHistory() is replaced with useNavigate so we have to use navigate() instead of push().
-            props.showAlert("Logged in Successfully.", "success");
             navigate("/");
             window.location.reload(true);
+            props.showAlert("Logged in Successfully.", "success");
         }
         else {
             props.showAlert("Invalid email or password !!", "danger");
@@ -34,7 +34,7 @@ const UserLogin = (props) => {
     const onChange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value })
     }
-
+    
     
     // const btmove = (e) => {
     //     let movingBtn = document.getElementById("outdiv");
@@ -74,7 +74,7 @@ const UserLogin = (props) => {
                                         <label htmlFor="password">Password</label>
                                     </div>
 
-                                    <button style={{ width: "100%", backgroundColor: "blue" }} type="submit" className="btn btn-primary my-1"><b>Login</b></button>
+                                    <button style={{ width: "100%", backgroundColor: "#042459" }} type="submit" className="btn btn-primary my-1"><b>Login</b></button>
 
                                     {/* <div id='outdiv' className='d-flex justify-content-center'>
                                         <div style={{ width: "30%" }} id='indiv' onMouseOver={(credentials.email || credentials.password) === "" ? btmove : ""}>
@@ -86,10 +86,10 @@ const UserLogin = (props) => {
 
                                     <div align="center">
                                         <div>
-                                            <Link style={{ color: "#2baffa", textDecoration: "none" }} to='/forgotpassword'>Forgotten Password?</Link>
+                                            <Link style={{ color: "#aaf3ff", textDecoration: "none" }} to='/forgotpassword'>Forgotten Password?</Link>
                                         </div>
                                         <div>
-                                            Don't have an account? <Link style={{ color: "#2baffa", textDecoration: "none", fontWeight: "bold" }} id="newaccount" to='/register'>Sign Up</Link>
+                                            Don't have an account? <Link style={{ color: "#aaf3ff", textDecoration: "none", fontWeight: "bold" }} id="newaccount" to='/register'>Sign Up</Link>
                                         </div>
                                     </div>
                                 </form>

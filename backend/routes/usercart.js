@@ -5,7 +5,7 @@ const UserCart = require('../models/UserCart');
 const fetchuser = require('../middleware/fetchuser');
 const AdminProducts = require('../models/AdminProducts');
 
-// ROUTE 1:--> Get all the cart products using: GET "/api/usercart/fetchcart". Login required.
+// ROUTE 1:--> Get all the ordered products using: GET "/api/usercart/fetchcart". Login required.
 router.get('/fetchcart', fetchuser, async (req, res) => {
     try {
         const cart = await UserCart.find({ user: req.user.id }); // It finds carts of the corresponding user.
@@ -17,9 +17,9 @@ router.get('/fetchcart', fetchuser, async (req, res) => {
 });
 
 // ROUTE 2:--> Add cart using POST "/api/usercart/addcart". Login required.
-router.post("/addcart/:id", fetchuser, [
+router.post("/addcart/:id/:shoesize", fetchuser, [
 ], async (req, res) => {
-    try {
+    try { 
         // Finds the validation errors in this request and wraps them in an object with handy functions.
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -31,19 +31,15 @@ router.post("/addcart/:id", fetchuser, [
             return res.status(401).send("Not found !!"); // Return not found if product not found.
         }
 
-        let alreadyInCart = await UserCart.find
+        // let alreadyInCart = await UserCart.find
 
         const cart = new UserCart({
-            // Note:-> Below we used the data like this way because data is de-structured above.
-            // Here, we are also saving admin id so that we can find products stored by which admin.
-            // image, brand, description, price, quantity, user: req.user.id
-
-
             // Note:-> This way of creating object used when data is not de-structured.
             image: product.image,
             brand: product.brand,
             description: product.description,
             price: product.price,
+            size: req.params.shoesize,
             user: req.user.id,
         });
 
@@ -54,6 +50,7 @@ router.post("/addcart/:id", fetchuser, [
 
         // res.json({"ID of Product": req.params.id}); // This is for testing only.
         res.json({ "Product": product, savedcart }); // This is for testing only.
+        // res.json({ "ID: ": req.params.id, "Size: ": req.params.size }); // This is for testing only.
 
     } catch (error) {
         console.error(error.message);

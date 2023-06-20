@@ -260,21 +260,36 @@ const CartState = (props) => {
     // ---------------------------- Contexts for Operations on Carts at user side. -----------------------------
     const [carts, setcarts] = useState([]);
 
+    let shoesize = null, id = null;
+    const sizeFunc = (size) => {
+        shoesize = size;
+        console.log("ShoeSize: " + shoesize); // This is for testing only.
+    }
+    const elemIdFunc = (elemID) => {
+        id = elemID;
+        console.log("Element ID: " + id); // This is for testing only.
+    }
     // Add Cart()
-    const addCart = async (id) => {
+    const addCart = async () => {
         // TODO: API Call
         // API Call:
-        const response = await fetch(`${host}/api/usercart/addcart/${id}`, {
+        const response = await fetch(`${host}/api/usercart/addcart/${id}/${shoesize}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'authtoken': sessionStorage.getItem("usertoken")
+                'authtoken': sessionStorage.getItem("usertoken"),
             },
             // body: JSON.stringify({ title, description })
         });
         const cart = await response.json();
         setcarts(carts.concat(cart));
-        showAlert("Product added to cart." , "success");
+
+        console.log("Added to cart.");
+        console.log("ID: " + id);
+        console.log("Size: " + shoesize);
+
+        // console.log("Response: " + response.json()) // This is for testing only.
+        // showAlert("Product added to cart." , "success");
     }
 
     // Delete Cart()
@@ -355,7 +370,8 @@ const CartState = (props) => {
             products, addProduct, deleteProduct, editProduct, getProducts,
             menItems, casualMen, formalMen, ethnicMen, womenItems, casualWomen, formalWomen, ethnicWomen,
             carts, addCart, deleteCart, editCart, getCart,
-            alert, showAlert
+            alert, showAlert,
+            sizeFunc, elemIdFunc
         }}>
             {props.children}
         </ProductContext.Provider>

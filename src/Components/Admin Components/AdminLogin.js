@@ -22,9 +22,9 @@ const AdminLogin = (props) => {
             // Save the auth token and redirect.
             sessionStorage.setItem('token', json.admintoken); // We use sessionStorage because it destroys data after ending session.
             // history.push("/"); // Since, useHistory() is replaced with useNavigate so we have to use navigate() instead of push().
-            // props.showAlert("Logged in Successfully.", "success");
             navigate("/admindashboard");
             window.location.reload(true);
+            props.showAlert("Logged in Successfully.", "success");
         }
         else {
             // props.showAlert("Invalid email or password !!", "danger");

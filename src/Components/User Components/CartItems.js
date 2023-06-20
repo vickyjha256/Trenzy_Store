@@ -39,7 +39,7 @@ const CartItems = (props) => {
                                 <input type='number' onChange={onChange} value={cart.quantity} id='qtyinput' name='quantity' list='inputGroupSelect01' min={1} />
                                 <button id='qtybtn' onClick={() => { updateQuantity(); }} className='btn btn-info' >Update Quantity</button>
                             </div>
-                            <i style={{ cursor: 'pointer' }} className="fa-solid fa-trash mx-2" title='Delete Cart' onClick={() => { deleteCart(item._id); /* props.showAlert("Note deleted successfully", "success");*/ }}  ></i>
+                            <i style={{ cursor: 'pointer' }} className="fa-solid fa-trash mx-2" title='Delete Cart' onClick={() => { deleteCart(item._id); props.showAlert("Cart deleted successfully", "success"); }}></i>
 
                             <p className="card-text"><b className="text-body-secondary">Price: ₹ {(item.price * item.quantity).toLocaleString('en-IN')}</b></p>
                         </div>

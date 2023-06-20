@@ -18,6 +18,7 @@ app.use('/api/adminauth', require('./routes/adminauth'));
 // This is for Stored data of the user and admin.
 app.use('/api/adminproducts', require('./routes/adminproducts'));
 app.use('/api/usercart', require('./routes/usercart'));
+app.use('/api/userorder', require('./routes/userorder'));
 
 // app.get('/', (req, res) => {
 //   res.send('Hello World!')

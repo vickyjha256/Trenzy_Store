@@ -109,7 +109,7 @@ const WomenShoes = (props) => {
                                 <img id='productimg' src={element.image} className="card-img-top" alt="..." />
                                 <div className="card-body">
                                     <h5 className="card-title">{element.brand}</h5>
-                                    <p className="card-text">{element.price}</p>
+                                    <p className="card-text"><b>₹ {element.price} </b></p>
 
                                     <button onClick={sessionStorage.getItem("usertoken") ? () => {
                                         addCart(element._id); Swal.fire({
