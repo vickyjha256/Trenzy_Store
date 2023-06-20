@@ -25,7 +25,7 @@ const CartItems = (props) => {
 
     return (
         <>
-            <div style={{ backgroundColor: "aquamarine" }} className="card my-2">
+            <div style={{ backgroundColor: "#a2bee8" }} className="card my-2">
                 <div className="row d-flex align-items-center">
                     <div className="col-xxl-5 col-5">
                         <img style={{ height: "200px", width: "180px" }} src={item.image} className="" alt="..." />
