@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { string } = require('prop-types');
 const { Schema } = mongoose;
 
 const UserSchema = new Schema({
@@ -20,7 +21,7 @@ const UserSchema = new Schema({
         default: Date.now
     },
     contact: {
-        type: Number,
+        type: String,
         default: ""
     },
     address: {

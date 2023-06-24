@@ -48,6 +48,7 @@ const Navbar = (props) => {
                                     <Link style={{ color: `${location.pathname === "/" ? "aqua" : "white"}`, fontWeight: "bolder" }} className={`nav-link ${location.pathname === "/" ? "active" : ""}`} aria-current="page" to="/">Home</Link>
                                     <Link style={{ color: `${location.pathname === "/men" ? "aqua" : "white"}`, fontWeight: "bolder" }} className={`nav-link ${location.pathname === "/men" ? "active" : ""}`} aria-current="page" to="/men">Men</Link>
                                     <Link style={{ color: `${location.pathname === "/women" ? "aqua" : "white"}`, fontWeight: "bolder" }} className={`nav-link ${location.pathname === "/women" ? "active" : ""}`} aria-current="page" to="/women">Women</Link>
+                                    <Link style={{ color: `${location.pathname === "/orders" ? "aqua" : "white"}`, fontWeight: "bolder" }} className={`nav-link ${location.pathname === "/orders" ? "active" : ""}`} aria-current="page" to="/orders">Orders</Link>
                                 </div>
 
                                 <div className='d-flex justify-content-center'>
@@ -88,6 +89,8 @@ const Navbar = (props) => {
                                     <Link style={{ color: `${location.pathname === "/" ? "aqua" : "white"}`, fontWeight: "bolder" }} className={`nav-link ${location.pathname === "/" ? "active" : ""}`} data-bs-dismiss="offcanvas" aria-current="page" to="/">Home</Link>
                                     <Link style={{ color: `${location.pathname === "/men" ? "aqua" : "white"}`, fontWeight: "bolder" }} className={`nav-link ${location.pathname === "/men" ? "active" : ""}`} data-bs-dismiss="offcanvas" aria-current="page" to="/men">Men</Link>
                                     <Link style={{ color: `${location.pathname === "/women" ? "aqua" : "white"}`, fontWeight: "bolder" }} className={`nav-link ${location.pathname === "/women" ? "active" : ""}`} data-bs-dismiss="offcanvas" aria-current="page" to="/women">Women</Link>
+                                    <Link style={{ color: `${location.pathname === "/orders" ? "aqua" : "white"}`, fontWeight: "bolder" }} className={`nav-link ${location.pathname === "/orders" ? "active" : ""}`} aria-current="page" to="/orders">Orders</Link>
+
                                     {/* </div> */}
 
                                     <div className='d-flex justify-content-start'>

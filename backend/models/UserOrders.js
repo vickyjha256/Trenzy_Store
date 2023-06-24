@@ -34,7 +34,7 @@ const UserOrderSchema = new Schema({
         // min: [1, "Quantity can't be less than 1."],
     },
     contact: {
-        type: Number,
+        type: String,
         required: true
     },
     address: {

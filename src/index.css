@@ -196,11 +196,6 @@ body {
         height: 20vh;
     }
 
-    .btn {
-        height: 5vh;
-        font-size: small;
-    }
-
     #adminproductcard {
         height: 75vh;
         width: 100vw;

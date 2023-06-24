@@ -18,7 +18,7 @@ router.get('/fetchorder', fetchuser, async (req, res) => {
 });
 
 // ROUTE 2:--> Add ordered product using POST "/api/userorder/addorder". Login required.
-router.post("/addorder/:id/:shoesize", fetchuser, [
+router.post("/addorder/:id/:shoesize/:contact/:address", fetchuser, [
 ], async (req, res) => {
     try {
         // Finds the validation errors in this request and wraps them in an object with handy functions.
@@ -34,9 +34,27 @@ router.post("/addorder/:id/:shoesize", fetchuser, [
 
         // let alreadyInCart = await UserCart.find
 
-        let contactNumber = await User.findById(req.user.id).select('contact');
-        let address = await User.findById(req.user.id).select('address');
-        const order = new UserOrder({
+        let delivInfo = await User.findById(req.user.id).select('-password');
+        let userdetail = await User.findById(req.user.id);
+
+        let ordContact, ordAddress;
+        if (delivInfo.contact === null) {
+            ordContact = req.params.contact;
+            ordAddress = req.params.address;
+
+            let updated_contact_info = {}
+            updated_contact_info.contact = ordContact;
+            updated_contact_info.address = ordAddress;
+
+            userdetail = await User.findByIdAndUpdate(req.user.id, { $set: updated_contact_info }, { new: true });
+            console.log("New Customer"); // This is for testing only.
+        } else {
+            ordContact = delivInfo.contact;
+            ordAddress = delivInfo.address;
+            console.log("Old Customer"); // This is for testing only.
+        }
+
+        const order = new UserOrders({
             // Note:-> This way of creating object used when data is not de-structured.
             image: product.image,
             brand: product.brand,
@@ -44,17 +62,19 @@ router.post("/addorder/:id/:shoesize", fetchuser, [
             price: product.price,
             size: req.params.shoesize,
             user: req.user.id,
-            contact: contactNumber,
-            address: address,
+            contact: ordContact,
+            address: ordAddress,
         });
 
         const savedorder = await order.save();
         // res.json({ savedorder });
 
 
+        // res.json({"Delivery Info: ": delivInfo}); // This is for testing only.
+        // res.json({ "Contact: ": ordContact, "Address: ": ordAddress }); // This is for testing only.
 
         // res.json({"ID of Product": req.params.id}); // This is for testing only.
-        res.json({ "Product": product, savedorder }); // This is for testing only.
+        res.json({ "Product": product, savedorder, delivInfo }); // This is for testing only.
         // res.json({ "ID: ": req.params.id, "Size: ": req.params.size }); // This is for testing only.
 
     } catch (error) {
@@ -115,7 +135,7 @@ router.post("/addorder/:id/:shoesize", fetchuser, [
 // });
 
 // ROUTE 4:--> Delete the order using: DELETE "/api/userorder/deleteorder/:id". Login required.
-router.delete("/deleteorder/:id", fetchuser, async (req, res) => {
+router.delete("/cancelorder/:id", fetchuser, async (req, res) => {
     try {
         // Finds the validation errors in this request and wraps them in an object with handy functions.
         const errors = validationResult(req);

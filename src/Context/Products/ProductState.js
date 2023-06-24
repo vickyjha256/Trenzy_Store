@@ -66,6 +66,7 @@ const CartState = (props) => {
         });
         const product = await response.json();
         setproducts(products.concat(product));
+        props.showAlert("Product Added successfully.", "success");
     }
 
     // Delete Product()
@@ -353,6 +354,129 @@ const CartState = (props) => {
         setcarts(json);
     }
 
+    // ---------------------------- Contexts for Operations on orders at user side. -----------------------------
+    const [orders, setorders] = useState([]);
+
+    // let shoesize = null, id = null;
+    // const sizeFunc = (size) => {
+    //     shoesize = size;
+    //     console.log("ShoeSize: " + shoesize); // This is for testing only.
+    // }
+    // const elemIdFunc = (elemID) => {
+    //     id = elemID;
+    //     console.log("Element ID: " + id); // This is for testing only.
+    // }
+    let contact = null, address = null;
+    const setContactFunc = (cont) => {
+        contact = cont;
+        // console.log("Contact: " + cont); // This is for testing only.
+    }
+    const setAddressFunc = (addr) => {
+        address = addr;
+        // console.log("Address: " + address); // This is for testing only.
+    }
+
+    const [userinfo, setuserinfo] = useState([]);
+
+    // Get User Info
+    const getUser = async () => {
+        // API Call:
+        const response = await fetch(`${host}/api/userauth/getuser`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'authtoken': sessionStorage.getItem("usertoken")
+            }
+        });
+        const json = await response.json();
+        console.log(json); // This is for testing only.
+        setuserinfo(json);
+    }
+
+    // Add Cart()
+    const addOrder = async () => {
+        // TODO: API Call
+        // API Call:
+        const response = await fetch(`${host}/api/userorder/addorder/${id}/${shoesize}/${contact}/${address}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'authtoken': sessionStorage.getItem("usertoken"),
+            },
+            // body: JSON.stringify({ title, description })
+        });
+        const order = await response.json();
+        setorders(orders.concat(order));
+
+        console.log("Added to orders.");
+        console.log("Ordered Product ID: " + id);
+        console.log("Ordered Shoe Size: " + shoesize);
+
+        // console.log("Response: " + response.json()) // This is for testing only.
+        // showAlert("Product added to orders." , "success");
+    }
+
+    // Delete Cart()
+    const cancelOrder = async (id) => {
+        // TODO: API Call
+        // API Call:
+        const response = await fetch(`${host}/api/userorder/cancelorder/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'authtoken': sessionStorage.getItem("usertoken")
+            },
+        });
+        const json = response.json();
+        console.log("Cancelled Order: " + json);
+
+        console.log("Cancelling the order with id: " + id); // This is for testing only.
+        const newOrders = orders.filter((order) => { return order._id !== id });
+        setorders(newOrders);
+    }
+
+    // // Edit Note()
+    // const editCart = async (id, quantity) => {
+    //     // API Call:
+    //     const response = await fetch(`${host}/api/usercart/updatecart/${id}`, {
+    //         method: 'PUT',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             'authtoken': sessionStorage.getItem("usertoken")
+    //         },
+    //         body: JSON.stringify({ quantity })
+    //     });
+    //     const json = response.json(); // This is for testing only.
+    //     console.log("Edit Cart: " + json);
+
+    //     let newCarts = JSON.parse(JSON.stringify(carts));
+
+    //     // Logic to edit in client.
+    //     for (let i = 0; i < newCarts.length; i++) {
+    //         const element = newCarts[i];
+    //         if (element._id === id) {
+    //             element.quantity = quantity;
+    //             break;
+    //         }
+    //     }
+    //     setcarts(newCarts);
+    // }
+
+    // Get All Carts
+    const getOrder = async () => {
+        // API Call:
+        const response = await fetch(`${host}/api/userorder/fetchorder`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'authtoken': sessionStorage.getItem("usertoken")
+            }
+        });
+        const json = await response.json();
+        console.log(json); // This is for testing only.
+        setorders(json);
+    }
+
     // ----------------- Alert Related Stuff -------------------
     const [alert, setAlert] = useState(null);
     const showAlert = (message, type) => {
@@ -371,7 +495,9 @@ const CartState = (props) => {
             menItems, casualMen, formalMen, ethnicMen, womenItems, casualWomen, formalWomen, ethnicWomen,
             carts, addCart, deleteCart, editCart, getCart,
             alert, showAlert,
-            sizeFunc, elemIdFunc
+            sizeFunc, elemIdFunc,
+            getUser, userinfo, setContactFunc, setAddressFunc,
+            orders, addOrder, cancelOrder, getOrder
         }}>
             {props.children}
         </ProductContext.Provider>
