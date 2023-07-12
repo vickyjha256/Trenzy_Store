@@ -27,7 +27,7 @@ const Carts = (props) => {
 
     return (
         <>
-            <div style={{ backgroundColor: "whitesmoke" }} className='container'>
+            <section style={{ backgroundColor: "whitesmoke" }} className='container'>
                 <h1>Hello, from CartBot.</h1>
                 {carts.map(
                     (product) => {
@@ -76,7 +76,7 @@ const Carts = (props) => {
                         <h6 style={{ color: "green" }} role='alert' className='alert-success'>You will save ₹{discount.toFixed().toLocaleString('en-IN')} on this order </h6>
                     </div>
                 </div>
-            </div>
+            </section>
         </>
     )
 }

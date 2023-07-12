@@ -6,6 +6,10 @@ const UserOrderSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user'
     },
+    name: {
+        type: String,
+        required: true
+    },
     image: {
         type: String,
         required: true,
@@ -40,7 +44,17 @@ const UserOrderSchema = new Schema({
     address: {
         type: String,
         required: true
-    }
+    },
+    track: {
+        type: String,
+        default: "ontheway",
+        required: true
+    },
+    // message: {
+    //     type: String,
+    //     default: "Sorry, for your inconvenience seller has cancelled your order due to some occured problem.",
+    //     required: true
+    // }
 });
 
 module.exports = mongoose.model('userorder', UserOrderSchema);

@@ -36,45 +36,6 @@ const Orders = (props) => {
                         return <OrderedItems key={product._id} item={product} showAlert={showAlert} />
                     }
                 )}
-
-                {/* <div className=''>
-                    <h3>Price Details</h3>
-
-                    <div className='row'>
-                        <div className='col-xxl-6 col-6 d-flex justify-content-start'>
-                            <p>Price &#40;{total_Items} item&#41;</p>
-                        </div>
-                        <div className='col-xxl-6 col-6 d-flex justify-content-end'>
-                            <p>₹{total_orderedItems_price.toLocaleString('en-IN')}</p>
-                        </div>
-                    </div>
-
-                    <div className='row'>
-                        <div className='col-xxl-6 col-6 d-flex justify-content-start'>
-                            <p>Discount</p>
-                        </div>
-                        <div className='col-xxl-6 col-6 d-flex justify-content-end'>
-                            <p>-₹{discount.toFixed().toLocaleString('en-IN')} </p>
-                        </div>
-                    </div>
-
-                    <hr id='line' />
-
-                    <div className='row'>
-                        <div className='col-xxl-6 col-6 d-flex justify-content-start'>
-                            <b>Total Amount</b>
-                        </div>
-                        <div className='col-xxl-6 col-6 d-flex justify-content-end'>
-                            <b>₹{(total_orderedItems_price - discount).toFixed().toLocaleString('en-IN')} </b>
-                        </div>
-                    </div>
-
-                    <hr id='line' />
-
-                    <div className="alert alert-success" role="alert">
-                        <h6 style={{ color: "green" }} role='alert' className='alert-success'>You will save ₹{discount.toFixed().toLocaleString('en-IN')} on this order </h6>
-                    </div>
-                </div> */}
             </div>
         </>
     )

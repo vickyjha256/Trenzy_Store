@@ -5,23 +5,6 @@ const OrderedItems = (props) => {
     const context = useContext(ProductContext);
     const { cancelOrder } = context;
 
-    // const [order, setorder] = useState({ quantity: item.quantity });
-    // const onChange = (e) => {
-    //     setorder({ ...order, [e.target.name]: e.target.value });
-    //     // e.preventDefault();
-    //     // console.log("Cart Stated Quantity: " + cart.quantity); // This is for testing only.
-    //     // editCart(item._id, cart.quantity);
-    // }
-
-    // const updateQuantity = (e) => {
-    //     if (cart.quantity <= 0) {
-    //         props.showAlert("Quantity can't be less than or equal to 0 !! 😎", "warning");
-    //     } else {
-    //         editCart(item._id, cart.quantity);
-    //         props.showAlert("Quantity updated successfully.", "success");
-    //         // console.log("Cart Updated Quantity: " + cart.quantity); // This is for testing only.
-    //     }
-    // }
     return (
         <>
             <div style={{ backgroundColor: "#a2bee8" }} className="card my-2">
@@ -34,10 +17,16 @@ const OrderedItems = (props) => {
                             <h5 className="card-title"><b>{item.brand}</b></h5>
                             <p className="card-text"><b>{item.description}</b></p>
 
-                            <p className="card-text"><b className="text-body-secondary">Size: {(item.size).toLocaleString('en-IN')}<br /> Price: ₹ {(item.price * item.quantity).toLocaleString('en-IN')} </b></p>
-                            {/* <p className="card-text"><b className="text-body-secondary">Size:  {item.size}</b></p> */}
 
-                            <button className='btn btn-danger' title='Cancel Order' onClick={() => { cancelOrder(item._id); props.showAlert("Order cancelled successfully.", "success"); }}>Cancel Order</button>
+                            <p className="card-text"><b className="text-body-secondary">Size: {item.size}<br /> Price: ₹ {(item.price * item.quantity).toLocaleString('en-IN')} </b></p>
+
+                            <section style={{backgroundColor: "#37455b", color: "white", borderRadius: "10px"}}>
+                                <h4 className='mx-2'> Order Status </h4>
+
+                                <p className="card-text mx-2"><b className="text-body-success"> {item.track === "ontheway" ? "Thank you for purchasing. Your order is on the way. Keep Shopping." : ""} {item.track === "delivered" ? "The order is delivered. Keep Shopping." : ""} {item.track === "problem" ? "Sorry, for your inconvenience. Seller has cancelled your order due to some occured problem. Please order again." : ""}</b></p>
+
+                                <button style={{width: "100%", fontWeight: "bolder"}} hidden={item.track === "ontheway" ? false : true} className='btn btn-danger my-2' title='Cancel Order' onClick={() => { cancelOrder(item._id); props.showAlert("Order cancelled successfully.", "success"); }}>Cancel Order</button>
+                            </section>
                         </div>
                     </div>
                 </div>

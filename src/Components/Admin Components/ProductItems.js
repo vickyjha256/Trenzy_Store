@@ -9,7 +9,7 @@ const ProductItems = (props) => {
     return (
         <>
             <div className='d-flex justify-content-center col-xxl-3'>
-                <div id='adminproductcard' style={{ backgroundColor: "aquamarine" }} className="card my-2">
+                <div id='adminproductcard' style={{ backgroundColor: "" }} className="card my-2">
                     <img id='adminproductimg' src={item.image} className="" alt="..." />
                     <div className="card-body">
                         <h5 className="card-title"><b>{item.brand}</b></h5>

@@ -393,7 +393,7 @@ const CartState = (props) => {
         setuserinfo(json);
     }
 
-    // Add Cart()
+    // Add Order()
     const addOrder = async () => {
         // TODO: API Call
         // API Call:
@@ -416,7 +416,7 @@ const CartState = (props) => {
         // showAlert("Product added to orders." , "success");
     }
 
-    // Delete Cart()
+    // Cancel Order()
     const cancelOrder = async (id) => {
         // TODO: API Call
         // API Call:
@@ -462,20 +462,61 @@ const CartState = (props) => {
     //     setcarts(newCarts);
     // }
 
-    // Get All Carts
+    // Get All Orders
     const getOrder = async () => {
         // API Call:
         const response = await fetch(`${host}/api/userorder/fetchorder`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'authtoken': sessionStorage.getItem("usertoken")
+                'authtoken': sessionStorage.getItem("usertoken"),
             }
         });
         const json = await response.json();
         console.log(json); // This is for testing only.
         setorders(json);
     }
+
+    const custOrders = async () => {
+        // API Call:
+        const response = await fetch(`${host}/api/userorder/customerorders`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'admintoken': sessionStorage.getItem("token"),
+            }
+        });
+
+        const json = await response.json();
+        console.log(json); // This is for testing only.
+        setorders(json);
+    }
+
+    const orderUpdate = async (id, track) => {
+        // API Call:
+        const response = await fetch(`${host}/api/userorder/trackupdate/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'admintoken': sessionStorage.getItem("token"),
+            },
+            body: JSON.stringify({ track })
+        });
+        
+        let trackup = JSON.parse(JSON.stringify(orders));
+
+        // Logic to edit in client.
+        for (let i = 0; i < trackup.length; i++) {
+            const element = trackup[i];
+            if (element._id === id) {
+                element.track = track;
+                break;
+            }
+        }
+        setorders(trackup);
+    }
+
+
 
     // ----------------- Alert Related Stuff -------------------
     const [alert, setAlert] = useState(null);
@@ -497,7 +538,7 @@ const CartState = (props) => {
             alert, showAlert,
             sizeFunc, elemIdFunc,
             getUser, userinfo, setContactFunc, setAddressFunc,
-            orders, addOrder, cancelOrder, getOrder
+            orders, addOrder, cancelOrder, getOrder, custOrders, orderUpdate
         }}>
             {props.children}
         </ProductContext.Provider>

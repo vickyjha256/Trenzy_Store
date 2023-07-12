@@ -41,7 +41,7 @@ const CartItems = (props) => {
                             </div>
                             <i style={{ cursor: 'pointer' }} className="fa-solid fa-trash mx-2" title='Delete Cart' onClick={() => { deleteCart(item._id); props.showAlert("Cart deleted successfully", "success"); }}></i>
 
-                            <p className="card-text"><b className="text-body-secondary">Price: ₹ {(item.price * item.quantity).toLocaleString('en-IN')}</b></p>
+                            <p className="card-text"><b className="text-body-secondary">Size: {item.size}<br />Price: ₹ {(item.price * item.quantity).toLocaleString('en-IN')}</b></p>
                         </div>
                     </div>
                 </div>
