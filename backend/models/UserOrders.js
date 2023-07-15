@@ -45,7 +45,7 @@ const UserOrderSchema = new Schema({
         type: String,
         required: true
     },
-    track: {
+    status: {
         type: String,
         default: "ontheway",
         required: true

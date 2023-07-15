@@ -20,9 +20,12 @@ router.get('/fetchorder', fetchuser, async (req, res) => {
 });
 
 // ROUTE 2:--> Add ordered product using POST "/api/userorder/addorder". Login required.
-router.post("/addorder/:id/:shoesize/:contact/:address", fetchuser, [
+// router.post("/addorder/:id/:shoesize/:contact/:address", fetchuser, [
+router.post("/addorder/:id/:shoesize", fetchuser, [
 ], async (req, res) => {
     try {
+        const {contact, address} = req.body;
+
         // Finds the validation errors in this request and wraps them in an object with handy functions.
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -41,8 +44,11 @@ router.post("/addorder/:id/:shoesize/:contact/:address", fetchuser, [
 
         let ordContact, ordAddress;
         if (delivInfo.contact === null) {
-            ordContact = req.params.contact;
-            ordAddress = req.params.address;
+            // ordContact = req.params.contact;
+            // ordAddress = req.params.address;
+
+            ordContact = contact;
+            ordAddress = address;
 
             let updated_contact_info = {}
             updated_contact_info.contact = ordContact;
@@ -89,7 +95,7 @@ router.post("/addorder/:id/:shoesize/:contact/:address", fetchuser, [
 // // ROUTE 3:--> Update the track message using: PUT "/api/userorder/:id". Login required.
 router.put('/trackupdate/:id', fetchadmin, async (req, res) => {
     try {
-        const { track } = req.body; // Here, we get the data using de-structuring.
+        const { status } = req.body; // Here, we get the data using de-structuring.
 
         // Finds the validation errors in this request and wraps them in an object with handy functions.
         const errors = validationResult(req);
@@ -99,15 +105,15 @@ router.put('/trackupdate/:id', fetchadmin, async (req, res) => {
 
         let updated = {};
 
-        if (track) {
-            updated.track = track;
+        if (status) {
+            updated.status = status;
         }
 
         // Find the order to be update and update it.
-        let updateTrack = await UserOrders.findById(req.params.id); // It finds the order with params's order id.
+        let updateStatus = await UserOrders.findById(req.params.id); // It finds the order with params's order id.
 
         // Below code will check the 
-        if (!updateTrack) {
+        if (!updateStatus) {
             return res.status(401).send("Not found !!"); // Return not found if product not found.
         }
 
@@ -125,8 +131,8 @@ router.put('/trackupdate/:id', fetchadmin, async (req, res) => {
         // Note:-> Below line is without {new: true} so it shows "res.json" without updated. With {new:true} it shows updated "res.json(cart)".
         // cart = await UserCart.findByIdAndUpdate(req.params.id, {$set: updated_cart}); // Cart Updated.
 
-        updateTrack = await UserOrders.findByIdAndUpdate(req.params.id, { $set: updated }, { new: true }); // Track Updated.
-        res.json(updateTrack);
+        updateStatus = await UserOrders.findByIdAndUpdate(req.params.id, { $set: updated }, { new: true }); // Status Updated.
+        res.json(updateStatus);
     } catch (error) {
         console.error(error.message);
         res.status(500).send("Internal Server Error.");

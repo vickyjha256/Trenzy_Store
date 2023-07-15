@@ -294,7 +294,7 @@ const CartState = (props) => {
     }
 
     // Delete Cart()
-    const deleteCart = async (id) => {
+    const deleteCart = async () => {
         // TODO: API Call
         // API Call:
         const response = await fetch(`${host}/api/usercart/deletecart/${id}`, {
@@ -397,13 +397,14 @@ const CartState = (props) => {
     const addOrder = async () => {
         // TODO: API Call
         // API Call:
-        const response = await fetch(`${host}/api/userorder/addorder/${id}/${shoesize}/${contact}/${address}`, {
+        const response = await fetch(`${host}/api/userorder/addorder/${id}/${shoesize}`, {
+        // const response = await fetch(`${host}/api/userorder/addorder/${id}/${shoesize}/${contact}/${address}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'authtoken': sessionStorage.getItem("usertoken"),
             },
-            // body: JSON.stringify({ title, description })
+            body: JSON.stringify({ contact, address })
         });
         const order = await response.json();
         setorders(orders.concat(order));
@@ -492,7 +493,7 @@ const CartState = (props) => {
         setorders(json);
     }
 
-    const orderUpdate = async (id, track) => {
+    const orderUpdate = async (id, status) => {
         // API Call:
         const response = await fetch(`${host}/api/userorder/trackupdate/${id}`, {
             method: 'PUT',
@@ -500,20 +501,23 @@ const CartState = (props) => {
                 'Content-Type': 'application/json',
                 'admintoken': sessionStorage.getItem("token"),
             },
-            body: JSON.stringify({ track })
+            body: JSON.stringify({ status })
         });
-        
+
         let trackup = JSON.parse(JSON.stringify(orders));
 
         // Logic to edit in client.
         for (let i = 0; i < trackup.length; i++) {
             const element = trackup[i];
             if (element._id === id) {
-                element.track = track;
+                element.status = status;
                 break;
             }
         }
         setorders(trackup);
+
+        // const json = await response.json();
+        // console.log(json); // This is for testing only.
     }
 
 

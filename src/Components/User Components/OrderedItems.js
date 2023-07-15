@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import ProductContext from '../../Context/Products/ProductContext';
 const OrderedItems = (props) => {
     const { item } = props;
@@ -20,12 +20,13 @@ const OrderedItems = (props) => {
 
                             <p className="card-text"><b className="text-body-secondary">Size: {item.size}<br /> Price: ₹ {(item.price * item.quantity).toLocaleString('en-IN')} </b></p>
 
-                            <section style={{backgroundColor: "#37455b", color: "white", borderRadius: "10px"}}>
+                            <section style={{ backgroundColor: "#37455b", color: "white", borderRadius: "10px" }}>
                                 <h4 className='mx-2'> Order Status </h4>
+                                <hr></hr>
 
-                                <p className="card-text mx-2"><b className="text-body-success"> {item.track === "ontheway" ? "Thank you for purchasing. Your order is on the way. Keep Shopping." : ""} {item.track === "delivered" ? "The order is delivered. Keep Shopping." : ""} {item.track === "problem" ? "Sorry, for your inconvenience. Seller has cancelled your order due to some occured problem. Please order again." : ""}</b></p>
+                                <p className="card-text mx-2 pb-2"><b className="text-body-success"> {item.status === "ontheway" ? "Thank you for purchasing. Your order is on the way. Keep Shopping." : ""} {item.status === "delivered" ? "The order is delivered. Keep Shopping." : ""} {item.status === "problem" ? "Sorry, for your inconvenience. Seller has cancelled your order due to some occured problem. Please order again." : ""}</b></p>
 
-                                <button style={{width: "100%", fontWeight: "bolder"}} hidden={item.track === "ontheway" ? false : true} className='btn btn-danger my-2' title='Cancel Order' onClick={() => { cancelOrder(item._id); props.showAlert("Order cancelled successfully.", "success"); }}>Cancel Order</button>
+                                <button style={{ width: "100%", fontWeight: "bolder", borderBottomLeftRadius: "10px", borderBottomRightRadius: "10px" }} hidden={item.status === "ontheway" ? false : true} className='btn btn-danger' title='Cancel Order' onClick={() => { cancelOrder(item._id); props.showAlert("Order cancelled successfully.", "success"); }}>Cancel Order</button>
                             </section>
                         </div>
                     </div>

@@ -111,7 +111,7 @@ const MenShoes = (props) => {
                                     <div id='outdiv' className='d-flex justify-content-center'>
                                         {/* <div style={{ width: "30%" }} id='indiv' onMouseOver={(credentials.number === "" || credentials.address === "") ? btmove : ""}> */}
                                         <div style={{ width: "30%" }} id='indiv' >
-                                            <button onClick={() => { setContactFunc(credentials.number); setAddressFunc(credentials.address); addOrder(); sweetCartAlert() }} disabled={credentials.number === "" || credentials.address === ""} style={{ width: "100%", backgroundColor: "blue" }} type="submit" className="btn btn-primary my-1" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#exampleModal2"><b>Submit</b></button>
+                                            <button onClick={() => { setContactFunc(credentials.number); setAddressFunc(credentials.address); addOrder(); sweetCartAlert(); console.log("Contact Number: " + credentials.number + "\nAddress: " + credentials.address) }} disabled={credentials.number === "" || credentials.address === ""} style={{ width: "100%", backgroundColor: "blue" }} type="submit" className="btn btn-primary my-1" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#exampleModal2"><b>Submit</b></button>
                                             {/* <button type='button' onClick={() => { sizeFunc(5); addCart(); sweetCartAlert(); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">5</button> */}
 
                                         </div>
@@ -283,4 +283,4 @@ const MenShoes = (props) => {
     )
 }
 
-export default MenShoes
+export default MenShoes;

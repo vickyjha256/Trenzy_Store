@@ -27,8 +27,8 @@ const AdminLogin = (props) => {
             props.showAlert("Logged in Successfully.", "success");
         }
         else {
-            // props.showAlert("Invalid email or password !!", "danger");
-            alert("Invalid email or password !!");
+            props.showAlert("Invalid email or password !!", "danger");
+            // alert("Invalid email or password !!");
         }
     }
 
