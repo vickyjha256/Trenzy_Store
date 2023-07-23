@@ -99,11 +99,10 @@ router.post('/login', [
 
 // ROUTE 3:--> Get Logged in user details using: POST "/api/userauth/getuser". Login required.
 router.post('/getuser', fetchuser, async (req, res) => {
-
     try {
-        let userId = req.user.id;
+        // let userId = req.user.id;
         // userId = req.user.id;
-        const user = await User.findById(userId).select("-password");
+        const user = await User.findById(req.user.id).select("-password");
         res.json(user);
     } catch (err) {
         console.error(err.message);

@@ -22,9 +22,11 @@ router.get('/fetchorder', fetchuser, async (req, res) => {
 // ROUTE 2:--> Add ordered product using POST "/api/userorder/addorder". Login required.
 // router.post("/addorder/:id/:shoesize/:contact/:address", fetchuser, [
 router.post("/addorder/:id/:shoesize", fetchuser, [
+    body("contact", "Contact Number must be of 10 digits.").isLength({min: 10, max: 10}),
+    body("address", "Address must be a string").isString()
 ], async (req, res) => {
     try {
-        const {contact, address} = req.body;
+        const { contact, address } = req.body;
 
         // Finds the validation errors in this request and wraps them in an object with handy functions.
         const errors = validationResult(req);
@@ -37,53 +39,27 @@ router.post("/addorder/:id/:shoesize", fetchuser, [
             return res.status(401).send("Not found !!"); // Return not found if product not found.
         }
 
-        // let alreadyInCart = await UserCart.find
 
-        let delivInfo = await User.findById(req.user.id).select('-password');
-        let userdetail = await User.findById(req.user.id);
-
-        let ordContact, ordAddress;
-        if (delivInfo.contact === null) {
-            // ordContact = req.params.contact;
-            // ordAddress = req.params.address;
-
-            ordContact = contact;
-            ordAddress = address;
-
-            let updated_contact_info = {}
-            updated_contact_info.contact = ordContact;
-            updated_contact_info.address = ordAddress;
-
-            userdetail = await User.findByIdAndUpdate(req.user.id, { $set: updated_contact_info }, { new: true });
-            console.log("New Customer"); // This is for testing only.
-        } else {
-            ordContact = delivInfo.contact;
-            ordAddress = delivInfo.address;
-            console.log("Old Customer"); // This is for testing only.
-        }
+        let userdetail = await User.findById(req.user.id).select('-password');
 
         const order = new UserOrders({
             // Note:-> This way of creating object used when data is not de-structured.
-            name: delivInfo.name,
+            name: userdetail.name,
             image: product.image,
             brand: product.brand,
             description: product.description,
             price: product.price,
             size: req.params.shoesize,
             user: req.user.id,
-            contact: ordContact,
-            address: ordAddress,
+            contact: contact,
+            address: address,
         });
 
         const savedorder = await order.save();
         // res.json({ savedorder });
 
-
-        // res.json({"Delivery Info: ": delivInfo}); // This is for testing only.
-        // res.json({ "Contact: ": ordContact, "Address: ": ordAddress }); // This is for testing only.
-
         // res.json({"ID of Product": req.params.id}); // This is for testing only.
-        res.json({ "Product": product, savedorder, delivInfo }); // This is for testing only.
+        res.json({ "Product": product, savedorder }); // This is for testing only.
         // res.json({ "ID: ": req.params.id, "Size: ": req.params.size }); // This is for testing only.
 
     } catch (error) {
@@ -172,6 +148,23 @@ router.get('/customerorders', fetchadmin, async (req, res) => {
     try {
         const order = await UserOrders.find(); // It finds orders of the corresponding user.        
         res.json(order); // It send cart as a response.
+    } catch (error) {
+        console.log(error);
+        res.status(500).send("Internal Server Error.");
+    }
+});
+
+// ROUTE 6:--> Check Whether contact and address of user is stored or not using: GET "/api/userorder/checkuserinfo". Login required.
+router.get('/checkuserinfo', fetchuser, async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id).select("-password"); // It finds stored information of the corresponding user.
+        let check = false;
+        if (user.contact === null) {
+            check = true; // We make check true. Because, we have to store userinfo.
+        }
+
+        // res.json({ user, check }); // It send cart as a response.
+        res.json(user); // It send cart as a response.
     } catch (error) {
         console.log(error);
         res.status(500).send("Internal Server Error.");

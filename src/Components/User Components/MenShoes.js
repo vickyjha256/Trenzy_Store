@@ -5,7 +5,7 @@ import Swal from 'sweetalert2'
 
 const MenShoes = (props) => {
     const context = useContext(ProductContext);
-    const { products, menItems, casualMen, formalMen, ethnicMen, addCart, sizeFunc, elemIdFunc, addOrder, getUser, userinfo, setContactFunc, setAddressFunc } = context;
+    const { products, menItems, casualMen, formalMen, ethnicMen, addCart, id, setid, sizeFunc, addOrder, getUser, userinfo, setContactFunc, setAddressFunc } = context;
 
     useEffect(() => {
         if (props.shoetype === "CasualMen") {
@@ -20,12 +20,20 @@ const MenShoes = (props) => {
     }, []);
     // console.log("Props.Shoetype: " + props.shoetype);
 
-    const [credentials, setCredentials] = useState({ number: "", address: "" });
+
+    // const [credentials, setCredentials] = useState({ number: `${userinfo.contact === undefined ? "" : userinfo.contact}`, address: `${userinfo.address === undefined ? "" : userinfo.address}` });
+    const [credentials, setCredentials] = useState({ number: `${userinfo.contact === undefined ? sessionStorage.getItem("usertoken") && getUser() && userinfo.contact : userinfo.contact}`, address: `${userinfo.address === undefined ? sessionStorage.getItem("usertoken") && getUser() && userinfo.address : userinfo.address}` });
     const onChange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
     }
-    // console.log("Userinfo Contact: " + userinfo.contact, "Userinfo Address: " + userinfo.address);\
-    console.log("User Info: ", userinfo);
+
+    // console.log("User Info: ", JSON.stringify(userinfo)); // This is for testing only.
+    console.log("User Contact: ", userinfo.contact); // This is for testing only.
+    console.log("User Address: ", userinfo.address); // This is for testing only.
+    console.log("Number: " + credentials.number); // This is for testing only.
+    console.log("Address: " + credentials.address); // This is for testing only.
+    console.log("ID in productstate: " + id); // This is for testing only.
+
 
     // const btmove = (e) => {
     //     let movingBtn = document.getElementById("outdiv");
@@ -43,18 +51,8 @@ const MenShoes = (props) => {
     //     }
     // }
 
-    // const handleDetails = () => {
-    //     console.log("Handled");
 
-    //     setContactFunc(credentials.number);
-    //     setAddressFunc(credentials.address);
-    //     addOrder();
-
-    //     // localStorage.setItem("Number", credentials.number);
-    //     // localStorage.setItem("Address", credentials.address);
-    // }
     let navigate = useNavigate();
-
     const sweetCartAlert = (role) => {
         // console.log("Added to cart successfully.");
         // addCart(element._id);
@@ -82,10 +80,23 @@ const MenShoes = (props) => {
         }
     }
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log("Handle Submit Triggered."); // This is for testing only.
+        setContactFunc(credentials.number);
+        setAddressFunc(credentials.address);
+        addOrder();
+        sweetCartAlert();
+
+        console.log("Contact Number: " + credentials.number + "\nAddress: " + credentials.address); // This is for testing only.
+    }
+
+
     return (
         <>
             <div id='divItem' className='container-fluid'>
                 <div className='row'>
+
                     {/* Below code is for modal popup. */}
                     <div className="modal fade" id="delivinfo" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div className="modal-dialog modal-dialog-centered">
@@ -95,34 +106,32 @@ const MenShoes = (props) => {
                                     {/* <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> */}
                                 </div>
                                 <div className="modal-body">
-
-                                    {/* <form onSubmit={handleDetails}> */}
-                                    <div className="form-floating mb-3">
-                                        <input style={{ color: "white" }} type="number" required className="form-control bg-dark" value={credentials.number} onChange={onChange} id="number" name='number' placeholder="Phone Number" />
-                                        <label htmlFor="number">Contact No.</label>
-                                    </div>
-                                    <div className="form-floating mb-3">
-                                        <input style={{ color: "white" }} type="text" required className="form-control bg-dark" value={credentials.address} onChange={onChange} id="address" name='address' placeholder='Address' />
-                                        <label htmlFor="address">Address</label>
-                                    </div>
-
-                                    {/* <button style={{ width: "100%", backgroundColor: "blue" }} type="submit" className="btn btn-primary my-1"><b>Submit</b></button> */}
-
-                                    <div id='outdiv' className='d-flex justify-content-center'>
-                                        {/* <div style={{ width: "30%" }} id='indiv' onMouseOver={(credentials.number === "" || credentials.address === "") ? btmove : ""}> */}
-                                        <div style={{ width: "30%" }} id='indiv' >
-                                            <button onClick={() => { setContactFunc(credentials.number); setAddressFunc(credentials.address); addOrder(); sweetCartAlert(); console.log("Contact Number: " + credentials.number + "\nAddress: " + credentials.address) }} disabled={credentials.number === "" || credentials.address === ""} style={{ width: "100%", backgroundColor: "blue" }} type="submit" className="btn btn-primary my-1" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#exampleModal2"><b>Submit</b></button>
-                                            {/* <button type='button' onClick={() => { sizeFunc(5); addCart(); sweetCartAlert(); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">5</button> */}
-
+                                    <form onSubmit={handleSubmit}>
+                                        <div className="form-floating mb-3">
+                                            <input style={{ color: "white" }} type="tel" required className="form-control bg-dark" value={credentials.number} onChange={onChange} minLength={10} maxLength={10} id="number" name='number' placeholder="Phone Number" />
+                                            <label htmlFor="number">Contact No.</label>
                                         </div>
-                                    </div>
-                                    {/* </form> */}
-                                </div>
+                                        <div className="form-floating mb-3">
+                                            <input style={{ color: "white" }} type="text" required className="form-control bg-dark" value={credentials.address} onChange={onChange} id="address" name='address' placeholder='Address' />
+                                            <label htmlFor="address">Address</label>
+                                        </div>
 
+                                        {/* <button style={{ width: "100%", backgroundColor: "blue" }} type="submit" className="btn btn-primary my-1"><b>Submit</b></button> */}
+
+                                        <div id='outdiv' className='d-flex justify-content-center'>
+                                            {/* <div style={{ width: "30%" }} id='indiv' onMouseOver={(credentials.number === "" || credentials.address === "") ? btmove : ""}> */}
+                                            <div style={{ width: "30%" }} id='indiv' >
+                                                <button id='submitbtn' style={{ width: "100%", backgroundColor: "blue" }} type="submit" className="btn btn-primary my-1" data-bs-dismiss={credentials.number.length === 10 && credentials.address !== "" ? "modal" : ""} data-bs-toggle={credentials.number.length === 10 && credentials.address !== "" ? "modal" : ""} data-bs-target="#exampleModal2"><b>Submit</b></button>
+                                                {/* <button id='submitbtn' style={{ width: "100%", backgroundColor: "blue" }} type="submit" className="btn btn-primary my-1" disabled={credentials.number === "" || credentials.address === ""} data-bs-dismiss={credentials.number.length === 10 && credentials.address !== "" ? "modal" : ""}><b>Submit</b></button> */}
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
 
+                    {/* Successful order confirmation Modal */}
                     <div className="modal fade" id="exampleModal2" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div className="modal-dialog modal-dialog-centered">
                             <div className="modal-content">
@@ -143,61 +152,6 @@ const MenShoes = (props) => {
 
                     {products.map((element) => {
                         return <div className='d-flex justify-content-center col-xxl-3 col-6 my-3' key={element._id}>
-                            {/* Below code is for modal popup. */}
-                            <div className="modal fade" id="delivinfo" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div className="modal-dialog modal-dialog-centered">
-                                    <div className="modal-content">
-                                        <div className="modal-header">
-                                            <h1 className="modal-title fs-5">Order - Delivery related details.</h1>
-                                            {/* <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> */}
-                                        </div>
-                                        <div className="modal-body">
-
-                                            {/* <form onSubmit={handleDetails}> */}
-                                            <div className="form-floating mb-3">
-                                                <input style={{ color: "white" }} type="number" required className="form-control bg-dark" value={credentials.number} onChange={onChange} id="number" name='number' placeholder="Phone Number" />
-                                                <label htmlFor="number">Contact No.</label>
-                                            </div>
-                                            <div className="form-floating mb-3">
-                                                <input style={{ color: "white" }} type="text" required className="form-control bg-dark" value={credentials.address} onChange={onChange} id="address" name='address' placeholder='Address' />
-                                                <label htmlFor="address">Address</label>
-                                            </div>
-
-                                            {/* <button style={{ width: "100%", backgroundColor: "blue" }} type="submit" className="btn btn-primary my-1"><b>Submit</b></button> */}
-
-                                            <div id='outdiv' className='d-flex justify-content-center'>
-                                                {/* <div style={{ width: "30%" }} id='indiv' onMouseOver={(credentials.number === "" || credentials.address === "") ? btmove : ""}> */}
-                                                <div style={{ width: "30%" }} id='indiv' >
-                                                    <button onClick={() => { setContactFunc(credentials.number); setAddressFunc(credentials.address); addOrder(); sweetCartAlert() }} disabled={credentials.number === "" || credentials.address === ""} style={{ width: "100%", backgroundColor: "blue" }} type="submit" className="btn btn-primary my-1" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#exampleModal2"><b>Submit</b></button>
-                                                    {/* <button type='button' onClick={() => { sizeFunc(5); addCart(); sweetCartAlert(); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">5</button> */}
-
-                                                </div>
-                                            </div>
-                                            {/* </form> */}
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="modal fade" id="exampleModal2" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div className="modal-dialog modal-dialog-centered">
-                                    <div className="modal-content">
-                                        <div className="modal-header">
-                                            <h1 className="modal-title fs-5">Hurrayyy</h1>
-                                            {/* <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> */}
-                                        </div>
-                                        <div className="modal-body">
-                                            <h2>Shoe ordered successfully 😎 </h2>
-                                        </div>
-                                        <div className="modal-footer">
-                                            <button style={{ width: "100%" }} type="button" className="btn btn-info" data-bs-dismiss="modal">Ok</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
                             {/* <img style={{height: "100%", width: "100%"}} src={element.image} alt="" /> */}
                             <div id='productcard' className="card">
                                 <img id='productimg' src={element.image} className="card-img-top" alt="..." />
@@ -235,6 +189,7 @@ const MenShoes = (props) => {
                                         </div>
                                     </div>
 
+
                                     {/* Order Size Choosing Modal */}
                                     <div className="modal fade" id="order" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div className="modal-dialog modal-dialog-centered">
@@ -266,12 +221,14 @@ const MenShoes = (props) => {
 
 
                                     <button id='crtbtn' onClick={sessionStorage.getItem("usertoken") ? () => {
-                                        elemIdFunc(element._id); // It sets the element id in product state file for passing it into addCart().
+                                        setid(element._id); // It sets the element id in product state file for passing it into addCart().
                                     } : () => { navigate("/login"); props.showAlert("Please login first to see your cart items.", "info"); console.log("User not login."); }} data-bs-toggle={sessionStorage.getItem("usertoken") ? "modal" : ""} data-bs-target={sessionStorage.getItem("usertoken") ? "#cart" : ""} className="btn btn-info cartbtn">🛒</button>
 
                                     <button id='ordbtn' onClick={sessionStorage.getItem('usertoken') ? () => {
-                                        elemIdFunc(element._id);
+                                        setid(element._id);
                                         getUser();
+                                        credentials.number = userinfo.contact;
+                                        credentials.address = userinfo.address;
                                     } : () => { navigate("/login"); props.showAlert("Please login first to make an order.", "info"); console.log("User not login."); }} data-bs-toggle={sessionStorage.getItem("usertoken") ? "modal" : ""} data-bs-target={sessionStorage.getItem("usertoken") ? "#order" : ""} className="btn btn-info buybtn">Buy now</button>
                                 </div>
                             </div>

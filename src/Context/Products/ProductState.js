@@ -148,7 +148,7 @@ const CartState = (props) => {
             }
         });
         const json = await response.json();
-        console.log(json); // This is for testing only.
+        // console.log(json); // This is for testing only.
         setproducts(json);
     }
 
@@ -261,15 +261,14 @@ const CartState = (props) => {
     // ---------------------------- Contexts for Operations on Carts at user side. -----------------------------
     const [carts, setcarts] = useState([]);
 
-    let shoesize = null, id = null;
+    let [id, setid] = useState();
+    let [shoesize, setshoesize] = useState();
+
     const sizeFunc = (size) => {
         shoesize = size;
         console.log("ShoeSize: " + shoesize); // This is for testing only.
     }
-    const elemIdFunc = (elemID) => {
-        id = elemID;
-        console.log("Element ID: " + id); // This is for testing only.
-    }
+
     // Add Cart()
     const addCart = async () => {
         // TODO: API Call
@@ -286,7 +285,7 @@ const CartState = (props) => {
         setcarts(carts.concat(cart));
 
         console.log("Added to cart.");
-        console.log("ID: " + id);
+        console.log("ID: " + id); 
         console.log("Size: " + shoesize);
 
         // console.log("Response: " + response.json()) // This is for testing only.
@@ -357,15 +356,6 @@ const CartState = (props) => {
     // ---------------------------- Contexts for Operations on orders at user side. -----------------------------
     const [orders, setorders] = useState([]);
 
-    // let shoesize = null, id = null;
-    // const sizeFunc = (size) => {
-    //     shoesize = size;
-    //     console.log("ShoeSize: " + shoesize); // This is for testing only.
-    // }
-    // const elemIdFunc = (elemID) => {
-    //     id = elemID;
-    //     console.log("Element ID: " + id); // This is for testing only.
-    // }
     let contact = null, address = null;
     const setContactFunc = (cont) => {
         contact = cont;
@@ -382,15 +372,18 @@ const CartState = (props) => {
     const getUser = async () => {
         // API Call:
         const response = await fetch(`${host}/api/userauth/getuser`, {
-            method: 'GET',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'authtoken': sessionStorage.getItem("usertoken")
             }
         });
-        const json = await response.json();
-        console.log(json); // This is for testing only.
-        setuserinfo(json);
+        const userDetail = await response.json();
+
+        // console.log("Get User: " + JSON.stringify(userDetail)); // This is for testing only.
+        // console.log("UserDetail Number: " + userDetail.contact); // This is for testing only.
+        // console.log("UserDetail Address: " + userDetail.address); // This is for testing only.
+        setuserinfo(userDetail);
     }
 
     // Add Order()
@@ -398,7 +391,7 @@ const CartState = (props) => {
         // TODO: API Call
         // API Call:
         const response = await fetch(`${host}/api/userorder/addorder/${id}/${shoesize}`, {
-        // const response = await fetch(`${host}/api/userorder/addorder/${id}/${shoesize}/${contact}/${address}`, {
+            // const response = await fetch(`${host}/api/userorder/addorder/${id}/${shoesize}/${contact}/${address}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -413,12 +406,13 @@ const CartState = (props) => {
         console.log("Ordered Product ID: " + id);
         console.log("Ordered Shoe Size: " + shoesize);
 
+
         // console.log("Response: " + response.json()) // This is for testing only.
         // showAlert("Product added to orders." , "success");
     }
 
     // Cancel Order()
-    const cancelOrder = async (id) => {
+    const cancelOrder = async () => {
         // TODO: API Call
         // API Call:
         const response = await fetch(`${host}/api/userorder/cancelorder/${id}`, {
@@ -494,6 +488,7 @@ const CartState = (props) => {
     }
 
     const orderUpdate = async (id, status) => {
+        // eslint-disable-next-line
         // API Call:
         const response = await fetch(`${host}/api/userorder/trackupdate/${id}`, {
             method: 'PUT',
@@ -540,9 +535,10 @@ const CartState = (props) => {
             menItems, casualMen, formalMen, ethnicMen, womenItems, casualWomen, formalWomen, ethnicWomen,
             carts, addCart, deleteCart, editCart, getCart,
             alert, showAlert,
-            sizeFunc, elemIdFunc,
+            id, setid, sizeFunc,
             getUser, userinfo, setContactFunc, setAddressFunc,
-            orders, addOrder, cancelOrder, getOrder, custOrders, orderUpdate
+            orders, addOrder, cancelOrder, getOrder, custOrders, orderUpdate,
+
         }}>
             {props.children}
         </ProductContext.Provider>
