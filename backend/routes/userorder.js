@@ -154,21 +154,5 @@ router.get('/customerorders', fetchadmin, async (req, res) => {
     }
 });
 
-// ROUTE 6:--> Check Whether contact and address of user is stored or not using: GET "/api/userorder/checkuserinfo". Login required.
-router.get('/checkuserinfo', fetchuser, async (req, res) => {
-    try {
-        const user = await User.findById(req.user.id).select("-password"); // It finds stored information of the corresponding user.
-        let check = false;
-        if (user.contact === null) {
-            check = true; // We make check true. Because, we have to store userinfo.
-        }
-
-        // res.json({ user, check }); // It send cart as a response.
-        res.json(user); // It send cart as a response.
-    } catch (error) {
-        console.log(error);
-        res.status(500).send("Internal Server Error.");
-    }
-});
 
 module.exports = router;

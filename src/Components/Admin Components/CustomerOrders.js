@@ -33,7 +33,7 @@ const CustomerOrders = (props) => {
             total_Items = total_Items + 1;
             total_orderedItems_price = total_orderedItems_price + product.price * product.quantity;
             discount = discount + ((product.price * product.quantity) / 10);
-            return <CustomerOrderedItems key={product._id} item={product} showAlert={showAlert} />
+            return <CustomerOrderedItems key={product._id} delivDetail={product} showAlert={showAlert} />
           }
         )}
       </div>    </>

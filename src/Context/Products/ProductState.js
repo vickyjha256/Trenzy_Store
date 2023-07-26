@@ -70,7 +70,7 @@ const CartState = (props) => {
     }
 
     // Delete Product()
-    const deleteProduct = async (id) => {
+    const deleteProduct = async () => {
         // TODO: API Call
         // API Call:
         const response = await fetch(`${host}/api/adminproducts/deleteproduct/${id}`, {

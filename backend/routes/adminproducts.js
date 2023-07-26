@@ -9,7 +9,7 @@ const { body, validationResult } = require('express-validator');
 router.get('/getproducts', async (req, res) => {
     try {
         // const products = await AdminProducts.find({ admin: req.admin.id }); // It finds products of the corresponding admin.
-        const products = await AdminProducts.find(); // It finds products of the corresponding admin.
+        const products = await AdminProducts.find().select("-admin"); // It finds products of the corresponding admin.
         res.json(products); // It send products as a response.
     } catch (error) {
         console.error(error.message);

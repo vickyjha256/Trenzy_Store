@@ -53,14 +53,17 @@ const AdminNavbar = (props) => {
 
                         <div className="collapse navbar-collapse mx-4" id="navbarSupportedContent">
                             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                                <li className="nav-item">
-                                    <Link style={{ color: `${location.pathname === "/admindashboard" ? "orange" : "white"}`, fontWeight: "bolder" }} className={`nav-link ${location.pathname === "/admindashboard" ? "active" : ""}`} aria-current="page" to="/admindashboard">Products</Link>
+                                <li className="nav-item mx-3">
+                                    <Link style={{ color: `${location.pathname === "/admindashboard" ? "orange" : "white"}`, fontWeight: "bolder" }} className={`nav-link ${location.pathname === "/admindashboard" ? "active" : ""}`} aria-current="page" to="/admindashboard">Dashboard</Link>
                                 </li>
-                                <li className="nav-item">
-                                    <Link style={{ color: `${location.pathname === "/ordermanagement" ? "orange" : "white"}`, fontWeight: "bolder" }} className={`nav-link ${location.pathname === "/ordermanagement" ? "active" : ""}`} aria-current="page" to="/ordermanagement">Orders</Link>
-                                </li>
-                                <li className="nav-item">
+                                <li className="nav-item mx-3">
                                     <Link style={{ color: `${location.pathname === "/addproducts" ? "orange" : "white"}`, fontWeight: "bolder" }} className={`nav-link ${location.pathname === "/addproducts" ? "active" : ""}`} aria-current="page" to="/addproducts">Add Products</Link>
+                                </li>
+                                <li className="nav-item mx-3">
+                                    <Link style={{ color: `${location.pathname === "/adminProducts" ? "orange" : "white"}`, fontWeight: "bolder" }} className={`nav-link ${location.pathname === "/adminProducts" ? "active" : ""}`} aria-current="page" to="/adminProducts">Products</Link>
+                                </li>
+                                <li className="nav-item mx-3">
+                                    <Link style={{ color: `${location.pathname === "/ordermanagement" ? "orange" : "white"}`, fontWeight: "bolder" }} className={`nav-link ${location.pathname === "/ordermanagement" ? "active" : ""}`} aria-current="page" to="/ordermanagement">Orders</Link>
                                 </li>
                             </ul>
 

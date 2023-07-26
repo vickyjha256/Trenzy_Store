@@ -18,6 +18,7 @@ import AddProducts from './Components/Admin Components/AddProducts';
 import AdminNavbar from './Components/Admin Components/AdminNavbar';
 import Orders from './Components/User Components/Orders';
 import CustomerOrders from './Components/Admin Components/CustomerOrders';
+import Dashboard from './Components/Admin Components/Dashboard';
 
 function App() {
   // const context = useContext(ProductContext);
@@ -57,7 +58,8 @@ function App() {
             <Route exact path="/orders" element={<Orders showAlert={showAlert} />} />
             <Route exact path="/createadmin" element={<AdminSignup showAlert={showAlert} />} />
             <Route exact path="/adminlogin" element={<AdminLogin showAlert={showAlert} />} />
-            <Route exact path="/admindashboard" element={<AdminProducts showAlert={showAlert} />} />
+            <Route exact path="/admindashboard" element={<Dashboard showAlert={showAlert} />} />
+            <Route exact path="/adminProducts" element={<AdminProducts showAlert={showAlert} />} />
             <Route exact path="/ordermanagement" element={<CustomerOrders showAlert={showAlert} />} />
             <Route exact path="/addproducts" element={<AddProducts showAlert={showAlert} />} />
           </Routes>
