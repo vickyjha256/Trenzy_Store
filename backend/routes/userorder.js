@@ -22,7 +22,7 @@ router.get('/fetchorder', fetchuser, async (req, res) => {
 // ROUTE 2:--> Add ordered product using POST "/api/userorder/addorder". Login required.
 // router.post("/addorder/:id/:shoesize/:contact/:address", fetchuser, [
 router.post("/addorder/:id/:shoesize", fetchuser, [
-    body("contact", "Contact Number must be of 10 digits.").isLength({min: 10, max: 10}),
+    body("contact", "Contact Number must be of 10 digits.").isLength({ min: 10, max: 10 }),
     body("address", "Address must be a string").isString()
 ], async (req, res) => {
     try {
@@ -54,6 +54,9 @@ router.post("/addorder/:id/:shoesize", fetchuser, [
             contact: contact,
             address: address,
         });
+
+        // --------- Updating Contact and Address of user with current order's contact and address. ---------
+        update_User_Details = await User.findByIdAndUpdate(req.user.id, { contact: contact, address: address }, { new: true });
 
         const savedorder = await order.save();
         // res.json({ savedorder });

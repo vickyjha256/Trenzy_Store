@@ -4,7 +4,11 @@ const { Schema } = mongoose;
 const UserCartSchema = new Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'user'
+        ref: 'user',
+    },
+    productID: {
+        type: String,
+        required: true,
     },
     image: {
         type: String,
@@ -12,15 +16,15 @@ const UserCartSchema = new Schema({
     },
     brand: {
         type: String,
-        required: true
+        required: true,
     },
     description: {
         type: String,
-        required: true
+        required: true,
     },
     price: {
         type: Number,
-        required: true
+        required: true,
     },
     size: {
         type: Number,
@@ -30,7 +34,7 @@ const UserCartSchema = new Schema({
     quantity: {
         type: Number,
         default: 1,
-        required: true
+        required: true,
         // min: [1, "Quantity can't be less than 1."],
     }
 });

@@ -8,11 +8,11 @@ const WomenShoes = (props) => {
     const { products, womenItems, casualWomen, formalWomen, ethnicWomen, addCart, id, setid, sizeFunc, addOrder, getUser, userinfo, setContactFunc, setAddressFunc } = context;
 
     useEffect(() => {
-        if (props.shoetype === "CasualWomen") {
+        if (props.shoetype === "casualwomen") {
             casualWomen();
-        } else if (props.shoetype === "FormalWomen") {
+        } else if (props.shoetype === "formalwomen") {
             formalWomen();
-        } else if (props.shoetype === "EthnicWomen") {
+        } else if (props.shoetype === "ethnicwomen") {
             ethnicWomen();
         } else {
             womenItems();

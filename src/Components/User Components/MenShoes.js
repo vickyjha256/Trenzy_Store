@@ -1,18 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react'
 import ProductContext from '../../Context/Products/ProductContext';
 import { useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2'
 
 const MenShoes = (props) => {
     const context = useContext(ProductContext);
-    const { products, menItems, casualMen, formalMen, ethnicMen, addCart, id, setid, sizeFunc, addOrder, getUser, userinfo, setContactFunc, setAddressFunc } = context;
+    const { products, menItems, casualMen, formalMen, ethnicMen, womenItems, casualWomen, formalWomen, ethnicWomen, addCart, id, setid, sizeFunc, addOrder, getUser, userinfo, setContactFunc, setAddressFunc, sweetAlert } = context;
 
     useEffect(() => {
-        if (props.shoetype === "CasualMen") {
+        if (props.shoetype === "men") {
+            menItems();
+        } else if (props.shoetype === "casualmen") {
             casualMen();
-        } else if (props.shoetype === "FormalMen") {
+        } else if (props.shoetype === "formalmen") {
             formalMen();
-        } else if (props.shoetype === "EthnicMen") {
+        } else if (props.shoetype === "ethnicmen") {
             ethnicMen();
         } else {
             menItems();
@@ -28,11 +29,11 @@ const MenShoes = (props) => {
     }
 
     // console.log("User Info: ", JSON.stringify(userinfo)); // This is for testing only.
-    console.log("User Contact: ", userinfo.contact); // This is for testing only.
-    console.log("User Address: ", userinfo.address); // This is for testing only.
-    console.log("Number: " + credentials.number); // This is for testing only.
-    console.log("Address: " + credentials.address); // This is for testing only.
-    console.log("ID in productstate: " + id); // This is for testing only.
+    // console.log("User Contact: ", userinfo.contact); // This is for testing only.
+    // console.log("User Address: ", userinfo.address); // This is for testing only.
+    // console.log("Number: " + credentials.number); // This is for testing only.
+    // console.log("Address: " + credentials.address); // This is for testing only.
+    // console.log("ID in productstate: " + id); // This is for testing only.
 
 
     // const btmove = (e) => {
@@ -53,42 +54,16 @@ const MenShoes = (props) => {
 
 
     let navigate = useNavigate();
-    const sweetCartAlert = (role) => {
-        // console.log("Added to cart successfully.");
-        // addCart(element._id);
-
-        if (role === 'cart') {
-            Swal.fire({
-                color: "white",
-                title: "Product added to cart successfully !!",
-                text: "",
-                icon: "success",
-                timer: 1400,
-                showConfirmButton: false,
-                background: "#0080ff"
-            });
-        } else {
-            Swal.fire({
-                color: "white",
-                title: "Product ordered successfully !!",
-                text: "",
-                icon: "success",
-                timer: 1400,
-                showConfirmButton: false,
-                background: "#0080ff"
-            });
-        }
-    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Handle Submit Triggered."); // This is for testing only.
+        // console.log("Handle Submit Triggered."); // This is for testing only.
         setContactFunc(credentials.number);
         setAddressFunc(credentials.address);
         addOrder();
-        sweetCartAlert();
+        sweetAlert();
 
-        console.log("Contact Number: " + credentials.number + "\nAddress: " + credentials.address); // This is for testing only.
+        // console.log("Contact Number: " + credentials.number + "\nAddress: " + credentials.address); // This is for testing only.
     }
 
 
@@ -121,7 +96,7 @@ const MenShoes = (props) => {
                                         <div id='outdiv' className='d-flex justify-content-center'>
                                             {/* <div style={{ width: "30%" }} id='indiv' onMouseOver={(credentials.number === "" || credentials.address === "") ? btmove : ""}> */}
                                             <div style={{ width: "30%" }} id='indiv' >
-                                                <button id='submitbtn' style={{ width: "100%", backgroundColor: "blue" }} type="submit" className="btn btn-primary my-1" data-bs-dismiss={credentials.number.length === 10 && credentials.address !== "" ? "modal" : ""} data-bs-toggle={credentials.number.length === 10 && credentials.address !== "" ? "modal" : ""} data-bs-target="#exampleModal2"><b>Submit</b></button>
+                                                <button id='submitbtn' style={{ width: "100%", backgroundColor: "lime", color: "black" }} type="submit" className="btn btn-primary my-1" data-bs-dismiss={credentials.number.length === 10 && credentials.address !== "" ? "modal" : ""} data-bs-toggle={credentials.number.length === 10 && credentials.address !== "" ? "modal" : ""} data-bs-target="#exampleModal2"><b>Proceed</b></button>
                                                 {/* <button id='submitbtn' style={{ width: "100%", backgroundColor: "blue" }} type="submit" className="btn btn-primary my-1" disabled={credentials.number === "" || credentials.address === ""} data-bs-dismiss={credentials.number.length === 10 && credentials.address !== "" ? "modal" : ""}><b>Submit</b></button> */}
                                             </div>
                                         </div>
@@ -171,14 +146,14 @@ const MenShoes = (props) => {
                                                 <div style={{ backgroundColor: "white", color: "black" }} className="modal-body">
                                                     <h6>Select Size: UK/India </h6>
                                                     <div className="grid text-center">
-                                                        <button type='button' onClick={() => { sizeFunc(5); addCart(); sweetCartAlert("cart"); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">5</button>
-                                                        <button type='button' onClick={() => { sizeFunc(6); addCart(); sweetCartAlert("cart"); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">6</button>
-                                                        <button type='button' onClick={() => { sizeFunc(7); addCart(); sweetCartAlert("cart"); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">7</button>
-                                                        <button type='button' onClick={() => { sizeFunc(8); addCart(); sweetCartAlert("cart"); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">8</button>
-                                                        <button type='button' onClick={() => { sizeFunc(9); addCart(); sweetCartAlert("cart"); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">9</button>
-                                                        <button type='button' onClick={() => { sizeFunc(10); addCart(); sweetCartAlert("cart"); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">10</button>
-                                                        <button type='button' onClick={() => { sizeFunc(11); addCart(); sweetCartAlert("cart"); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">11</button>
-                                                        <button type='button' onClick={() => { sizeFunc(12); addCart(); sweetCartAlert("cart"); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">12</button>
+                                                        <button type='button' onClick={() => { sizeFunc(5); addCart(); sweetAlert("cart"); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">5</button>
+                                                        <button type='button' onClick={() => { sizeFunc(6); addCart(); sweetAlert("cart"); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">6</button>
+                                                        <button type='button' onClick={() => { sizeFunc(7); addCart(); sweetAlert("cart"); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">7</button>
+                                                        <button type='button' onClick={() => { sizeFunc(8); addCart(); sweetAlert("cart"); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">8</button>
+                                                        <button type='button' onClick={() => { sizeFunc(9); addCart(); sweetAlert("cart"); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">9</button>
+                                                        <button type='button' onClick={() => { sizeFunc(10); addCart(); sweetAlert("cart"); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">10</button>
+                                                        <button type='button' onClick={() => { sizeFunc(11); addCart(); sweetAlert("cart"); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">11</button>
+                                                        <button type='button' onClick={() => { sizeFunc(12); addCart(); sweetAlert("cart"); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">12</button>
 
                                                     </div>
                                                 </div>

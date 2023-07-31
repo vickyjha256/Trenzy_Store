@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ProductContext from "./ProductContext";
+import Swal from "sweetalert2";
 
 const CartState = (props) => {
     const host = "http://localhost:5000";
@@ -285,7 +286,7 @@ const CartState = (props) => {
         setcarts(carts.concat(cart));
 
         console.log("Added to cart.");
-        console.log("ID: " + id); 
+        console.log("ID: " + id);
         console.log("Size: " + shoesize);
 
         // console.log("Response: " + response.json()) // This is for testing only.
@@ -529,15 +530,43 @@ const CartState = (props) => {
         }, 1500);
     }
 
+    const sweetAlert = (role) => {
+        // console.log("Added to cart successfully.");
+        // addCart(element._id);
+
+        if (role === 'cart') {
+            Swal.fire({
+                color: "white",
+                title: "Product added to cart successfully !!",
+                text: "",
+                icon: "success",
+                timer: 1400,
+                showConfirmButton: false,
+                background: "#0080ff"
+            });
+        } else {
+            Swal.fire({
+                color: "white",
+                title: "Product ordered successfully !!",
+                text: "",
+                icon: "success",
+                timer: 1400,
+                showConfirmButton: false,
+                background: "#0080ff"
+            });
+        }
+    }
+
     return (
         <ProductContext.Provider value={{
             products, addProduct, deleteProduct, editProduct, getProducts,
             menItems, casualMen, formalMen, ethnicMen, womenItems, casualWomen, formalWomen, ethnicWomen,
             carts, addCart, deleteCart, editCart, getCart,
             alert, showAlert,
-            id, setid, sizeFunc,
+            id, setid, sizeFunc, setshoesize,
             getUser, userinfo, setContactFunc, setAddressFunc,
             orders, addOrder, cancelOrder, getOrder, custOrders, orderUpdate,
+            sweetAlert,
 
         }}>
             {props.children}

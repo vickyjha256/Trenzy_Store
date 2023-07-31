@@ -33,8 +33,9 @@ router.post("/addcart/:id/:shoesize", fetchuser, [
 
         // let alreadyInCart = await UserCart.find
 
-        const cart = new UserCart({
+        const cart = new UserCart({ 
             // Note:-> This way of creating object used when data is not de-structured.
+            productID: req.params.id,
             image: product.image,
             brand: product.brand,
             description: product.description,

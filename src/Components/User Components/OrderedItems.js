@@ -10,6 +10,27 @@ const OrderedItems = (props) => {
 
     return (
         <>
+            {/* Confirmation Popup modal for Deletion of Cart Item. */}
+            <div className="modal fade" id="cnfpopupOrder" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered">
+                    <div style={{ backgroundImage: "none", backgroundColor: "orange" }} className="modal-content">
+                        <div className="modal-header">
+                            <h1 className="modal-title fs-5" id="exampleModalLabel">Cancel Order</h1>
+                            {/* <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> */}
+                        </div>
+                        <div className="modal-body">
+                            <h4>Are you sure you want to cancel your order?</h4>
+                        </div>
+                        <div className="d-flex justify-content-center my-2">
+                            {/* <button style={{ width: "48%" }} type="button" onClick={() => { deleteOrder(item._id); props.showAlert("Cart deleted successfully", "success"); }} data-bs-dismiss="modal" className="btn btn-primary mx-2">Yes</button> */}
+                            <button style={{ width: "48%" }} type="button" onClick={() => { cancelOrder(); props.showAlert("Order cancelled successfully.", "success"); }} data-bs-dismiss="modal" className="btn btn-primary mx-2">Yes</button>
+                            <button style={{ width: "48%" }} type="button" className="btn btn-danger mx-2" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
             <div style={{ backgroundColor: "#a2bee8" }} className="card my-2">
                 <div className="row d-flex align-items-center">
                     <div className="col-xxl-5 col-5">
@@ -17,25 +38,6 @@ const OrderedItems = (props) => {
                     </div>
                     <div className="col-xxl-7 col-7">
 
-                        {/* Confirmation Popup modal for Deletion of Cart Item. */}
-                        <div className="modal fade" id="cnfpopupOrder" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div className="modal-dialog modal-dialog-centered">
-                                <div style={{ backgroundImage: "none", backgroundColor: "orange" }} className="modal-content">
-                                    <div className="modal-header">
-                                        <h1 className="modal-title fs-5" id="exampleModalLabel">Cancel Order</h1>
-                                        {/* <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> */}
-                                    </div>
-                                    <div className="modal-body">
-                                        <h4>Are you sure you want to cancel your order?</h4>
-                                    </div>
-                                    <div className="d-flex justify-content-center my-2">
-                                        {/* <button style={{ width: "48%" }} type="button" onClick={() => { deleteOrder(item._id); props.showAlert("Cart deleted successfully", "success"); }} data-bs-dismiss="modal" className="btn btn-primary mx-2">Yes</button> */}
-                                        <button style={{ width: "48%" }} type="button" onClick={() => { cancelOrder(); props.showAlert("Order cancelled successfully.", "success"); }} data-bs-dismiss="modal" className="btn btn-primary mx-2">Yes</button>
-                                        <button style={{ width: "48%" }} type="button" className="btn btn-danger mx-2" data-bs-dismiss="modal">Cancel</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
                         <div className="card-body">
                             <h5 className="card-title"><b>{item.brand}</b></h5>
