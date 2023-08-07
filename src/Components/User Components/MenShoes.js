@@ -4,19 +4,19 @@ import { useNavigate } from 'react-router-dom';
 
 const MenShoes = (props) => {
     const context = useContext(ProductContext);
-    const { products, menItems, casualMen, formalMen, ethnicMen, womenItems, casualWomen, formalWomen, ethnicWomen, addCart, id, setid, sizeFunc, addOrder, getUser, userinfo, setContactFunc, setAddressFunc, sweetAlert } = context;
+    const { products,fetchItems, addCart, id, setid, sizeFunc, addOrder, getUser, userinfo, setContactFunc, setAddressFunc, sweetAlert } = context;
 
     useEffect(() => {
         if (props.shoetype === "men") {
-            menItems();
+            fetchItems("menitems");
         } else if (props.shoetype === "casualmen") {
-            casualMen();
+            fetchItems("casualmen");
         } else if (props.shoetype === "formalmen") {
-            formalMen();
+            fetchItems("formalmen");
         } else if (props.shoetype === "ethnicmen") {
-            ethnicMen();
+            fetchItems("ethnicmen");
         } else {
-            menItems();
+            fetchItems("menItems");
         }
     }, []);
     // console.log("Props.Shoetype: " + props.shoetype);

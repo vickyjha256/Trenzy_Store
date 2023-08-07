@@ -6,7 +6,7 @@ const CartItems = (props) => {
     const context = useContext(ProductContext);
     const { editCart, deleteCart, setid, setshoesize, userinfo, getUser, addOrder, setAddressFunc, setContactFunc, sweetAlert } = context;
 
-    
+
     const [credentials, setCredentials] = useState({ number: `${userinfo.contact === undefined ? sessionStorage.getItem("usertoken") && getUser() && userinfo.contact : userinfo.contact}`, address: `${userinfo.address === undefined ? sessionStorage.getItem("usertoken") && getUser() && userinfo.address : userinfo.address}` });
     const [cart, setcart] = useState({ quantity: item.quantity });
     const onChange = (e) => {
@@ -129,30 +129,35 @@ const CartItems = (props) => {
 
             <div style={{ backgroundColor: "#a2bee8" }} className="card my-2">
                 <div className="row d-flex align-items-center">
-                    <div className="col-xxl-5 col-5">
+                    <div className="col-xxl-5 col-6">
                         <img style={{ height: "200px", width: "180px" }} src={item.image} className="" alt="..." />
+                        {/* <div className="input-group mb-3 my-1">
+                            <input type='number' onChange={onChange} value={cart.quantity} id='qtyinput' name='quantity' list='inputGroupSelect01' min={1} />
+                            <button id='qtybtn' onClick={() => { updateQuantity(); }} className='btn btn-info' >Update Quantity</button>
+                        </div> */}
                     </div>
-                    <div className="col-xxl-7 col-7">
-
+                    <div className="col-xxl-7 col-6">
 
                         <div className="card-body">
                             <h5 className="card-title"><b>{item.brand}</b></h5>
-                            <p className="card-text"><b>{item.description}</b></p>
+                            <p style={{fontSize: "small"}} className="card-text"><b>{item.description}</b></p>
 
                             <div className="input-group mb-3">
+                                <button id='qty' className='btn btn-info'>➖</button>
                                 <input type='number' onChange={onChange} value={cart.quantity} id='qtyinput' name='quantity' list='inputGroupSelect01' min={1} />
-                                <button id='qtybtn' onClick={() => { updateQuantity(); }} className='btn btn-info' >Update Quantity</button>
+                                <button id='qty' onClick={() => {cart.quantity++}} className='btn btn-info'>➕</button>
+                                {/* <button id='qtybtn' onClick={() => { updateQuantity(); }} className='btn btn-info' >Update Quantity</button> */}
                             </div>
-                            {/* <i style={{ cursor: 'pointer' }} className="fa-solid fa-trash mx-2" title='Delete Cart' onClick={() => { deleteCart(item._id); props.showAlert("Cart deleted successfully", "success"); }}></i> */}
-
-
-                            <i style={{ cursor: 'pointer' }} className="fa-solid fa-trash mx-2" title='Delete Cart' onClick={sessionStorage.getItem("usertoken") ? () => {
-                                setid(item._id); // It sets the element id in product state file for passing it into deleteCart().
-                            } : () => { navigate("/login"); props.showAlert("Unauthorize access attempted !!", "warning"); }} data-bs-toggle="modal" data-bs-target="#cnfpopup"></i>
 
 
                             <p className="card-text"><b className="text-body-secondary">Size: {item.size}<br />Price: ₹ {(item.price * item.quantity).toLocaleString('en-IN')}</b></p>
                             {/* <button type="button" className="btn btn-warning">Buy this now</button> */}
+
+
+                            {/* <i style={{ cursor: 'pointer' }} className="fa-solid fa-trash mx-2" title='Delete Cart' onClick={() => { deleteCart(item._id); props.showAlert("Cart deleted successfully", "success"); }}></i> */}
+                            <i style={{ cursor: 'pointer' }} className="fa-solid fa-trash mx-2" title='Delete Cart' onClick={sessionStorage.getItem("usertoken") ? () => {
+                                setid(item._id); // It sets the element id in product state file for passing it into deleteCart().
+                            } : () => { navigate("/login"); props.showAlert("Unauthorize access attempted !!", "warning"); }} data-bs-toggle="modal" data-bs-target="#cnfpopup"></i>
 
                             <button id='ordbtn' onClick={sessionStorage.getItem('usertoken') ? () => {
                                 setid(item.productID);
@@ -166,12 +171,10 @@ const CartItems = (props) => {
 
                             {/* Used extra hidden button for fetching contact and address of user on click. */}
                             <button hidden id='hidbtn' onClick={sessionStorage.getItem('usertoken') ? () => {
-                                // setid(item.productID);
-                                // setshoesize(item.size);
                                 getUser();
                                 credentials.number = userinfo.contact;
                                 credentials.address = userinfo.address;
-                            } : () => { navigate("/login"); props.showAlert("Please login first to proceed an order.", "info"); console.log("User not login."); }} data-bs-toggle={sessionStorage.getItem("usertoken") ? "modal" : ""} data-bs-target={sessionStorage.getItem("usertoken") ? "#delivinfo" : ""} className="btn btn-warning">Buy now</button>
+                            } : () => { navigate("/login"); props.showAlert("Please login first to proceed an order.", "info"); console.log("User not login."); }} data-bs-toggle={sessionStorage.getItem("usertoken") ? "modal" : ""} data-bs-target={sessionStorage.getItem("usertoken") ? "#delivinfo" : ""} className="btn btn-warning"></button>
 
 
                         </div>

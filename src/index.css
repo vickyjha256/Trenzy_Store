@@ -150,6 +150,9 @@ body {
     border: 2px solid rgb(0, 0, 0);
 }
 
+#qty{
+    border: 2px solid #02204f;
+}
 
 /* Media Query for Mobile Devices */
 @media screen and (max-width: 480px) {
@@ -181,6 +184,7 @@ body {
 
     #qtybtn {
         width: 80%;
+        font-size: 80%;
     }
 }
 

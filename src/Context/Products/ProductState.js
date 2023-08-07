@@ -139,9 +139,9 @@ const CartState = (props) => {
 
     // --------------------- Fetching Items for client side. ----------------------
     // Get All Men Items
-    const menItems = async () => {
+    const fetchItems = async (type) => {
         // API Call:
-        const response = await fetch(`${host}/api/adminproducts/menitems`, {
+        const response = await fetch(`${host}/api/adminproducts/${type}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -153,111 +153,127 @@ const CartState = (props) => {
         setproducts(json);
     }
 
-    // Get All Casual Men Items
-    const casualMen = async () => {
-        // API Call:
-        const response = await fetch(`${host}/api/adminproducts/casualmen`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                // 'admintoken': sessionStorage.getItem("token")
-            }
-        });
-        const json = await response.json();
-        console.log(json); // This is for testing only.
-        setproducts(json);
-    }
 
-    // Get All Formal Men Items
-    const formalMen = async () => {
-        // API Call:
-        const response = await fetch(`${host}/api/adminproducts/formalmen`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                // 'admintoken': sessionStorage.getItem("token")
-            }
-        });
-        const json = await response.json();
-        console.log(json); // This is for testing only.
-        setproducts(json);
-    }
+    // // Get All Men Items
+    // const menItems = async () => {
+    //     // API Call:
+    //     const response = await fetch(`${host}/api/adminproducts/menitems`, {
+    //         method: 'GET',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             // 'admintoken': sessionStorage.getItem("token")
+    //         }
+    //     });
+    //     const json = await response.json();
+    //     // console.log(json); // This is for testing only.
+    //     setproducts(json);
+    // }
 
-    // Get All Ethnic Men Items
-    const ethnicMen = async () => {
-        // API Call:
-        const response = await fetch(`${host}/api/adminproducts/ethnicmen`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                // 'admintoken': sessionStorage.getItem("token")
-            }
-        });
-        const json = await response.json();
-        console.log(json); // This is for testing only.
-        setproducts(json);
-    }
+    // // Get All Casual Men Items
+    // const casualMen = async () => {
+    //     // API Call:
+    //     const response = await fetch(`${host}/api/adminproducts/casualmen`, {
+    //         method: 'GET',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             // 'admintoken': sessionStorage.getItem("token")
+    //         }
+    //     });
+    //     const json = await response.json();
+    //     // console.log(json); // This is for testing only.
+    //     setproducts(json);
+    // }
+
+    // // Get All Formal Men Items
+    // const formalMen = async () => {
+    //     // API Call:
+    //     const response = await fetch(`${host}/api/adminproducts/formalmen`, {
+    //         method: 'GET',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             // 'admintoken': sessionStorage.getItem("token")
+    //         }
+    //     });
+    //     const json = await response.json();
+    //     // console.log(json); // This is for testing only.
+    //     setproducts(json);
+    // }
+
+    // // Get All Ethnic Men Items
+    // const ethnicMen = async () => {
+    //     // API Call:
+    //     const response = await fetch(`${host}/api/adminproducts/ethnicmen`, {
+    //         method: 'GET',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             // 'admintoken': sessionStorage.getItem("token")
+    //         }
+    //     });
+    //     const json = await response.json();
+    //     // console.log(json); // This is for testing only.
+    //     setproducts(json);
+    // }
 
 
-    // Get All Women Items
-    const womenItems = async () => {
-        // API Call:
-        const response = await fetch(`${host}/api/adminproducts/womenitems`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                // 'admintoken': sessionStorage.getItem("token")
-            }
-        });
-        const json = await response.json();
-        console.log(json); // This is for testing only.
-        setproducts(json);
-    }
+    // // Get All Women Items
+    // const womenItems = async () => {
+    //     // API Call:
+    //     const response = await fetch(`${host}/api/adminproducts/womenitems`, {
+    //         method: 'GET',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             // 'admintoken': sessionStorage.getItem("token")
+    //         }
+    //     });
+    //     const json = await response.json();
+    //     // console.log(json); // This is for testing only.
+    //     setproducts(json);
+    // }
 
-    // Get All Casual Women Items
-    const casualWomen = async () => {
-        // API Call:
-        const response = await fetch(`${host}/api/adminproducts/casualwomen`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                // 'admintoken': sessionStorage.getItem("token")
-            }
-        });
-        const json = await response.json();
-        console.log(json); // This is for testing only.
-        setproducts(json);
-    }
+    // // Get All Casual Women Items
+    // const casualWomen = async () => {
+    //     // API Call:
+    //     const response = await fetch(`${host}/api/adminproducts/casualwomen`, {
+    //         method: 'GET',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             // 'admintoken': sessionStorage.getItem("token")
+    //         }
+    //     });
+    //     const json = await response.json();
+    //     // console.log(json); // This is for testing only.
+    //     setproducts(json);
+    // }
 
-    // Get All Formal Women Items
-    const formalWomen = async () => {
-        // API Call:
-        const response = await fetch(`${host}/api/adminproducts/formalwomen`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                // 'admintoken': sessionStorage.getItem("token")
-            }
-        });
-        const json = await response.json();
-        console.log(json); // This is for testing only.
-        setproducts(json);
-    }
+    // // Get All Formal Women Items
+    // const formalWomen = async () => {
+    //     // API Call:
+    //     const response = await fetch(`${host}/api/adminproducts/formalwomen`, {
+    //         method: 'GET',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             // 'admintoken': sessionStorage.getItem("token")
+    //         }
+    //     });
+    //     const json = await response.json();
+    //     // console.log(json); // This is for testing only.
+    //     setproducts(json);
+    // }
 
-    // Get All Ethnic Women Items
-    const ethnicWomen = async () => {
-        // API Call:
-        const response = await fetch(`${host}/api/adminproducts/ethnicwomen`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                // 'admintoken': sessionStorage.getItem("token")
-            }
-        });
-        const json = await response.json();
-        console.log(json); // This is for testing only.
-        setproducts(json);
-    }
+    // // Get All Ethnic Women Items
+    // const ethnicWomen = async () => {
+    //     // API Call:
+    //     const response = await fetch(`${host}/api/adminproducts/ethnicwomen`, {
+    //         method: 'GET',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             // 'admintoken': sessionStorage.getItem("token")
+    //         }
+    //     });
+    //     const json = await response.json();
+    //     // console.log(json); // This is for testing only.
+    //     setproducts(json);
+    // }
 
     // ---------------------------- Contexts for Operations on Carts at user side. -----------------------------
     const [carts, setcarts] = useState([]);
@@ -265,9 +281,13 @@ const CartState = (props) => {
     let [id, setid] = useState();
     let [shoesize, setshoesize] = useState();
 
+    const idFunc = (getId) => {
+        id = getId;
+        // console.log("IdFunc: " + id); // This is for testing only.
+    }
     const sizeFunc = (size) => {
         shoesize = size;
-        console.log("ShoeSize: " + shoesize); // This is for testing only.
+        // console.log("ShoeSize: " + shoesize); // This is for testing only.
     }
 
     // Add Cart()
@@ -560,10 +580,11 @@ const CartState = (props) => {
     return (
         <ProductContext.Provider value={{
             products, addProduct, deleteProduct, editProduct, getProducts,
-            menItems, casualMen, formalMen, ethnicMen, womenItems, casualWomen, formalWomen, ethnicWomen,
+            // fetchItems, menItems, casualMen, formalMen, ethnicMen, womenItems, casualWomen, formalWomen, ethnicWomen,
+            fetchItems,
             carts, addCart, deleteCart, editCart, getCart,
             alert, showAlert,
-            id, setid, sizeFunc, setshoesize,
+            id, setid, idFunc, sizeFunc, setshoesize,
             getUser, userinfo, setContactFunc, setAddressFunc,
             orders, addOrder, cancelOrder, getOrder, custOrders, orderUpdate,
             sweetAlert,
