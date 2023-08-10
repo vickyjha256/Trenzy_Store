@@ -152,7 +152,27 @@ body {
 
 #qty{
     border: 2px solid #02204f;
+    /* margin-left: 4px; */
 }
+
+#cartimg{
+    height: 27vh;
+    width: 15vw;
+    margin-left: 4px;
+    margin-top: 4px;
+}
+
+.carttext{
+    font-size: medium;
+}
+
+.pricetext{
+    font-size: large;
+}
+.delprice{
+    font-size: medium;
+}
+
 
 /* Media Query for Mobile Devices */
 @media screen and (max-width: 480px) {
@@ -177,14 +197,18 @@ body {
         height: 36vh;
     }
 
-
-    #qtyinput {
-        width: 20%;
+    #qty{
+        border: 2px solid #02204f;
+        /* height: 20; */
+        width: 32%;
+    }
+    #cartimg{
+        height: 14vh;
+        width: 30vw;
     }
 
-    #qtybtn {
-        width: 80%;
-        font-size: 80%;
+    .carttext{
+        font-size: small;
     }
 }
 

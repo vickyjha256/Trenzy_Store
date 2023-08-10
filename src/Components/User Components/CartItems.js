@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ProductContext from '../../Context/Products/ProductContext';
 import { useNavigate } from 'react-router-dom';
 const CartItems = (props) => {
@@ -8,23 +8,22 @@ const CartItems = (props) => {
 
 
     const [credentials, setCredentials] = useState({ number: `${userinfo.contact === undefined ? sessionStorage.getItem("usertoken") && getUser() && userinfo.contact : userinfo.contact}`, address: `${userinfo.address === undefined ? sessionStorage.getItem("usertoken") && getUser() && userinfo.address : userinfo.address}` });
-    const [cart, setcart] = useState({ quantity: item.quantity });
     const onChange = (e) => {
-        setcart({ ...cart, [e.target.name]: e.target.value });
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
         // e.preventDefault();
         // console.log("Cart Stated Quantity: " + cart.quantity); // This is for testing only.
         // editCart(item._id, cart.quantity);
     }
 
-    const updateQuantity = (e) => {
-        if (cart.quantity <= 0) {
-            props.showAlert("Quantity can't be less than or equal to 0 !! 😎", "warning");
-        } else {
-            editCart(item._id, cart.quantity);
-            props.showAlert("Quantity updated successfully.", "success");
-            // console.log("Cart Updated Quantity: " + cart.quantity); // This is for testing only.
-        }
+    let [quantity, setquantity] = useState(item.quantity);
+    const incQty = () => {
+        quantity < 5 ? setquantity(quantity + 1) : setquantity(5);
+        quantity < 5 ? editCart(item._id, quantity + 1) : setquantity(5);
+    }
+
+    const decQty = () => {
+        quantity > 1 ? setquantity(quantity - 1) : setquantity(1);
+        quantity > 1 ? editCart(item._id, quantity - 1) : setquantity(1);
     }
 
     // console.log("User Info: ", JSON.stringify(userinfo)); // This is for testing only.
@@ -47,6 +46,44 @@ const CartItems = (props) => {
 
         // console.log("Contact Number: " + credentials.number + "\nAddress: " + credentials.address); // This is for testing only.
     }
+
+    const d = new Date();
+    const day = d.getDay();
+
+    const [delivDay, setdelivDay] = useState();
+
+    const getDay = () => {
+        switch (day) {
+            case 0:
+                setdelivDay("Tue");
+                break;
+            case 1:
+                setdelivDay("Wed");
+                break;
+            case 2:
+                setdelivDay("Thu");
+                break;
+            case 3:
+                setdelivDay("Fri");
+                break;
+            case 4:
+                setdelivDay("Sat");
+                break;
+            case 5:
+                setdelivDay("Sun");
+                break;
+            case 6:
+                setdelivDay("Mon");
+                break;
+
+            default:
+                break;
+        }
+    }
+    useEffect(() => {
+        getDay();
+    }, []);
+    // console.log("Current Day: " + day); // This is for testing only.
 
     const navigate = useNavigate();
 
@@ -127,34 +164,44 @@ const CartItems = (props) => {
             </div>
 
 
-            <div style={{ backgroundColor: "#a2bee8" }} className="card my-2">
+            <div style={{ backgroundColor: "#a2bee8" }} className="card my-2 mx-1">
                 <div className="row d-flex align-items-center">
-                    <div className="col-xxl-5 col-6">
-                        <img style={{ height: "200px", width: "180px" }} src={item.image} className="" alt="..." />
-                        {/* <div className="input-group mb-3 my-1">
-                            <input type='number' onChange={onChange} value={cart.quantity} id='qtyinput' name='quantity' list='inputGroupSelect01' min={1} />
-                            <button id='qtybtn' onClick={() => { updateQuantity(); }} className='btn btn-info' >Update Quantity</button>
-                        </div> */}
+                    <div className="col-xxl-5 col-4">
+                        {/* <img style={{ height: "160px", width: "130px" }} src={item.image} className="" alt="..." /> */}
+                        <img id='cartimg' src={item.image} className="" alt="..." />
+
+                        <div className="input-group my-1">
+                            {quantity === 1 ?
+                                <button id='qty' onClick={() => { decQty(); }} className='btn btn-light'>
+                                    <i style={{ cursor: 'pointer' }} className="fa-solid fa-trash" title='Delete Cart' onClick={sessionStorage.getItem("usertoken") ? () => {
+                                        setid(item._id); // It sets the element id in product state file for passing it into deleteCart().
+                                    } : () => { navigate("/login"); props.showAlert("Unauthorize access attempted !!", "warning"); }} data-bs-toggle="modal" data-bs-target="#cnfpopup"></i>
+                                </button>
+
+                                : <button id='qty' onClick={() => { decQty(); }} className='btn btn-light'><i className="fa-solid fa-minus" /></button>
+                            }
+
+                            <div style={{ fontWeight: "bolder" }} className='mx-3 mt-2'>{quantity}</div>
+                            <button id='qty' onClick={() => { incQty(); }} className='btn btn-light'><i className="fa-solid fa-plus" /></button>
+                        </div>
                     </div>
-                    <div className="col-xxl-7 col-6">
+                    <div className="col-xxl-7 col-8">
 
                         <div className="card-body">
                             <h5 className="card-title"><b>{item.brand}</b></h5>
-                            <p style={{fontSize: "small"}} className="card-text"><b>{item.description}</b></p>
+                            <p className="card-text carttext"><b>{item.description}</b></p>
 
-                            <div className="input-group mb-3">
-                                <button id='qty' className='btn btn-info'>➖</button>
-                                <input type='number' onChange={onChange} value={cart.quantity} id='qtyinput' name='quantity' list='inputGroupSelect01' min={1} />
-                                <button id='qty' onClick={() => {cart.quantity++}} className='btn btn-info'>➕</button>
-                                {/* <button id='qtybtn' onClick={() => { updateQuantity(); }} className='btn btn-info' >Update Quantity</button> */}
-                            </div>
+                            <p className="card-text carttext">Delivery in 2 days, {delivDay} | <b style={{ color: "green" }}>Free</b> ₹<del>40</del> <br /> Size: {item.size}</p>
 
-
-                            <p className="card-text"><b className="text-body-secondary">Size: {item.size}<br />Price: ₹ {(item.price * item.quantity).toLocaleString('en-IN')}</b></p>
-                            {/* <button type="button" className="btn btn-warning">Buy this now</button> */}
+                            {/* <div className="input-group mb-3">
+                                <button id='qty' onClick={() => { decQty(); }} className='btn btn-light'><i className="fa-solid fa-minus" /></button>
+                                <div style={{ fontWeight: "bolder" }} className='mx-3 mt-2'>{quantity}</div>
+                                <button id='qty' onClick={() => { incQty(); }} className='btn btn-light'><i className="fa-solid fa-plus" /></button>
+                            </div> */}
 
 
-                            {/* <i style={{ cursor: 'pointer' }} className="fa-solid fa-trash mx-2" title='Delete Cart' onClick={() => { deleteCart(item._id); props.showAlert("Cart deleted successfully", "success"); }}></i> */}
+                            <p className="card-text carttext pricetext"><del className='delprice me-2'>₹{item.price * item.quantity}</del> <b className="text-body-secondary"> ₹{(item.price * item.quantity - ((item.price * item.quantity) / 10).toFixed().toLocaleString('en-IN')).toLocaleString('en-IN')}</b></p>
+
                             <i style={{ cursor: 'pointer' }} className="fa-solid fa-trash mx-2" title='Delete Cart' onClick={sessionStorage.getItem("usertoken") ? () => {
                                 setid(item._id); // It sets the element id in product state file for passing it into deleteCart().
                             } : () => { navigate("/login"); props.showAlert("Unauthorize access attempted !!", "warning"); }} data-bs-toggle="modal" data-bs-target="#cnfpopup"></i>

@@ -107,73 +107,81 @@ const Carts = (props) => {
 
 
             <section style={{ backgroundColor: "whitesmoke" }} className='container'>
-                <h1>Hello, from CartBot.</h1>
-                {carts.map(
-                    (product) => {
-                        total_Items = total_Items + 1;
-                        total_cartItems_price = total_cartItems_price + product.price * product.quantity;
-                        discount = discount + ((product.price * product.quantity) / 10);
-                        return <CartItems key={product._id} item={product} showAlert={showAlert} />
-                    }
-                )}
+                <div className='row'>
 
-                {total_Items !== 0 ? <div className=''>
-                    <h3>Price Details</h3>
+                    <h1>Hello, from CartBot.</h1>
+                    <div className=''>
+                        {carts.map(
+                            (product) => {
+                                total_Items = total_Items + 1;
+                                total_cartItems_price = total_cartItems_price + product.price * product.quantity;
+                                discount = discount + ((product.price * product.quantity) / 10);
+                                return <CartItems key={product._id} item={product} showAlert={showAlert} />
+                            }
+                        )}
+                    </div>
+                    <div style={{}} className=''>
+                        {total_Items !== 0 ? <div className=''>
+                            <h3>Price Details</h3>
 
-                    <div className='row'>
-                        <div className='col-xxl-6 col-6 d-flex justify-content-start'>
-                            <p>Price &#40;{total_Items} item&#41;</p>
-                        </div>
-                        <div className='col-xxl-6 col-6 d-flex justify-content-end'>
-                            <p>₹{total_cartItems_price.toLocaleString('en-IN')}</p>
-                        </div>
+                            <div className='row'>
+                                <div className='col-xxl-6 col-6 d-flex justify-content-start'>
+                                    <p>Price &#40;{total_Items} item&#41;</p>
+                                </div>
+                                <div className='col-xxl-6 col-6 d-flex justify-content-end'>
+                                    <p>₹{total_cartItems_price.toLocaleString('en-IN')}</p>
+                                </div>
+                            </div>
+
+                            <div className='row'>
+                                <div className='col-xxl-6 col-6 d-flex justify-content-start'>
+                                    <p>Discount</p>
+                                </div>
+                                <div className='col-xxl-6 col-6 d-flex justify-content-end'>
+                                    <p>-₹{discount.toFixed().toLocaleString('en-IN')} </p>
+                                </div>
+                            </div>
+
+                            <hr id='line' />
+
+                            <div className='row'>
+                                <div className='col-xxl-6 col-6 d-flex justify-content-start'>
+                                    <b>Total Amount</b>
+                                </div>
+                                <div className='col-xxl-6 col-6 d-flex justify-content-end'>
+                                    <b>₹{(total_cartItems_price - discount).toFixed().toLocaleString('en-IN')} </b>
+                                </div>
+                            </div>
+
+                            <hr id='line' />
+
+                            <div className="alert alert-success row" role="alert">
+                                <h6 style={{ color: "green", width: "70%" }} role='alert' className='alert-success'>You will save ₹{discount.toFixed().toLocaleString('en-IN')} on this order </h6>
+                                <button style={{ width: "30%", fontSize: "small", fontWeight: "bold" }} type="button" id='ordbtn' onClick={sessionStorage.getItem('usertoken') ? () => {
+                                    getUser();
+                                    credentials.number = userinfo.contact;
+                                    credentials.address = userinfo.address;
+                                    document.getElementById('hidbtn2').click();
+                                    // } : () => { navigate("/login"); props.showAlert("Please login first to proceed an order.", "info"); console.log("User not login."); }} data-bs-toggle={sessionStorage.getItem("usertoken") ? "modal" : ""} data-bs-target={sessionStorage.getItem("usertoken") ? "#delivinfo" : ""} className="btn btn-warning">Buy now</button>
+                                } : () => { navigate("/login"); props.showAlert("Please login first to proceed an order.", "info"); console.log("User not login."); }} className="btn btn-warning">Place Orders</button>
+
+                                {/* Used extra hidden button for fetching contact and address of user on click. */}
+                                <button hidden id='hidbtn2' onClick={sessionStorage.getItem('usertoken') ? () => {
+                                    getUser();
+                                    credentials.number = userinfo.contact;
+                                    credentials.address = userinfo.address;
+                                } : () => { navigate("/login"); props.showAlert("Please login first to proceed an order.", "info"); console.log("User not login."); }} data-bs-toggle={sessionStorage.getItem("usertoken") ? "modal" : ""} data-bs-target={sessionStorage.getItem("usertoken") ? "#delivinfo2" : ""} className="btn btn-warning"></button>
+                            </div>
+
+
+                        </div> : <div className="alert alert-warning row" role="alert">
+                            <h6 role='alert' className='alert-warning'>Cart is empty, Please add some items to cart. </h6>
+                        </div>}
                     </div>
 
-                    <div className='row'>
-                        <div className='col-xxl-6 col-6 d-flex justify-content-start'>
-                            <p>Discount</p>
-                        </div>
-                        <div className='col-xxl-6 col-6 d-flex justify-content-end'>
-                            <p>-₹{discount.toFixed().toLocaleString('en-IN')} </p>
-                        </div>
-                    </div>
+                </div>
 
-                    <hr id='line' />
-
-                    <div className='row'>
-                        <div className='col-xxl-6 col-6 d-flex justify-content-start'>
-                            <b>Total Amount</b>
-                        </div>
-                        <div className='col-xxl-6 col-6 d-flex justify-content-end'>
-                            <b>₹{(total_cartItems_price - discount).toFixed().toLocaleString('en-IN')} </b>
-                        </div>
-                    </div>
-
-                    <hr id='line' />
-
-                    <div className="alert alert-success row" role="alert">
-                        <h6 style={{ color: "green", width: "70%" }} role='alert' className='alert-success'>You will save ₹{discount.toFixed().toLocaleString('en-IN')} on this order </h6>
-                        <button style={{ width: "30%", fontSize: "small", fontWeight: "bold" }} type="button" id='ordbtn' onClick={sessionStorage.getItem('usertoken') ? () => {
-                            getUser();
-                            credentials.number = userinfo.contact;
-                            credentials.address = userinfo.address;
-                            document.getElementById('hidbtn2').click();
-                            // } : () => { navigate("/login"); props.showAlert("Please login first to proceed an order.", "info"); console.log("User not login."); }} data-bs-toggle={sessionStorage.getItem("usertoken") ? "modal" : ""} data-bs-target={sessionStorage.getItem("usertoken") ? "#delivinfo" : ""} className="btn btn-warning">Buy now</button>
-                        } : () => { navigate("/login"); props.showAlert("Please login first to proceed an order.", "info"); console.log("User not login."); }} className="btn btn-warning">Place Orders</button>
-
-                        {/* Used extra hidden button for fetching contact and address of user on click. */}
-                        <button hidden id='hidbtn2' onClick={sessionStorage.getItem('usertoken') ? () => {
-                            getUser();
-                            credentials.number = userinfo.contact;
-                            credentials.address = userinfo.address;
-                        } : () => { navigate("/login"); props.showAlert("Please login first to proceed an order.", "info"); console.log("User not login."); }} data-bs-toggle={sessionStorage.getItem("usertoken") ? "modal" : ""} data-bs-target={sessionStorage.getItem("usertoken") ? "#delivinfo2" : ""} className="btn btn-warning"></button>
-                    </div>
-
-
-                </div> : <div className="alert alert-warning row" role="alert">
-                    <h6 style={{}} role='alert' className='alert-warning'>Cart is empty, Please add some items to cart. </h6>
-                </div>}
-            </section>
+            </section >
         </>
     )
 }
