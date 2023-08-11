@@ -21,14 +21,16 @@ const Navbar = (props) => {
             // navigate("/admindashboard");
             // navigate("/carts");
             getCart();
+            getUser();
         }
     }, []);
 
     const context = useContext(ProductContext);
-    const { carts, getCart } = context;
+    const { carts, getCart, getUser, userinfo } = context;
 
     let total_Cart_Items = carts.length;
 
+    // <i className="fa-solid fa-user"></i> // User Icon
     console.log("Total Cart Items: " + total_Cart_Items);
     // console.log("Cart Length: " + carts.length);
 
@@ -40,25 +42,17 @@ const Navbar = (props) => {
                         <Link style={{ color: `${location.pathname === "/" ? "aqua" : "white"}`, fontWeight: "bolder" }} className="navbar-brand" to="/"><b> Trendz </b></Link>
 
                         <div className='d-flex justify-content-center'>
-                            <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" aria-expanded="false" aria-label="Toggle navigation">
-                                <span className='navbar-toggler-icon'></span>
-                            </button>
+
+                            {/* ----------------------------------------- Navbar Code -------------------------------------- */}
                             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                                 <div className='d-flex justify-content-center'>
                                     <Link style={{ color: `${location.pathname === "/" ? "aqua" : "white"}`, fontWeight: "bolder" }} className={`nav-link ${location.pathname === "/" ? "active" : ""}`} aria-current="page" to="/">Home</Link>
                                     <Link style={{ color: `${location.pathname === "/men" ? "aqua" : "white"}`, fontWeight: "bolder" }} className={`nav-link ${location.pathname === "/men" ? "active" : ""}`} aria-current="page" to="/men">Men</Link>
                                     <Link style={{ color: `${location.pathname === "/women" ? "aqua" : "white"}`, fontWeight: "bolder" }} className={`nav-link ${location.pathname === "/women" ? "active" : ""}`} aria-current="page" to="/women">Women</Link>
-                                    <Link style={{ color: `${location.pathname === "/orders" ? "aqua" : "white"}`, fontWeight: "bolder" }} className={`nav-link ${location.pathname === "/orders" ? "active" : ""}`} aria-current="page" to="/orders">Orders</Link>
+                                    {/* <Link style={{ color: `${location.pathname === "/orders" ? "aqua" : "white"}`, fontWeight: "bolder" }} className={`nav-link ${location.pathname === "/orders" ? "active" : ""}`} aria-current="page" to="/orders">Orders</Link> */}
                                 </div>
 
-                                <div className='d-flex justify-content-center'>
-                                    <Link id='carticon' className='btn btn-lg btn-block mx-3 my-1 position-relative' to='/carts' >
-                                        <span className="position-absolute top-0 start-100 translate-middle p-0 rounded-circle" id='cartbadge'>
-                                            {sessionStorage.getItem('usertoken') ? <>
-                                                {total_Cart_Items}</> : "0"}
-                                            <span className="visually-hidden">New alerts</span>
-                                        </span>
-                                    </Link>
+                                <div className='d-flex justify-content-center me-5'>
                                     {/* <form className="d-flex"> */}
                                     <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
                                     <button className="btn btn-outline-success" type="submit">Search</button>
@@ -66,50 +60,70 @@ const Navbar = (props) => {
                                     {/* <button type="button" onClick={handleLogin} className="btn btn-outline mx-2 loginbtn">Login</button> */}
                                 </div>
 
-                                <div className='d-flex justify-content-center'>
+                                <div className='d-flex justify-content-center ms-5'>
                                     {sessionStorage.getItem("usertoken") ? <>
-                                        <Link style={{ backgroundColor: "black" }} className="btn btn-primary mx-3" to="/changepassword" role="button">Change Password</Link>
-                                        <button onClick={handleLogout} className="btn btn-danger"> Log Out</button>
+                                        {/* <Link style={{ backgroundColor: "black" }} className="btn btn-primary mx-3" to="/changepassword" role="button">Change Password</Link>
+                                        <button onClick={handleLogout} className="btn btn-danger"> Log Out</button> */}
+
+                                        <div className="dropdown">
+                                            <button className="btn btn-info dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i className="fa-solid fa-user"></i> {userinfo.name}
+                                            </button>
+                                            <ul className="dropdown-menu bg-dark">
+                                                {/* <li><Link className="dropdown-item" to="/">Something else here</Link></li> */}
+                                                <li><Link style={{ backgroundColor: "darkblue", fontSize: "9pt", width: "100%" }} className={`btn btn-primary`} aria-current="page" to="/orders">My Orders</Link></li>
+                                                <li><Link style={{ backgroundColor: "black", fontSize: "9pt", width: "100%" }} className="btn btn-primary my-2" to="/changepassword" role="button">Change Password</Link></li>
+                                                <li><Link style={{ backgroundColor: "red", fontSize: "9pt", width: "100%" }} onClick={handleLogout} className="btn btn-primary"> Log Out</Link></li>
+
+                                                {/* <li><button style={{fontSize: "9pt"}} onClick={handleLogout} className="btn btn-danger"> Log Out</button></li> */}
+                                            </ul>
+                                        </div>
                                     </> : <form className="d-flex">
-                                        <button type="button" onClick={handleLogin} className="btn btn-outline mx-2 loginbtn">Login</button>
+                                        <button style={{backgroundColor: `${location.pathname === '/login' ? "aqua" : "teal"}`, color: 'black'}} type="button" onClick={handleLogin} className="btn btn-outline mx-2 loginbtn">Login</button>
                                     </form>}
                                 </div>
                             </div>
+
+
+
+                            {/* This is Cart ICON and Navbar Toggler Code which is Outside the collapse */}
+                            <Link id='carticon' className='btn btn-lg btn-block mx-3 my-1 position-relative' to='/carts' >
+                                <span className="position-absolute top-0 start-100 translate-middle p-0 rounded-circle" id='cartbadge'>
+                                    {sessionStorage.getItem('usertoken') ? <>
+                                        {total_Cart_Items}</> : "0"}
+                                    <span className="visually-hidden">New alerts</span>
+                                </span>
+                            </Link>
+                            <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" aria-expanded="false" aria-label="Toggle navigation">
+                                <span className='navbar-toggler-icon'></span>
+                            </button>
+
+
+
+
+                            {/* ----------------------------------- OFFCanvas Menu Code ----------------------------------- */}
                             <div className="offcanvas offcanvas-start bg-dark" data-bs-scroll="true" tabIndex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
                                 <div className="offcanvas-header">
-                                    {/* <h5 className="offcanvas-title" id="offcanvasWithBothOptionsLabel">Backdrop with scrolling</h5> */}
                                     <Link style={{ color: `${location.pathname === "/" ? "aqua" : "white"}`, fontWeight: "bolder" }} className="navbar-brand" to="/"><b> Trendz </b></Link>
-
                                     <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                                 </div>
+
                                 <div className="offcanvas-body">
-                                    {/* <p style={{ color: "white" }}>Try scrolling the rest of the page to see this option in action.</p> */}
+                                    {sessionStorage.getItem('usertoken') ?
+                                        <Link disabled style={{ color: "aqua", border: "px solid darkblue", width: "100%" }} className='btn mb-4' data-bs-dismiss="offcanvas" aria-current="page" to='/'> <Link disabled style={{ color: "aqua", border: "2px solid aqua", borderRadius: "20px", marginRight: "62pt" }} className='btn' data-bs-dismiss="offcanvas" aria-current="page" to='/'><i style={{ color: "aqua" }} className="fa-solid fa-user"></i></Link>{userinfo.name}</Link>
+                                        :
+                                        <Link style={{ color: "aqua", border: "2px solid aqua", borderRadius: "20px" }} className='btn ms-2 mb-4' data-bs-dismiss="offcanvas" aria-current="page" to='/login'><i style={{ color: "aqua" }} className="fa-solid fa-user"></i></Link>
+                                    }
 
                                     {/* <div className='d-flex justify-content-center'> */}
                                     <Link style={{ color: `${location.pathname === "/" ? "aqua" : "white"}`, fontWeight: "bolder" }} className={`nav-link ${location.pathname === "/" ? "active" : ""}`} data-bs-dismiss="offcanvas" aria-current="page" to="/">Home</Link>
                                     <Link style={{ color: `${location.pathname === "/men" ? "aqua" : "white"}`, fontWeight: "bolder" }} className={`nav-link ${location.pathname === "/men" ? "active" : ""}`} data-bs-dismiss="offcanvas" aria-current="page" to="/men">Men</Link>
                                     <Link style={{ color: `${location.pathname === "/women" ? "aqua" : "white"}`, fontWeight: "bolder" }} className={`nav-link ${location.pathname === "/women" ? "active" : ""}`} data-bs-dismiss="offcanvas" aria-current="page" to="/women">Women</Link>
-                                    <Link style={{ color: `${location.pathname === "/orders" ? "aqua" : "white"}`, fontWeight: "bolder" }} className={`nav-link ${location.pathname === "/orders" ? "active" : ""}`} data-bs-dismiss="offcanvas" aria-current="page" to="/orders">Orders</Link>
-
+                                    {sessionStorage.getItem('usertoken') ? <Link style={{ color: `${location.pathname === "/orders" ? "aqua" : "white"}`, fontWeight: "bolder" }} className={`nav-link ${location.pathname === "/orders" ? "active" : ""}`} data-bs-dismiss="offcanvas" aria-current="page" to="/orders">My Orders</Link>
+                                        : <></>}
                                     {/* </div> */}
 
-                                    <div className='d-flex justify-content-start'>
-                                        <Link id='carticon' data-bs-dismiss="offcanvas" className='btn btn-lg btn-block mx-3 my-1 position-relative' to='/carts' >
-                                            <span className="position-absolute top-0 start-100 translate-middle p-0 rounded-circle" id='cartbadge'>
-                                                {sessionStorage.getItem('usertoken') ? <>
-                                                    {total_Cart_Items}</> : "0"}
-                                                <span className="visually-hidden">New alerts</span>
-                                            </span>
-                                        </Link>
-                                        {sessionStorage.getItem("usertoken") ? <>
-                                            <button style={{ width: "100%" }} onClick={handleLogout} className="btn btn-danger"> Log Out</button>
-                                        </> : <form style={{ width: "100%" }} className="d-flex">
-                                            <button style={{ width: "100%" }} type="button" onClick={handleLogin} data-bs-dismiss="offcanvas" className="btn btn-outline mx-2 loginbtn">Login</button>
-                                        </form>}
-                                        {/* <button type="button" onClick={handleLogin} data-bs-dismiss="offcanvas" className="btn btn-outline mx-2 loginbtn">Login</button> */}
-                                    </div>
-
-                                    <div className='d-flex justify-content-center my-2'>
+                                    <div className='d-flex justify-content-center my-4'>
                                         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
                                         <button className="btn btn-outline-success" data-bs-dismiss="offcanvas" type="submit">Search</button>
                                     </div>
@@ -117,11 +131,14 @@ const Navbar = (props) => {
                                     <div className='d-flex justify-content-center my-2'>
                                         {sessionStorage.getItem("usertoken") ? <>
                                             <Link style={{ backgroundColor: "black", width: "100%" }} className="btn btn-primary" to="/changepassword" role="button">Change Password</Link>
-                                            {/* <button className="btn btn-primary"> Change Password</button> */}
-                                            {/* <button onClick={handleLogout} className="btn btn-danger"> Log Out</button> */}
                                         </> : <form className="d-flex">
-                                            {/* <Link className="btn btn-primary mx-1" to="/login" role="button">Login</Link>
-                                <Link className="btn btn-primary mx-1" to="/signup" role="button">Sign Up</Link> */}
+                                        </form>}
+                                    </div>
+
+                                    <div className='d-flex justify-content-start'>
+                                        {sessionStorage.getItem("usertoken") ? <>
+                                            <button style={{ width: "100%" }} onClick={handleLogout} className="btn btn-danger"> Log Out</button>
+                                        </> : <form style={{ width: "100%" }} className="d-flex">
                                         </form>}
                                     </div>
                                 </div>
@@ -129,7 +146,7 @@ const Navbar = (props) => {
                         </div>
 
                     </div>
-                </nav>
+                </nav >
 
             </div >
 
