@@ -138,7 +138,7 @@ const CartState = (props) => {
     }
 
     // --------------------- Fetching Items for client side. ----------------------
-    // Get All Men Items
+    // Get All Items for specific type men, women and filters(casual,formal,ethnic).
     const fetchItems = async (type) => {
         // API Call:
         const response = await fetch(`${host}/api/adminproducts/${type}`, {
@@ -152,6 +152,23 @@ const CartState = (props) => {
         // console.log(json); // This is for testing only.
         setproducts(json);
     }
+
+    const [searchedProduct, setsearchedProduct] = useState([]);
+    // Get Searched Items.
+    const searchItems = async (q) => {
+        // API Call:
+        const response = await fetch(`${host}/api/adminproducts/query/${q}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                // 'admintoken': sessionStorage.getItem("token")
+            }
+        });
+        const json = await response.json();
+        // console.log(json); // This is for testing only.
+        setsearchedProduct(json);
+    }
+
 
     // ---------------------------- Contexts for Operations on Carts at user side. -----------------------------
     const [carts, setcarts] = useState([]);
@@ -285,8 +302,10 @@ const CartState = (props) => {
         setuserinfo(userDetail);
     }
 
+    const [quant, setquant] = useState(1);
+    // console.log("Quant in product State: " + quant); // This is for testing only.
     // Add Order()
-    const addOrder = async () => {
+    const addOrder = async (quantity) => {
         // TODO: API Call
         // API Call:
         const response = await fetch(`${host}/api/userorder/addorder/${id}/${shoesize}`, {
@@ -296,14 +315,15 @@ const CartState = (props) => {
                 'Content-Type': 'application/json',
                 'authtoken': sessionStorage.getItem("usertoken"),
             },
-            body: JSON.stringify({ contact, address })
+            body: JSON.stringify({ contact, address, quantity })
         });
         const order = await response.json();
         setorders(orders.concat(order));
 
-        console.log("Added to orders.");
-        console.log("Ordered Product ID: " + id);
-        console.log("Ordered Shoe Size: " + shoesize);
+        // console.log("Added to orders.");
+        // console.log("Ordered Product ID: " + id);
+        // console.log("Ordered Shoe Size: " + shoesize);
+        // console.log("Quantity " + quantity);
 
 
         // console.log("Response: " + response.json()) // This is for testing only.
@@ -428,17 +448,21 @@ const CartState = (props) => {
         }
     }
 
+    // ----------- Context for Search related text. -------------
+    const [query, setquery] = useState("");
+
     return (
         <ProductContext.Provider value={{
             products, addProduct, deleteProduct, editProduct, getProducts,
             // fetchItems, menItems, casualMen, formalMen, ethnicMen, womenItems, casualWomen, formalWomen, ethnicWomen,
-            fetchItems,
+            fetchItems, searchItems, searchedProduct,
             carts, addCart, deleteCart, editCart, getCart,
             alert, showAlert,
             id, setid, idFunc, sizeFunc, setshoesize,
             getUser, userinfo, setContactFunc, setAddressFunc,
-            orders, addOrder, cancelOrder, getOrder, custOrders, orderUpdate,
+            orders, addOrder, cancelOrder, getOrder, custOrders, orderUpdate, setquant, quant,
             sweetAlert,
+            query, setquery,
 
         }}>
             {props.children}

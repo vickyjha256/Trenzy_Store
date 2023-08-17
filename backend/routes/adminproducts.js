@@ -189,6 +189,7 @@ router.get('/:type', async (req, res) => {
                 break;
 
             // default:
+            //     products = await AdminProducts.find({ brand: req.params.type }); // It finds products of the corresponding admin.
             //     break;
         }
         // const products = await AdminProducts.find({ admin: req.admin.id }); // It finds products of the corresponding admin.
@@ -200,101 +201,39 @@ router.get('/:type', async (req, res) => {
     }
 });
 
-// // ROUTE 5:--> Get Men products using: GET "/api/adminproducts/menitems". No Login required.
-// router.get('/menitems', async (req, res) => {
-//     try {
-//         // const products = await AdminProducts.find({ admin: req.admin.id }); // It finds products of the corresponding admin.
-//         const products = await AdminProducts.find({ gender: "Male" }); // It finds products of the corresponding admin.
-//         res.json(products); // It send products as a response.
-//     } catch (error) {
-//         console.error(error.message);
-//         res.status(500).send("Internal Server Error.");
-//     }
-// });
 
-// // ROUTE 6:--> Get Casual Men products using: GET "/api/adminproducts/casualmen". No Login required.
-// router.get('/casualmen', async (req, res) => {
-//     try {
-//         // const products = await AdminProducts.find({ admin: req.admin.id }); // It finds products of the corresponding admin.
-//         const products = await AdminProducts.find({ gender: "Male", type: "Casual" }); // It finds products of the corresponding admin.
-//         res.json(products); // It send products as a response.
-//     } catch (error) {
-//         console.error(error.message);
-//         res.status(500).send("Internal Server Error.");
-//     }
-// });
+// ROUTE 6:--> Get products using: GET "/api/adminproducts/:search/gender". No Login required.
+router.get('/query/:search', async (req, res) => {
+    try {
+        let products = await AdminProducts.find();
+        //  console.log(products);
 
-// // ROUTE 7:--> Get Formal Men products using: GET "/api/adminproducts/formalmen". No Login required.
-// router.get('/formalmen', async (req, res) => {
-//     try {
-//         // const products = await AdminProducts.find({ admin: req.admin.id }); // It finds products of the corresponding admin.
-//         const products = await AdminProducts.find({ gender: "Male", type: "Formal" }); // It finds products of the corresponding admin.
-//         res.json(products); // It send products as a response.
-//     } catch (error) {
-//         console.error(error.message);
-//         res.status(500).send("Internal Server Error.");
-//     }
-// });
+        let arr = [];
+        products.map((elem) => {
+            let brand = elem.brand.toLowerCase();
+            let description = elem.description.toLowerCase();
+            // let result = string.match(req.params.search.toLowerCase());
+            // console.log("Output : " + result);
 
-// // ROUTE 8:--> Get Ethnic Men products using: GET "/api/adminproducts/ethnicmen". No Login required.
-// router.get('/ethnicmen', async (req, res) => {
-//     try {
-//         // const products = await AdminProducts.find({ admin: req.admin.id }); // It finds products of the corresponding admin.
-//         const products = await AdminProducts.find({ gender: "Male", type: "Ethnic" }); // It finds products of the corresponding admin.
-//         res.json(products); // It send products as a response.
-//     } catch (error) {
-//         console.error(error.message);
-//         res.status(500).send("Internal Server Error.");
-//     }
-// });
+            let words = req.params.search.toLowerCase().split(" ");
+            // // console.log(words); // This is for testing only.
+            words.forEach(element => {
+                if (brand.match(element) || description.match(element)) {
+                    // console.log(true);
+                    arr.push(elem);
+                }
+            });
 
-// // ROUTE 9:--> Get Women products using: GET "/api/adminproducts/womenitems". No Login required.
-// router.get('/womenitems', async (req, res) => {
-//     try {
-//         // const products = await AdminProducts.find({ admin: req.admin.id }); // It finds products of the corresponding admin.
-//         const products = await AdminProducts.find({ gender: "Female" }); // It finds products of the corresponding admin.
-//         res.json(products); // It send products as a response.
-//     } catch (error) {
-//         console.error(error.message);
-//         res.status(500).send("Internal Server Error.");
-//     }
-// });
+            // console.log(string); // This is for testing only.
+        })
+        // console.log("Array: " + arr); // This is for testing only.
 
-// // ROUTE 10:--> Get Casual Women products using: GET "/api/adminproducts/casualwomen". No Login required.
-// router.get('/casualwomen', async (req, res) => {
-//     try {
-//         // const products = await AdminProducts.find({ admin: req.admin.id }); // It finds products of the corresponding admin.
-//         const products = await AdminProducts.find({ gender: "Female", type: "Casual" }); // It finds products of the corresponding admin.
-//         res.json(products); // It send products as a response.
-//     } catch (error) {
-//         console.error(error.message);
-//         res.status(500).send("Internal Server Error.");
-//     }
-// });
-
-// // ROUTE 11:--> Get Formal Women products using: GET "/api/adminproducts/formalwomen". No Login required.
-// router.get('/formalwomen', async (req, res) => {
-//     try {
-//         // const products = await AdminProducts.find({ admin: req.admin.id }); // It finds products of the corresponding admin.
-//         const products = await AdminProducts.find({ gender: "Female", type: "Formal" }); // It finds products of the corresponding admin.
-//         res.json(products); // It send products as a response.
-//     } catch (error) {
-//         console.error(error.message);
-//         res.status(500).send("Internal Server Error.");
-//     }
-// });
-
-// // ROUTE 12:--> Get Ethnic Women products using: GET "/api/adminproducts/ethnicwomen". No Login required.
-// router.get('/ethnicwomen', async (req, res) => {
-//     try {
-//         // const products = await AdminProducts.find({ admin: req.admin.id }); // It finds products of the corresponding admin.
-//         const products = await AdminProducts.find({ gender: "Female", type: "Ethnic" }); // It finds products of the corresponding admin.
-//         res.json(products); // It send products as a response.
-//     } catch (error) {
-//         console.error(error.message);
-//         res.status(500).send("Internal Server Error.");
-//     }
-// });
+        res.json(arr); // It send products as a response.
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send("Internal Server Error.");
+    }
+});
 
 
 module.exports = router;

@@ -1,26 +1,21 @@
 import React, { useContext, useEffect, useState } from 'react'
 import ProductContext from '../../Context/Products/ProductContext';
-import { useNavigate } from 'react-router-dom';
+import { redirect, useNavigate } from 'react-router-dom';
 
-const MenShoes = (props) => {
+const SearchItem = (props) => {
     const context = useContext(ProductContext);
-    const { products, fetchItems, addCart, id, setid, sizeFunc, addOrder, getUser, userinfo, setContactFunc, setAddressFunc, sweetAlert } = context;
+    const { searchedProduct, fetchItems, addCart, id, setid, sizeFunc, addOrder, getUser, userinfo, setContactFunc, setAddressFunc, sweetAlert, searchItems } = context;
 
     useEffect(() => {
-        if (props.shoetype === "men") {
-            fetchItems("menitems");
-        } else if (props.shoetype === "casualmen") {
-            fetchItems("casualmen");
-        } else if (props.shoetype === "formalmen") {
-            fetchItems("formalmen");
-        } else if (props.shoetype === "ethnicmen") {
-            fetchItems("ethnicmen");
+        if (props.query.length === 0) {
+            searchItems(props.query);
+            redirect("/");
         } else {
-            fetchItems('menitems');
+            searchItems(props.query);
         }
-
     }, []);
-    // console.log("Props.Shoetype: " + props.shoetype); // This is for testing only.
+    console.log("Props.Query: " + props.query);
+    // console.log("Searched Product: " + searchedProduct);
 
 
     // const [credentials, setCredentials] = useState({ number: `${userinfo.contact === undefined ? "" : userinfo.contact}`, address: `${userinfo.address === undefined ? "" : userinfo.address}` });
@@ -74,7 +69,7 @@ const MenShoes = (props) => {
                 <div className='row'>
 
                     {/* Below code is for modal popup. */}
-                    <div className="modal fade" id="delivinfo" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal fade" id="searchdelivinfo" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div className="modal-dialog modal-dialog-centered">
                             <div className="modal-content">
                                 <div className="modal-header">
@@ -126,7 +121,7 @@ const MenShoes = (props) => {
                     </div>
 
 
-                    {products.map((element) => {
+                    {searchedProduct.map((element) => {
                         return <div className='d-flex justify-content-center col-xxl-3 col-6 my-3' key={element._id}>
                             {/* <img style={{height: "100%", width: "100%"}} src={element.image} alt="" /> */}
                             <div id='productcard' className="card">
@@ -178,14 +173,14 @@ const MenShoes = (props) => {
                                                 <div style={{ backgroundColor: "white", color: "black" }} className="modal-body">
                                                     <h6>Select Size: UK/India </h6>
                                                     <div className="grid text-center">
-                                                        <button type='button' onClick={() => { sizeFunc(5); }} data-bs-toggle={sessionStorage.getItem("usertoken") ? "modal" : ""} data-bs-target={sessionStorage.getItem("usertoken") ? "#delivinfo" : ""} data-bs-dismiss="modal" className="btn btn-warning mx-2">5</button>
-                                                        <button type='button' onClick={() => { sizeFunc(6); }} data-bs-toggle={sessionStorage.getItem("usertoken") ? "modal" : ""} data-bs-target={sessionStorage.getItem("usertoken") ? "#delivinfo" : ""} data-bs-dismiss="modal" className="btn btn-warning mx-2">6</button>
-                                                        <button type='button' onClick={() => { sizeFunc(7); }} data-bs-toggle={sessionStorage.getItem("usertoken") ? "modal" : ""} data-bs-target={sessionStorage.getItem("usertoken") ? "#delivinfo" : ""} data-bs-dismiss="modal" className="btn btn-warning mx-2">7</button>
-                                                        <button type='button' onClick={() => { sizeFunc(8); }} data-bs-toggle={sessionStorage.getItem("usertoken") ? "modal" : ""} data-bs-target={sessionStorage.getItem("usertoken") ? "#delivinfo" : ""} data-bs-dismiss="modal" className="btn btn-warning mx-2">8</button>
-                                                        <button type='button' onClick={() => { sizeFunc(9); }} data-bs-toggle={sessionStorage.getItem("usertoken") ? "modal" : ""} data-bs-target={sessionStorage.getItem("usertoken") ? "#delivinfo" : ""} data-bs-dismiss="modal" className="btn btn-warning mx-2">9</button>
-                                                        <button type='button' onClick={() => { sizeFunc(10); }} data-bs-toggle={sessionStorage.getItem("usertoken") ? "modal" : ""} data-bs-target={sessionStorage.getItem("usertoken") ? "#delivinfo" : ""} data-bs-dismiss="modal" className="btn btn-warning mx-2">10</button>
-                                                        <button type='button' onClick={() => { sizeFunc(11); }} data-bs-toggle={sessionStorage.getItem("usertoken") ? "modal" : ""} data-bs-target={sessionStorage.getItem("usertoken") ? "#delivinfo" : ""} data-bs-dismiss="modal" className="btn btn-warning mx-2">11</button>
-                                                        <button type='button' onClick={() => { sizeFunc(12); }} data-bs-toggle={sessionStorage.getItem("usertoken") ? "modal" : ""} data-bs-target={sessionStorage.getItem("usertoken") ? "#delivinfo" : ""} data-bs-dismiss="modal" className="btn btn-warning mx-2">12</button>
+                                                        <button type='button' onClick={() => { sizeFunc(5); }} data-bs-toggle={sessionStorage.getItem("usertoken") ? "modal" : ""} data-bs-target={sessionStorage.getItem("usertoken") ? "#searchdelivinfo" : ""} data-bs-dismiss="modal" className="btn btn-warning mx-2">5</button>
+                                                        <button type='button' onClick={() => { sizeFunc(6); }} data-bs-toggle={sessionStorage.getItem("usertoken") ? "modal" : ""} data-bs-target={sessionStorage.getItem("usertoken") ? "#searchdelivinfo" : ""} data-bs-dismiss="modal" className="btn btn-warning mx-2">6</button>
+                                                        <button type='button' onClick={() => { sizeFunc(7); }} data-bs-toggle={sessionStorage.getItem("usertoken") ? "modal" : ""} data-bs-target={sessionStorage.getItem("usertoken") ? "#searchdelivinfo" : ""} data-bs-dismiss="modal" className="btn btn-warning mx-2">7</button>
+                                                        <button type='button' onClick={() => { sizeFunc(8); }} data-bs-toggle={sessionStorage.getItem("usertoken") ? "modal" : ""} data-bs-target={sessionStorage.getItem("usertoken") ? "#searchdelivinfo" : ""} data-bs-dismiss="modal" className="btn btn-warning mx-2">8</button>
+                                                        <button type='button' onClick={() => { sizeFunc(9); }} data-bs-toggle={sessionStorage.getItem("usertoken") ? "modal" : ""} data-bs-target={sessionStorage.getItem("usertoken") ? "#searchdelivinfo" : ""} data-bs-dismiss="modal" className="btn btn-warning mx-2">9</button>
+                                                        <button type='button' onClick={() => { sizeFunc(10); }} data-bs-toggle={sessionStorage.getItem("usertoken") ? "modal" : ""} data-bs-target={sessionStorage.getItem("usertoken") ? "#searchdelivinfo" : ""} data-bs-dismiss="modal" className="btn btn-warning mx-2">10</button>
+                                                        <button type='button' onClick={() => { sizeFunc(11); }} data-bs-toggle={sessionStorage.getItem("usertoken") ? "modal" : ""} data-bs-target={sessionStorage.getItem("usertoken") ? "#searchdelivinfo" : ""} data-bs-dismiss="modal" className="btn btn-warning mx-2">11</button>
+                                                        <button type='button' onClick={() => { sizeFunc(12); }} data-bs-toggle={sessionStorage.getItem("usertoken") ? "modal" : ""} data-bs-target={sessionStorage.getItem("usertoken") ? "#searchdelivinfo" : ""} data-bs-dismiss="modal" className="btn btn-warning mx-2">12</button>
 
                                                     </div>
                                                 </div>
@@ -217,4 +212,4 @@ const MenShoes = (props) => {
     )
 }
 
-export default MenShoes;
+export default SearchItem;

@@ -3,8 +3,25 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import ProductContext from '../../Context/Products/ProductContext';
 
 const Navbar = (props) => {
+    const context = useContext(ProductContext);
+    const { carts, getCart, getUser, userinfo, searchItems, query, setquery } = context;
+
     let location = useLocation();
     let redirect = useNavigate();
+
+    useEffect(() => {
+        if (sessionStorage.getItem("usertoken")) {
+            // navigate("/admindashboard");
+            // navigate("/carts");
+            getCart();
+            getUser();
+        }
+    }, []);
+
+    let total_Cart_Items = carts.length;
+    console.log("Total Cart Items: " + total_Cart_Items);
+    // console.log("Cart Length: " + carts.length);
+
     const handleLogin = (e) => {
         redirect("/login");
     }
@@ -16,23 +33,12 @@ const Navbar = (props) => {
         redirect("/login");
     }
 
-    useEffect(() => {
-        if (sessionStorage.getItem("usertoken")) {
-            // navigate("/admindashboard");
-            // navigate("/carts");
-            getCart();
-            getUser();
-        }
-    }, []);
+    // console.log("Query: " + query); // This is for testing only.
 
-    const context = useContext(ProductContext);
-    const { carts, getCart, getUser, userinfo } = context;
-
-    let total_Cart_Items = carts.length;
-
-    // <i className="fa-solid fa-user"></i> // User Icon
-    console.log("Total Cart Items: " + total_Cart_Items);
-    // console.log("Cart Length: " + carts.length);
+    // const handleSearch = (e) => {
+    //     searchItems(query);
+    //     redirect(`/search`);
+    // }
 
     return (
         <>
@@ -53,11 +59,17 @@ const Navbar = (props) => {
                                 </div>
 
                                 <div className='d-flex justify-content-center me-5'>
-                                    {/* <form className="d-flex"> */}
-                                    <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                                    <button className="btn btn-outline-success" type="submit">Search</button>
-                                    {/* </form> */}
-                                    {/* <button type="button" onClick={handleLogin} className="btn btn-outline mx-2 loginbtn">Login</button> */}
+                                    <div className="searchBarDiv">
+                                        {query.length === 0 ? <> <i className="fa-solid searchIcon fa-magnifying-glass"></i> </> : ""}
+                                        <input id='searchbar' onChange={(e) => {
+                                            // e.target.value;
+                                            e.preventDefault();
+                                            setquery(e.target.value);
+                                            searchItems(query);
+                                            redirect(`/search`);
+                                        }} className="form-control" type="search" placeholder="  Search for products" aria-label="Search" />
+                                    </div>
+                                    {/* <button onClick={handleSearch} className="btn btn-outline-info" type="submit">Search</button> */}
                                 </div>
 
                                 <div className='d-flex justify-content-center ms-5'>
@@ -79,7 +91,7 @@ const Navbar = (props) => {
                                             </ul>
                                         </div>
                                     </> : <form className="d-flex">
-                                        <button style={{backgroundColor: `${location.pathname === '/login' ? "aqua" : "teal"}`, color: 'black'}} type="button" onClick={handleLogin} className="btn btn-outline mx-2 loginbtn">Login</button>
+                                        <button type="button" onClick={handleLogin} className={`btn ${location.pathname === "/login" ? "btn-outline-info" : "btn-outline-light"} mx-2`}>Login</button>
                                     </form>}
                                 </div>
                             </div>
@@ -110,10 +122,22 @@ const Navbar = (props) => {
 
                                 <div className="offcanvas-body">
                                     {sessionStorage.getItem('usertoken') ?
-                                        <Link disabled style={{ color: "aqua", border: "px solid darkblue", width: "100%" }} className='btn mb-4' data-bs-dismiss="offcanvas" aria-current="page" to='/'> <Link disabled style={{ color: "aqua", border: "2px solid aqua", borderRadius: "20px", marginRight: "62pt" }} className='btn' data-bs-dismiss="offcanvas" aria-current="page" to='/'><i style={{ color: "aqua" }} className="fa-solid fa-user"></i></Link>{userinfo.name}</Link>
+                                        <Link disabled style={{ color: "aqua", border: "px solid darkblue", width: "100%" }} className='btn mb-3' data-bs-dismiss="offcanvas" aria-current="page" to='/'> <Link disabled style={{ color: "aqua", border: "2px solid aqua", borderRadius: "20px", marginRight: "62pt" }} className='btn' data-bs-dismiss="offcanvas" aria-current="page" to='/'><i style={{ color: "aqua" }} className="fa-solid fa-user"></i></Link>{userinfo.name}</Link>
                                         :
-                                        <Link style={{ color: "aqua", border: "2px solid aqua", borderRadius: "20px" }} className='btn ms-2 mb-4' data-bs-dismiss="offcanvas" aria-current="page" to='/login'><i style={{ color: "aqua" }} className="fa-solid fa-user"></i></Link>
+                                        <Link style={{ color: "aqua", border: "2px solid aqua", borderRadius: "20px" }} className='btn ms-2 mb-3' data-bs-dismiss="offcanvas" aria-current="page" to='/login'><i style={{ color: "aqua" }} className="fa-solid fa-user"></i></Link>
                                     }
+                                    <div className='d-flex justify-content-center mb-5'>
+                                        <div className="searchBarDiv">
+                                            {query.length === 0 ? <> <i className="fa-solid searchIcon fa-magnifying-glass"></i> </> : ""}
+                                            <input id='searchbar' onChange={(e) => {
+                                                // e.target.value;
+                                                setquery(e.target.value);
+                                                searchItems(query);
+                                                redirect(`/search`);
+                                            }} className="form-control" type="search" placeholder="  Search for products" aria-label="Search" />
+                                        </div>
+                                        {/* <button onClick={handleSearch} className="btn btn-outline-info" type="submit">Search</button> */}
+                                    </div>
 
                                     {/* <div className='d-flex justify-content-center'> */}
                                     <Link style={{ color: `${location.pathname === "/" ? "aqua" : "white"}`, fontWeight: "bolder" }} className={`nav-link ${location.pathname === "/" ? "active" : ""}`} data-bs-dismiss="offcanvas" aria-current="page" to="/">Home</Link>
@@ -123,10 +147,18 @@ const Navbar = (props) => {
                                         : <></>}
                                     {/* </div> */}
 
-                                    <div className='d-flex justify-content-center my-4'>
-                                        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                                        <button className="btn btn-outline-success" data-bs-dismiss="offcanvas" type="submit">Search</button>
-                                    </div>
+                                    {/* <div className='d-flex justify-content-center my-4'> */}
+                                    {/* <div className="searchBarDiv">
+                                            <i className="fa-solid searchIcon fa-magnifying-glass"></i>
+                                            <input id='searchbar' onChange={(e) => {
+                                                // e.target.value;
+                                                setquery(e.target.value);
+                                                searchItems(query);
+                                                redirect(`/search`);
+                                            }} className="form-control" type="search" placeholder="  Search for products" aria-label="Search" />
+                                        </div> */}
+                                    {/* <button onClick={handleSearch} className="btn btn-outline-info" type="submit">Search</button> */}
+                                    {/* </div> */}
 
                                     <div className='d-flex justify-content-center my-2'>
                                         {sessionStorage.getItem("usertoken") ? <>
@@ -137,7 +169,7 @@ const Navbar = (props) => {
 
                                     <div className='d-flex justify-content-start'>
                                         {sessionStorage.getItem("usertoken") ? <>
-                                            <button style={{ width: "100%" }} onClick={handleLogout} className="btn btn-danger"> Log Out</button>
+                                            <button style={{ backgroundColor: "red", width: "100%" }} onClick={handleLogout} className="btn btn-primary"> Log Out</button>
                                         </> : <form style={{ width: "100%" }} className="d-flex">
                                         </form>}
                                     </div>

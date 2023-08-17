@@ -19,6 +19,7 @@ import AdminNavbar from './Components/Admin Components/AdminNavbar';
 import Orders from './Components/User Components/Orders';
 import CustomerOrders from './Components/Admin Components/CustomerOrders';
 import Dashboard from './Components/Admin Components/Dashboard';
+import Search from './Components/User Components/Search';
 
 function App() {
   // const context = useContext(ProductContext);
@@ -51,6 +52,9 @@ function App() {
             <Route exact path="/casualwomen" element={<WomenShoes showAlert={showAlert} shoetype="casualwomen" />} />
             <Route exact path="/formalwomen" element={<WomenShoes showAlert={showAlert} shoetype="formalwomen" />} />
             <Route exact path="/ethnicwomen" element={<WomenShoes showAlert={showAlert} shoetype="ethnicwomen" />} />
+
+
+            <Route exact path="/search" element={<Search showAlert={showAlert} />} />
             
 
             <Route exact path="/message" element={<Message />} />

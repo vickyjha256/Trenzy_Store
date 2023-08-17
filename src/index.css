@@ -150,28 +150,44 @@ body {
     border: 2px solid rgb(0, 0, 0);
 }
 
-#qty{
+#qty {
     border: 2px solid #02204f;
     /* margin-left: 4px; */
 }
 
-#cartimg{
+#cartimg {
     height: 27vh;
     width: 15vw;
     margin-left: 4px;
     margin-top: 4px;
 }
 
-.carttext{
+.carttext {
     font-size: medium;
 }
 
-.pricetext{
+.pricetext {
     font-size: large;
 }
-.delprice{
+
+.delprice {
     font-size: medium;
 }
+
+.searchIcon {
+    color:#02204f;
+    position: absolute;
+    padding: 11px;
+    cursor: text;
+}
+#searchbar{
+    width: 100%;
+    text-align: center;
+    border-radius: 20px;
+}
+
+
+
 
 
 /* Media Query for Mobile Devices */
@@ -197,17 +213,18 @@ body {
         height: 36vh;
     }
 
-    #qty{
+    #qty {
         border: 2px solid #02204f;
         /* height: 20; */
         width: 32%;
     }
-    #cartimg{
+
+    #cartimg {
         height: 14vh;
         width: 30vw;
     }
 
-    .carttext{
+    .carttext {
         font-size: small;
     }
 }

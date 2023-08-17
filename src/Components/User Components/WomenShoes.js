@@ -1,11 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
 import ProductContext from '../../Context/Products/ProductContext'
-import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 
 const WomenShoes = (props) => {
     const context = useContext(ProductContext);
-    const { products, fetchItems, addCart, id, setid, sizeFunc, addOrder, getUser, userinfo, setContactFunc, setAddressFunc } = context;
+    const { products, fetchItems, addCart, id, setid, sizeFunc, addOrder, getUser, userinfo, setContactFunc, setAddressFunc, sweetAlert } = context;
 
     useEffect(() => {
         if (props.shoetype === "women") {
@@ -19,6 +18,7 @@ const WomenShoes = (props) => {
         } else {
             fetchItems("womenitems");
         }
+
     }, []);
     // console.log("Props.Shoetype: " + props.shoetype);
 
@@ -30,11 +30,11 @@ const WomenShoes = (props) => {
     }
 
     // console.log("User Info: ", JSON.stringify(userinfo)); // This is for testing only.
-    console.log("User Contact: ", userinfo.contact); // This is for testing only.
-    console.log("User Address: ", userinfo.address); // This is for testing only.
-    console.log("Number: " + credentials.number); // This is for testing only.
-    console.log("Address: " + credentials.address); // This is for testing only.
-    console.log("ID in productstate: " + id); // This is for testing only.
+    // console.log("User Contact: ", userinfo.contact); // This is for testing only.
+    // console.log("User Address: ", userinfo.address); // This is for testing only.
+    // console.log("Number: " + credentials.number); // This is for testing only.
+    // console.log("Address: " + credentials.address); // This is for testing only.
+    // console.log("ID in productstate: " + id); // This is for testing only.
 
 
     // const btmove = (e) => {
@@ -55,42 +55,16 @@ const WomenShoes = (props) => {
 
 
     let navigate = useNavigate();
-    const sweetCartAlert = (role) => {
-        // console.log("Added to cart successfully.");
-        // addCart(element._id);
-
-        if (role === 'cart') {
-            Swal.fire({
-                color: "white",
-                title: "Product added to cart successfully !!",
-                text: "",
-                icon: "success",
-                timer: 1400,
-                showConfirmButton: false,
-                background: "#0080ff"
-            });
-        } else {
-            Swal.fire({
-                color: "white",
-                title: "Product ordered successfully !!",
-                text: "",
-                icon: "success",
-                timer: 1400,
-                showConfirmButton: false,
-                background: "#0080ff"
-            });
-        }
-    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Handle Submit Triggered."); // This is for testing only.
+        // console.log("Handle Submit Triggered."); // This is for testing only.
         setContactFunc(credentials.number);
         setAddressFunc(credentials.address);
         addOrder();
-        sweetCartAlert();
+        sweetAlert();
 
-        console.log("Contact Number: " + credentials.number + "\nAddress: " + credentials.address); // This is for testing only.
+        // console.log("Contact Number: " + credentials.number + "\nAddress: " + credentials.address); // This is for testing only.
     }
 
 
@@ -159,6 +133,7 @@ const WomenShoes = (props) => {
                                 <img id='productimg' src={element.image} className="card-img-top" alt="..." />
                                 <div className="card-body">
                                     <h5 className="card-title">{element.brand}</h5>
+                                    {/* <p>{element.description}</p> */}
                                     <p className="card-text"><b>₹ {element.price} </b></p>
 
 
@@ -173,14 +148,14 @@ const WomenShoes = (props) => {
                                                 <div style={{ backgroundColor: "white", color: "black" }} className="modal-body">
                                                     <h6>Select Size: UK/India </h6>
                                                     <div className="grid text-center">
-                                                        <button type='button' onClick={() => { sizeFunc(5); addCart(); sweetCartAlert("cart"); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">5</button>
-                                                        <button type='button' onClick={() => { sizeFunc(6); addCart(); sweetCartAlert("cart"); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">6</button>
-                                                        <button type='button' onClick={() => { sizeFunc(7); addCart(); sweetCartAlert("cart"); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">7</button>
-                                                        <button type='button' onClick={() => { sizeFunc(8); addCart(); sweetCartAlert("cart"); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">8</button>
-                                                        <button type='button' onClick={() => { sizeFunc(9); addCart(); sweetCartAlert("cart"); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">9</button>
-                                                        <button type='button' onClick={() => { sizeFunc(10); addCart(); sweetCartAlert("cart"); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">10</button>
-                                                        <button type='button' onClick={() => { sizeFunc(11); addCart(); sweetCartAlert("cart"); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">11</button>
-                                                        <button type='button' onClick={() => { sizeFunc(12); addCart(); sweetCartAlert("cart"); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">12</button>
+                                                        <button type='button' onClick={() => { sizeFunc(5); addCart(); sweetAlert("cart"); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">5</button>
+                                                        <button type='button' onClick={() => { sizeFunc(6); addCart(); sweetAlert("cart"); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">6</button>
+                                                        <button type='button' onClick={() => { sizeFunc(7); addCart(); sweetAlert("cart"); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">7</button>
+                                                        <button type='button' onClick={() => { sizeFunc(8); addCart(); sweetAlert("cart"); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">8</button>
+                                                        <button type='button' onClick={() => { sizeFunc(9); addCart(); sweetAlert("cart"); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">9</button>
+                                                        <button type='button' onClick={() => { sizeFunc(10); addCart(); sweetAlert("cart"); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">10</button>
+                                                        <button type='button' onClick={() => { sizeFunc(11); addCart(); sweetAlert("cart"); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">11</button>
+                                                        <button type='button' onClick={() => { sizeFunc(12); addCart(); sweetAlert("cart"); }} data-bs-dismiss="modal" className="btn btn-warning mx-2">12</button>
 
                                                     </div>
                                                 </div>

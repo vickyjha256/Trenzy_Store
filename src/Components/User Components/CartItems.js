@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const CartItems = (props) => {
     const { item } = props;
     const context = useContext(ProductContext);
-    const { editCart, deleteCart, setid, setshoesize, userinfo, getUser, addOrder, setAddressFunc, setContactFunc, sweetAlert } = context;
+    const { editCart, deleteCart, setid, setshoesize, userinfo, getUser, addOrder, setAddressFunc, setContactFunc, sweetAlert, quant, setquant } = context;
 
 
     const [credentials, setCredentials] = useState({ number: `${userinfo.contact === undefined ? sessionStorage.getItem("usertoken") && getUser() && userinfo.contact : userinfo.contact}`, address: `${userinfo.address === undefined ? sessionStorage.getItem("usertoken") && getUser() && userinfo.address : userinfo.address}` });
@@ -41,7 +41,8 @@ const CartItems = (props) => {
         // console.log("Handle Submit Triggered."); // This is for testing only.
         setContactFunc(credentials.number);
         setAddressFunc(credentials.address);
-        addOrder();
+        addOrder(quant);
+
         sweetAlert();
 
         // console.log("Contact Number: " + credentials.number + "\nAddress: " + credentials.address); // This is for testing only.
@@ -209,6 +210,7 @@ const CartItems = (props) => {
                             <button id='ordbtn' onClick={sessionStorage.getItem('usertoken') ? () => {
                                 setid(item.productID);
                                 setshoesize(item.size);
+                                setquant(item.quantity);
                                 getUser();
                                 credentials.number = userinfo.contact;
                                 credentials.address = userinfo.address;

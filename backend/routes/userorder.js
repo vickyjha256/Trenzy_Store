@@ -50,6 +50,7 @@ router.post("/addorder/:id/:shoesize", fetchuser, [
             description: product.description,
             price: product.price,
             size: req.params.shoesize,
+            quantity: req.body.quantity,
             user: req.user.id,
             contact: contact,
             address: address,
