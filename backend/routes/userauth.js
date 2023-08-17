@@ -110,4 +110,42 @@ router.post('/getuser', fetchuser, async (req, res) => {
     }
 });
 
+// ROUTE 4:--> Change Password using: POST "/api/userauth/changepassword". Login required.
+router.post('/changepassword', fetchuser, [
+    body('currentpassword', 'Password field cannot be empty.').exists(),
+    body('newpassword', 'Password must contain atleast one uppercase, one lowercase, one number and one special character.').exists().isLength({ min: 5 }).isStrongPassword(),
+], async (req, res) => {
+    let success = false;
+    // Finds the validation errors in this request and wraps them in an object with handy functions.
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) { // It returns error 400 bad request if error occured.
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { currentpassword, newpassword } = req.body; // Destructured Passwords from body.
+    try {
+        const user = await User.findById(req.user.id);
+
+        const passwordMatching = await bcrypt.compare(currentpassword, user.password);
+        if (!passwordMatching) {
+            success = false;
+            // res.json({ success });
+            return res.status(400).json({error: "Incorrect current password."});
+        }
+
+        const salt = await bcrypt.genSalt(10);
+        const encryptedNewPassword = await bcrypt.hash(newpassword, salt);
+
+        const updatePassword = await user.updateOne({ password: encryptedNewPassword, }); // It updates the password field of user.
+
+        // console.log("Current Password: " + currentpassword, "\nNew Password: " +  newpassword);
+        success = true;
+        res.json({ success });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Internal Server Error.");
+    }
+});
+
+
 module.exports = router;

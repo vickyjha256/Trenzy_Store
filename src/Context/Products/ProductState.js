@@ -422,9 +422,6 @@ const CartState = (props) => {
     }
 
     const sweetAlert = (role) => {
-        // console.log("Added to cart successfully.");
-        // addCart(element._id);
-
         if (role === 'cart') {
             Swal.fire({
                 color: "white",
@@ -450,6 +447,7 @@ const CartState = (props) => {
 
     // ----------- Context for Search related text. -------------
     const [query, setquery] = useState("");
+    
 
     return (
         <ProductContext.Provider value={{

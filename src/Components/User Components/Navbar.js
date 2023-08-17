@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import ProductContext from '../../Context/Products/ProductContext';
+import ChangePassword from './ChangePassword';
 
 const Navbar = (props) => {
     const context = useContext(ProductContext);
@@ -82,12 +83,9 @@ const Navbar = (props) => {
                                                 <i className="fa-solid fa-user"></i> {userinfo.name}
                                             </button>
                                             <ul className="dropdown-menu bg-dark">
-                                                {/* <li><Link className="dropdown-item" to="/">Something else here</Link></li> */}
                                                 <li><Link style={{ backgroundColor: "darkblue", fontSize: "9pt", width: "100%" }} className={`btn btn-primary`} aria-current="page" to="/orders">My Orders</Link></li>
-                                                <li><Link style={{ backgroundColor: "black", fontSize: "9pt", width: "100%" }} className="btn btn-primary my-2" to="/changepassword" role="button">Change Password</Link></li>
-                                                <li><Link style={{ backgroundColor: "red", fontSize: "9pt", width: "100%" }} onClick={handleLogout} className="btn btn-primary"> Log Out</Link></li>
-
-                                                {/* <li><button style={{fontSize: "9pt"}} onClick={handleLogout} className="btn btn-danger"> Log Out</button></li> */}
+                                                <li><button style={{ backgroundColor: "black", fontSize: "9pt", width: "100%" }} className="btn btn-primary my-2" data-bs-toggle="modal" data-bs-target="#cpmodal" role="button">Change Password</button></li>
+                                                <li><button style={{ backgroundColor: "red", fontSize: "9pt", width: "100%" }} onClick={handleLogout} className="btn btn-primary"> Log Out</button></li>
                                             </ul>
                                         </div>
                                     </> : <form className="d-flex">
@@ -147,29 +145,16 @@ const Navbar = (props) => {
                                         : <></>}
                                     {/* </div> */}
 
-                                    {/* <div className='d-flex justify-content-center my-4'> */}
-                                    {/* <div className="searchBarDiv">
-                                            <i className="fa-solid searchIcon fa-magnifying-glass"></i>
-                                            <input id='searchbar' onChange={(e) => {
-                                                // e.target.value;
-                                                setquery(e.target.value);
-                                                searchItems(query);
-                                                redirect(`/search`);
-                                            }} className="form-control" type="search" placeholder="  Search for products" aria-label="Search" />
-                                        </div> */}
-                                    {/* <button onClick={handleSearch} className="btn btn-outline-info" type="submit">Search</button> */}
-                                    {/* </div> */}
-
                                     <div className='d-flex justify-content-center my-2'>
                                         {sessionStorage.getItem("usertoken") ? <>
-                                            <Link style={{ backgroundColor: "black", width: "100%" }} className="btn btn-primary" to="/changepassword" role="button">Change Password</Link>
+                                            <button style={{ backgroundColor: "black", width: "100%" }} className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cpmodal" data-bs-dismiss="offcanvas" role="button">Change Password</button>
                                         </> : <form className="d-flex">
                                         </form>}
                                     </div>
 
                                     <div className='d-flex justify-content-start'>
                                         {sessionStorage.getItem("usertoken") ? <>
-                                            <button style={{ backgroundColor: "red", width: "100%" }} onClick={handleLogout} className="btn btn-primary"> Log Out</button>
+                                            <button style={{ backgroundColor: "red", width: "100%" }} onClick={handleLogout} className="btn btn-primary" data-bs-dismiss="offcanvas"> Log Out</button>
                                         </> : <form style={{ width: "100%" }} className="d-flex">
                                         </form>}
                                     </div>
@@ -179,6 +164,7 @@ const Navbar = (props) => {
 
                     </div>
                 </nav >
+                <ChangePassword showAlert={props.showAlert} />
 
             </div >
 
