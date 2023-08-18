@@ -129,7 +129,6 @@ router.post('/changepassword', fetchuser, [
         const passwordMatching = await bcrypt.compare(currentpassword, user.password);
         if (!passwordMatching) {
             success = false;
-            // res.json({ success });
             return res.status(400).json({error: "Incorrect current password."});
         }
 

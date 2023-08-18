@@ -84,7 +84,7 @@ const Navbar = (props) => {
                                             </button>
                                             <ul className="dropdown-menu bg-dark">
                                                 <li><Link style={{ backgroundColor: "darkblue", fontSize: "9pt", width: "100%" }} className={`btn btn-primary`} aria-current="page" to="/orders">My Orders</Link></li>
-                                                <li><button style={{ backgroundColor: "black", fontSize: "9pt", width: "100%" }} className="btn btn-primary my-2" data-bs-toggle="modal" data-bs-target="#cpmodal" role="button">Change Password</button></li>
+                                                <li><button style={{ backgroundColor: "black", fontSize: "9pt", width: "100%" }} className="btn btn-primary my-2" data-bs-toggle="modal" data-bs-target="#cpmodal">Change Password</button></li>
                                                 <li><button style={{ backgroundColor: "red", fontSize: "9pt", width: "100%" }} onClick={handleLogout} className="btn btn-primary"> Log Out</button></li>
                                             </ul>
                                         </div>
@@ -147,7 +147,7 @@ const Navbar = (props) => {
 
                                     <div className='d-flex justify-content-center my-2'>
                                         {sessionStorage.getItem("usertoken") ? <>
-                                            <button style={{ backgroundColor: "black", width: "100%" }} className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cpmodal" data-bs-dismiss="offcanvas" role="button">Change Password</button>
+                                            <button style={{ backgroundColor: "black", width: "100%" }} className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cpmodal" data-bs-dismiss="offcanvas">Change Password</button>
                                         </> : <form className="d-flex">
                                         </form>}
                                     </div>
