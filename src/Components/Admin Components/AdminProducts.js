@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import ProductItems from './ProductItems';
-import AddProducts from './AddProducts';
 import ProductContext from '../../Context/Products/ProductContext';
 import { useNavigate } from 'react-router-dom';
 

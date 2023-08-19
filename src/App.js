@@ -20,6 +20,7 @@ import Orders from './Components/User Components/Orders';
 import CustomerOrders from './Components/Admin Components/CustomerOrders';
 import Dashboard from './Components/Admin Components/Dashboard';
 import Search from './Components/User Components/Search';
+import ForgotPassword from './Components/User Components/ForgotPassword';
 
 function App() {
   // const context = useContext(ProductContext);
@@ -55,6 +56,7 @@ function App() {
 
 
             <Route exact path="/search" element={<Search showAlert={showAlert} />} />
+            <Route exact path="/forgotpassword" element={<ForgotPassword showAlert={showAlert} />} />
             
 
             <Route exact path="/message" element={<Message />} />
@@ -62,6 +64,8 @@ function App() {
             <Route exact path="/login" element={<UserLogin showAlert={showAlert} />} />
             <Route exact path="/carts" element={<Carts showAlert={showAlert} />} />
             <Route exact path="/orders" element={<Orders showAlert={showAlert} />} />
+
+            
             <Route exact path="/createadmin" element={<AdminSignup showAlert={showAlert} />} />
             <Route exact path="/adminlogin" element={<AdminLogin showAlert={showAlert} />} />
             <Route exact path="/admindashboard" element={<Dashboard showAlert={showAlert} />} />

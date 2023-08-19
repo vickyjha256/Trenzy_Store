@@ -447,7 +447,8 @@ const CartState = (props) => {
 
     // ----------- Context for Search related text. -------------
     const [query, setquery] = useState("");
-    
+    const [otpBoxToggle, setotpBoxToggle] = useState(false);
+    const [toggleRP, settoggleRP] = useState(false);
 
     return (
         <ProductContext.Provider value={{
@@ -461,6 +462,8 @@ const CartState = (props) => {
             orders, addOrder, cancelOrder, getOrder, custOrders, orderUpdate, setquant, quant,
             sweetAlert,
             query, setquery,
+            otpBoxToggle, setotpBoxToggle,
+            toggleRP, settoggleRP,
 
         }}>
             {props.children}

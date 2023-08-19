@@ -1,10 +1,6 @@
-import React, { useContext, useState } from 'react'
-import ProductContext from '../../Context/Products/ProductContext';
+import React, { useState } from 'react'
 
 const ChangePassword = (props) => {
-    const context = useContext(ProductContext);
-    const {  } = context;
-
     const [credentials, setCredentials] = useState({ currentpassword: "", newpassword: "", conpassword: "" });
 
     const { currentpassword, newpassword, conpassword } = credentials;

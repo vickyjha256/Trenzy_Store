@@ -4,7 +4,7 @@ const Alert = (props) => {
     const capitalize = (word) => {
         if (word === "danger") {
             word = "Error";
-        } else if (word == "info") {
+        } else if (word === "info") {
             word = "";
         }
         const lower = word.toLowerCase();
