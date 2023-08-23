@@ -39,7 +39,7 @@ const Carts = (props) => {
 
                 setContactFunc(credentials.number);
                 setAddressFunc(credentials.address);
-                addOrder();
+                addOrder(elem.quantity);
                 return "Ordered";
             }
         )

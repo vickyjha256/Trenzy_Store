@@ -128,13 +128,18 @@ const MenShoes = (props) => {
 
                     {products.map((element) => {
                         return <div className='d-flex justify-content-center col-xxl-3 col-6 my-3' key={element._id}>
+
                             {/* <img style={{height: "100%", width: "100%"}} src={element.image} alt="" /> */}
                             <div id='productcard' className="card">
+                                {/* <div className='d-flex justify-content-center'> */}
                                 <img id='productimg' src={element.image} className="card-img-top" alt="..." />
+                                {/* </div> */}
                                 <div className="card-body">
-                                    <h5 className="card-title">{element.brand}</h5>
-                                    {/* <p>{element.description}</p> */}
-                                    <p className="card-text"><b>₹ {element.price} </b></p>
+                                    {/* <h5 style={{ fontSize: "medium" }} className="card-title">{element.brand}</h5> */}
+                                    <h5 className="card-title brandname">{element.brand}</h5>
+                                    <p style={{ lineHeight: 1.3, fontWeight: "500" }} className='description'>{element.description}</p>
+
+                                    <p className="card-text prodprice"><del className='me-1'>{element.price}</del> <b className="text-body-secondary"> ₹{(element.price - ((element.price) / 10).toFixed().toLocaleString('en-IN')).toLocaleString('en-IN')}</b></p>
 
 
                                     {/* Cart Size Choosing Modal */}
@@ -196,17 +201,19 @@ const MenShoes = (props) => {
                                         </div>
                                     </div>
 
+                                    <div>
+                                        <button id='crtbtn' onClick={sessionStorage.getItem("usertoken") ? () => {
+                                            setid(element._id); // It sets the element id in product state file for passing it into addCart().
+                                        } : () => { navigate("/login"); props.showAlert("Please login first to see your cart items.", "info"); console.log("User not login."); }} data-bs-toggle={sessionStorage.getItem("usertoken") ? "modal" : ""} data-bs-target={sessionStorage.getItem("usertoken") ? "#cart" : ""} className="btn btn-info cartbtn">🛒</button>
 
-                                    <button id='crtbtn' onClick={sessionStorage.getItem("usertoken") ? () => {
-                                        setid(element._id); // It sets the element id in product state file for passing it into addCart().
-                                    } : () => { navigate("/login"); props.showAlert("Please login first to see your cart items.", "info"); console.log("User not login."); }} data-bs-toggle={sessionStorage.getItem("usertoken") ? "modal" : ""} data-bs-target={sessionStorage.getItem("usertoken") ? "#cart" : ""} className="btn btn-info cartbtn">🛒</button>
+                                        <button id='ordbtn' onClick={sessionStorage.getItem('usertoken') ? () => {
+                                            setid(element._id);
+                                            getUser();
+                                            credentials.number = userinfo.contact;
+                                            credentials.address = userinfo.address;
+                                        } : () => { navigate("/login"); props.showAlert("Please login first to make an order.", "info"); console.log("User not login."); }} data-bs-toggle={sessionStorage.getItem("usertoken") ? "modal" : ""} data-bs-target={sessionStorage.getItem("usertoken") ? "#order" : ""} className="btn btn-info buybtn">Buy now</button>
 
-                                    <button id='ordbtn' onClick={sessionStorage.getItem('usertoken') ? () => {
-                                        setid(element._id);
-                                        getUser();
-                                        credentials.number = userinfo.contact;
-                                        credentials.address = userinfo.address;
-                                    } : () => { navigate("/login"); props.showAlert("Please login first to make an order.", "info"); console.log("User not login."); }} data-bs-toggle={sessionStorage.getItem("usertoken") ? "modal" : ""} data-bs-target={sessionStorage.getItem("usertoken") ? "#order" : ""} className="btn btn-info buybtn">Buy now</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

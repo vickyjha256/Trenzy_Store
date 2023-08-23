@@ -152,7 +152,7 @@ body {
 
 #qty {
     border: 2px solid #02204f;
-    /* margin-left: 4px; */
+    margin-left: 4px;
 }
 
 #cartimg {
@@ -175,26 +175,63 @@ body {
 }
 
 .searchIcon {
-    color:#02204f;
+    color: #02204f;
     position: absolute;
     padding: 11px;
     cursor: text;
 }
-#searchbar{
+
+#searchbar {
     width: 100%;
     text-align: center;
     border-radius: 20px;
 }
 
+/* CSS for removing arrrows from number input */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+/* input[type=number] {
+    -moz-appearance: textfield;
+} */
 
 
+/* .description {
+    white-space: nowrap;
+    width: 140px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+}
 
+.description:hover {
+    white-space:normal;
+    overflow: visible;
+} */
+
+/* #productimg{
+    width: 43vw;
+    height: 20vh;
+} */
+
+.ordersimg {
+    width: 15vw;
+    height: 25vh;
+}
+
+.ordinfo{
+    padding-left: 40px;
+}
 
 /* Media Query for Mobile Devices */
 @media screen and (max-width: 480px) {
     #productcard {
         height: 35vh;
-        width: 50vw;
+        width: 55vw;
         object-fit: fill;
     }
 
@@ -213,19 +250,57 @@ body {
         height: 36vh;
     }
 
-    #qty {
-        border: 2px solid #02204f;
-        /* height: 20; */
-        width: 32%;
-    }
-
     #cartimg {
-        height: 14vh;
+        height: 15vh;
         width: 30vw;
     }
 
     .carttext {
         font-size: small;
+    }
+
+    .qtydiv {
+        padding-top: 24px;
+    }
+
+    .description {
+        white-space: nowrap;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .description:hover {
+        white-space: normal;
+        overflow: visible;
+    }
+
+    .brandname {
+        font-size: medium;
+        line-height: 0.6;
+    }
+
+    .ordersimg {
+        height: 15vh;
+        width: 34vw;
+    }
+
+    .ordtext {
+        font-size: 10pt;
+    }
+
+    .orddescription {
+        white-space: nowrap;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 12pt;
+        line-height: 1.2;
+    }
+
+    .orddescription:hover {
+        white-space: normal;
+        overflow: visible;
     }
 }
 
@@ -251,27 +326,56 @@ body {
         height: 36vh;
     }
 
-
-    #qtyinput {
-        width: 20%;
+    #cartimg {
+        height: 15vh;
+        width: 32vw;
     }
 
-    #qtybtn {
-        width: 80%;
+    .carttext {
+        font-size: small;
+    }
+
+    .qtydiv {
+        padding-top: 24px;
+    }
+
+    .description {
+        white-space: nowrap;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .description:hover {
+        white-space: normal;
+        overflow: visible;
+    }
+
+    .brandname {
+        font-size: medium;
+        line-height: 0.6;
+    }
+
+    .ordersimg {
+        height: 15vh;
+        width: 34vw;
+    }
+
+    .ordtext {
+        font-size: 9pt;
     }
 }
 
 /* Media Query for Samsung Galaxy Fold device */
 @media (min-width: 280px) and (max-width: 653px) {
     #productcard {
-        height: 40vh;
+        height: 44vh;
         width: 50vw;
         object-fit: fill;
-        font-size: smaller;
     }
 
     #productimg {
-        height: 20vh;
+        height: 19vh;
     }
 
     #crtbtn {
@@ -301,26 +405,47 @@ body {
         height: 36vh;
     }
 
-
-    #qtyinput {
-        width: 20%;
+    #cartimg {
+        height: 15vh;
+        width: 32vw;
     }
 
-    #qtybtn {
-        width: 80%;
+    .carttext {
+        font-size: small;
+    }
+
+    .qtydiv {
+        padding-top: 24px;
+    }
+
+    .description {
+        white-space: nowrap;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .description:hover {
+        white-space: normal;
+        overflow: visible;
+    }
+
+    .brandname {
+        font-size: medium;
+        line-height: 0.6;
     }
 }
 
 /* Media Query for low resolution  Tablets, Ipads */
 @media (min-width: 375px) and (max-width: 767px) {
     #productcard {
-        height: 38vh;
+        height: 39vh;
         width: 50vw;
         object-fit: fill;
     }
 
     #productimg {
-        height: 20vh;
+        height: 19vh;
     }
 
 
@@ -334,22 +459,110 @@ body {
         height: 36vh;
     }
 
-
-    #qtyinput {
-        width: 20%;
+    #cartimg {
+        height: 15vh;
+        width: 32vw;
     }
 
-    #qtybtn {
-        width: 80%;
+    .carttext {
+        font-size: small;
+    }
+
+    .qtydiv {
+        padding-top: 24px;
+    }
+
+    .brandname {
+        font-size: medium;
+        line-height: 0.6;
     }
 }
 
 /* Media Query for Tablets Ipads portrait mode */
 @media (min-width: 768px) and (max-width: 1024px) {
     #productcard {
-        height: 41vh;
+        height: 46vh;
         width: 50vw;
         object-fit: fill;
+        /* font-size: x-large; */
+    }
+
+    #productimg {
+        height: 26vh;
+    }
+
+
+    #adminproductcard {
+        height: 75vh;
+        width: 100vw;
+        object-fit: fill;
+    }
+
+    #adminproductimg {
+        height: 36vh;
+    }
+
+    #cartimg {
+        height: 17vh;
+        width: 27vw;
+    }
+
+    .carttext {
+        font-size: larger;
+    }
+
+    .qtydiv {
+        padding-top: 4px;
+    }
+
+    .brandname {
+        font-size: xx-large;
+        line-height: 1;
+    }
+
+    .description {
+        font-size: 15pt
+    }
+
+    .prodprice {
+        font-size: x-large;
+    }
+
+    .ordersimg {
+        height: 15vh;
+        width: 24vw;
+    }
+
+    .ordtext {
+        font-size: 13pt;
+    }
+
+    .ordprice{
+        font-size: larger;
+    }
+
+    .orddescription {
+        white-space: nowrap;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 12pt;
+        line-height: 1.2;
+    }
+
+    .orddescription:hover {
+        white-space: normal;
+        overflow: visible;
+    }
+}
+
+/* Media Query for Tablets Ipads portrait mode */
+@media (min-width: 820px) and (max-width: 1180px) {
+    #productcard {
+        height: 45vh;
+        width: 50vw;
+        object-fit: fill;
+        /* font-size: x-large; */
     }
 
     #productimg {
@@ -367,13 +580,30 @@ body {
         height: 36vh;
     }
 
-
-    #qtyinput {
-        width: 20%;
+    #cartimg {
+        height: 17vh;
+        width: 27vw;
     }
 
-    #qtybtn {
-        width: 80%;
+    .carttext {
+        font-size: larger;
+    }
+
+    .qtydiv {
+        padding-top: 4px;
+    }
+
+    .brandname {
+        font-size: xx-large;
+        line-height: 1;
+    }
+
+    .description {
+        font-size: 15pt
+    }
+
+    .prodprice {
+        font-size: x-large;
     }
 }
 
@@ -438,7 +668,7 @@ body {
     }
 
     #productimg {
-        height: 40vh;
+        height: 36vh;
     }
 
     #adminproductcard {

@@ -15,7 +15,7 @@ const AddProducts = (props) => {
         e.preventDefault();
         addProduct(product.image, product.brand, product.description, product.type, product.gender, product.price, product.availability);
         setproduct({ image: "", brand: "", description: "", type: "Casual", gender: "Male", price: "", availability: "In Stock" });
-        // props.showAlert("Product Added successfully.", "success");
+        props.showAlert("Product Added successfully.", "success");
     }
 
     // console.log("Product Type: " + product.type); // This is for testing only.
