@@ -46,7 +46,7 @@ const Navbar = (props) => {
             <div className="">
                 <nav className="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
                     <div className="container-fluid d-flex justify-content-around">
-                        <Link style={{ color: `${location.pathname === "/" ? "aqua" : "white"}`, fontWeight: "bolder" }} className="navbar-brand" to="/"><b> Trendz </b></Link>
+                        <Link style={{ color: `${location.pathname === "/" ? "aqua" : "white"}`, fontWeight: "bolder" }} className="navbar-brand" to="/"><b> Trenzy </b></Link>
 
                         <div className='d-flex justify-content-center'>
 
