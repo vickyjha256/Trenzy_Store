@@ -48,7 +48,8 @@ body {
 
 
 #carticon {
-    background-image: url('D:\VS Code Programs\React Programs\shoestore\public\Images\cart96.png');
+    /* background-image: url('D:\VS Code Programs\React Programs\shoestore\public\Images\cart96.png'); */
+    background-image: url("public\Images\cart96.png");
     background-repeat: no-repeat;
     background-size: cover;
     height: 30px;
@@ -223,7 +224,7 @@ input::-webkit-inner-spin-button {
     height: 25vh;
 }
 
-.ordinfo{
+.ordinfo {
     padding-left: 40px;
 }
 
@@ -537,7 +538,7 @@ input::-webkit-inner-spin-button {
         font-size: 13pt;
     }
 
-    .ordprice{
+    .ordprice {
         font-size: larger;
     }
 
