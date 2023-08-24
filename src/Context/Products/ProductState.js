@@ -3,6 +3,7 @@ import ProductContext from "./ProductContext";
 import Swal from "sweetalert2";
 
 const CartState = (props) => {
+    // const host = "http://localhost:5000";
     const host = "http://localhost:5000";
     const [products, setproducts] = useState([]);
 

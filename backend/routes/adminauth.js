@@ -6,7 +6,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const fetchadmin = require('../middleware/fetchadmin');
 
-const JWT_PRIAD_SECRET_KEY = "Shoestoreapp_PrivateAdminAuthorization"; // This is for testing only.
+const JWT_PRIAD_SECRET_KEY = process.env.JWT_PRIAD_SECRET_KEY; // This is for testing only.
+// const JWT_PRIAD_SECRET_KEY = "Shoestoreapp_PrivateAdminAuthorization"; // This is for testing only.
 
 // ROUTE 1:--> Create a admin using: POST "/api/adminauth/createadmin". No login required.
 router.post(

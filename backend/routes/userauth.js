@@ -9,8 +9,8 @@ const nodemailer = require('nodemailer');
 const otpgenerator = require('otp-generator');
 
 
-// const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY; // This is for deployment.
-const JWT_SECRET_KEY = "Shoestoreapp_Authorization"; // This is for testing on local host.
+const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY; // This is for deployment.
+// const JWT_SECRET_KEY = "Shoestoreapp_Authorization"; // This is for testing on local host.
 
 // ROUTE 1:--> Create a user using: POST "/api/userauth/registerUser". No login required.
 router.post('/registerUser', [
