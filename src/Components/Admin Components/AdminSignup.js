@@ -13,9 +13,8 @@ const AdminSignup = (props) => {
             // alert("Passwords are not equal ⚠");
         }
         else {
-            // const response = await fetch("https://skynotes.herokuapp.com/api/auth/createuser", {
-            // const response = await fetch("https://notes-backend-render.onrender.com/api/auth/createuser", {
-            const response = await fetch("http://localhost:5000/api/adminauth/createadmin", {
+            // const response = await fetch("http://localhost:5000/api/adminauth/createadmin", {
+            const response = await fetch("https://trenzy-backend.onrender.com/api/adminauth/createadmin", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

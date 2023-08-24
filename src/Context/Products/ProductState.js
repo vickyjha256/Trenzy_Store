@@ -4,55 +4,8 @@ import Swal from "sweetalert2";
 
 const CartState = (props) => {
     // const host = "http://localhost:5000";
-    const host = "http://localhost:5000";
+    const host = "https://trenzy-backend.onrender.com";
     const [products, setproducts] = useState([]);
-
-    // products = [
-    //     {
-    //         "_id": "6446286a44e1ac8d9351389a",
-    //         "admin": "64284ff1d4d10acdaf62b7a5",
-    //         "image": "https://rukminim1.flixcart.com/image/612/612/xif0q/shoe/g/o/3/-original-imagg6r2tekyegmy.jpeg?q=70",
-    //         "brand": "Rohit Updated",
-    //         "description": "Final Solid black Sneakers for men.",
-    //         "gender": "male",
-    //         "price": 2500,
-    //         "quantity": 1,
-    //         "__v": 0
-    //     },
-    //     {
-    //         "_id": "6446286a44l1ac8d9351389a",
-    //         "admin": "64284ff1d4d10acdaf62b7a5",
-    //         "image": "https://rukminim1.flixcart.com/image/612/612/xif0q/shoe/g/o/3/-original-imagg6r2tekyegmy.jpeg?q=70",
-    //         "brand": "Rohit Updated",
-    //         "description": "Final Solid black Sneakers for men.",
-    //         "gender": "female",
-    //         "price": 2500,
-    //         "quantity": 1,
-    //         "__v": 0
-    //     },
-    //     {
-    //         "_id": "6446286a44e1acod9351389a",
-    //         "admin": "64284ff1d4d10acdaf62b7a5",
-    //         "image": "https://rukminim1.flixcart.com/image/612/612/xif0q/shoe/g/o/3/-original-imagg6r2tekyegmy.jpeg?q=70",
-    //         "brand": "Rohit Updated",
-    //         "description": "Final Solid black Sneakers for men.",
-    //         "gender": "male",
-    //         "price": 2500,
-    //         "quantity": 1,
-    //         "__v": 0
-    //     },
-    //     {
-    //         "_id": "6446286a44e1am8d9351389a",
-    //         "admin": "64284ff1d4d10acdaf62b7a5",
-    //         "image": "https://rukminim1.flixcart.com/image/612/612/xif0q/shoe/g/o/3/-original-imagg6r2tekyegmy.jpeg?q=70",
-    //         "brand": "Rohit Updated",
-    //         "description": "Final Solid black Sneakers for men.",
-    //         "gender": "male",
-    //         "price": 2500,
-    //         "quantity": 1,
-    //         "__v": 0
-    //     },
-    // ];
 
     // Add Product()
     const addProduct = async (image, brand, description, type, gender, price, availability) => {

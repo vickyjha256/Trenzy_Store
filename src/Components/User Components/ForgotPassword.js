@@ -12,7 +12,8 @@ const ForgotPassword = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch("http://localhost:5000/api/userauth/forgotpassword", {
+    // const response = await fetch("http://localhost:5000/api/userauth/forgotpassword", {
+    const response = await fetch("https://trenzy-backend.onrender.com/api/userauth/forgotpassword", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

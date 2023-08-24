@@ -10,7 +10,8 @@ const ChangePassword = (props) => {
             props.showAlert("Passwords are not equal ⚠", "danger");
         }
         else {
-            const response = await fetch("http://localhost:5000/api/userauth/changepassword", {
+            // const response = await fetch("http://localhost:5000/api/userauth/changepassword", {
+            const response = await fetch("https://trenzy-backend.onrender.com/api/userauth/changepassword", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
