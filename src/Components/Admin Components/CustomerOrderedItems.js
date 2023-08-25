@@ -53,4 +53,4 @@ const CustomerOrderedItems = (props) => {
     )
 }
 
-export default CustomerOrderedItems
+export default CustomerOrderedItems;
