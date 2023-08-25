@@ -97,7 +97,7 @@ const Navbar = (props) => {
 
 
                             {/* This is Cart ICON and Navbar Toggler Code which is Outside the collapse */}
-                            <Link id='carticon' className='btn btn-lg btn-block mx-3 my-1 position-relative' to='/carts' >
+                            <Link style={{backgroundImage: `url("Images/cart96.png")`, backgroundRepeat: "no-repeat", backgroundSize: "cover"}} id='' className='btn btn-lg mx-3 my-1 position-relative' to='/carts' >
                                 <span className="position-absolute top-0 start-100 translate-middle p-0 rounded-circle" id='cartbadge'>
                                     {sessionStorage.getItem('usertoken') ? <>
                                         {total_Cart_Items}</> : "0"}
