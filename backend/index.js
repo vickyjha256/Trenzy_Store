@@ -3,7 +3,7 @@ const mongoConnection = require('./db'); // Imported db.js file.
 const express = require('express');
 var cors = require('cors');
 
-mongoConnection();
+// mongoConnection();
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -24,6 +24,9 @@ app.use('/api/userorder', require('./routes/userorder'));
 //   res.send('Hello World!')
 // })
 
-app.listen(port, () => {
-  console.log(`ShoeStore app listening on port ${port}`)
+
+mongoConnection().then(() => {
+  app.listen(port, () => {
+    console.log(`ShoeStore app listening on port ${port}`)
+  })
 })

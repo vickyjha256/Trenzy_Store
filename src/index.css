@@ -144,7 +144,7 @@ body {
 
 #qty {
     border: 2px solid #02204f;
-    margin-left: 4px;
+    /* margin-left: 4px; */
 }
 
 #cartimg {
@@ -453,7 +453,7 @@ input::-webkit-inner-spin-button {
 
     #cartimg {
         height: 15vh;
-        width: 32vw;
+        width: 28vw;
     }
 
     .carttext {

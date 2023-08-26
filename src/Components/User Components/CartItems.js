@@ -166,24 +166,25 @@ const CartItems = (props) => {
 
 
             <div style={{ backgroundColor: "#a2bee8" }} className="card my-2 mx-1">
-                <div className="row d-flex align-items-center">
+                <div className="row d-flex">
                     <div className="col-xxl-5 col-4">
-                        {/* <img style={{ height: "160px", width: "130px" }} src={item.image} className="" alt="..." /> */}
                         <img id='cartimg' src={item.image} className="" alt="..." />
 
-                        <div className="d-flex justify-content-start my-1 qtydiv">
-                            {quantity === 1 ?
-                                <button id='qty' onClick={() => { decQty(); }} className='btn btn-light'>
-                                    <i style={{ cursor: 'pointer' }} className="fa-solid fa-trash" title='Delete Cart' onClick={sessionStorage.getItem("usertoken") ? () => {
-                                        setid(item._id); // It sets the element id in product state file for passing it into deleteCart().
-                                    } : () => { navigate("/login"); props.showAlert("Unauthorize access attempted !!", "warning"); }} data-bs-toggle="modal" data-bs-target="#cnfpopup"></i>
-                                </button>
+                        <div className='d-flex justify-content-start col-4 col-xxl-5'>
+                            <div className="d-flex justify-content-center my-1 mt-4">
+                                {quantity === 1 ?
+                                    <button id='qty' onClick={() => { decQty(); }} className='btn btn-light'>
+                                        <i style={{ cursor: 'pointer' }} className="fa-solid fa-trash" title='Delete Cart' onClick={sessionStorage.getItem("usertoken") ? () => {
+                                            setid(item._id); // It sets the element id in product state file for passing it into deleteCart().
+                                        } : () => { navigate("/login"); props.showAlert("Unauthorize access attempted !!", "warning"); }} data-bs-toggle="modal" data-bs-target="#cnfpopup"></i>
+                                    </button>
 
-                                : <button id='qty' onClick={() => { decQty(); }} className='btn btn-light'><i className="fa-solid fa-minus" /></button>
-                            }
+                                    : <button id='qty' onClick={() => { decQty(); }} className='btn btn-light'><i className="fa-solid fa-minus" /></button>
+                                }
 
-                            <div style={{ fontWeight: "bolder" }} className='mx-3 mt-2'>{quantity}</div>
-                            <button id='qty' onClick={() => { incQty(); }} className='btn btn-light'><i className="fa-solid fa-plus" /></button>
+                                <div style={{ fontWeight: "bolder" }} className='mx-3 mt-2'>{quantity}</div>
+                                <button id='qty' onClick={() => { incQty(); }} className='btn btn-light'><i className="fa-solid fa-plus" /></button>
+                            </div>
                         </div>
                     </div>
                     <div className="col-xxl-7 col-8">
@@ -193,12 +194,6 @@ const CartItems = (props) => {
                             <p className="card-text carttext"><b>{item.description}</b></p>
 
                             <p className="card-text carttext">Delivery in 2 days, {delivDay} | <b style={{ color: "green" }}>Free</b> ₹<del>40</del> <br /> Size: {item.size}</p>
-
-                            {/* <div className="input-group mb-3">
-                                <button id='qty' onClick={() => { decQty(); }} className='btn btn-light'><i className="fa-solid fa-minus" /></button>
-                                <div style={{ fontWeight: "bolder" }} className='mx-3 mt-2'>{quantity}</div>
-                                <button id='qty' onClick={() => { incQty(); }} className='btn btn-light'><i className="fa-solid fa-plus" /></button>
-                            </div> */}
 
 
                             <p className="card-text carttext pricetext"><del className='delprice me-2'>₹{item.price * item.quantity}</del> <b className="text-body-secondary"> ₹{(item.price * item.quantity - ((item.price * item.quantity) / 10).toFixed().toLocaleString('en-IN')).toLocaleString('en-IN')}</b></p>

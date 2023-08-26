@@ -97,7 +97,7 @@ const Navbar = (props) => {
 
 
                             {/* This is Cart ICON and Navbar Toggler Code which is Outside the collapse */}
-                            <Link style={{backgroundImage: `url("Images/cart96.png")`, backgroundRepeat: "no-repeat", backgroundSize: "cover"}} id='' className='btn btn-lg mx-3 my-1 position-relative' to='/carts' >
+                            <Link style={{ backgroundImage: `url("Images/cart96.png")`, backgroundRepeat: "no-repeat", backgroundSize: "cover" }} id='' className='btn btn-lg mx-3 my-1 position-relative' to='/carts' >
                                 <span className="position-absolute top-0 start-100 translate-middle p-0 rounded-circle" id='cartbadge'>
                                     {sessionStorage.getItem('usertoken') ? <>
                                         {total_Cart_Items}</> : "0"}
@@ -119,11 +119,24 @@ const Navbar = (props) => {
                                 </div>
 
                                 <div className="offcanvas-body">
-                                    {sessionStorage.getItem('usertoken') ?
-                                        <Link disabled style={{ color: "aqua", border: "px solid darkblue", width: "100%" }} className='btn mb-3' data-bs-dismiss="offcanvas" aria-current="page" to='/'> <Link disabled style={{ color: "aqua", border: "2px solid aqua", borderRadius: "20px", marginRight: "62pt" }} className='btn' data-bs-dismiss="offcanvas" aria-current="page" to='/'><i style={{ color: "aqua" }} className="fa-solid fa-user"></i></Link>{userinfo.name}</Link>
-                                        :
-                                        <Link style={{ color: "aqua", border: "2px solid aqua", borderRadius: "20px" }} className='btn ms-2 mb-3' data-bs-dismiss="offcanvas" aria-current="page" to='/login'><i style={{ color: "aqua" }} className="fa-solid fa-user"></i></Link>
-                                    }
+
+                                    <div className='d-flex justify-content-between mb-3'>
+                                        {sessionStorage.getItem('usertoken') ?
+                                            // <Link disabled style={{ color: "aqua", border: "px solid darkblue", width: "100%" }} className='btn mb-3' data-bs-dismiss="offcanvas" aria-current="page" to='/'> <Link disabled style={{ color: "aqua", border: "2px solid aqua", borderRadius: "20px", marginRight: "" }} className='btn' data-bs-dismiss="offcanvas" aria-current="page" to='/'>  <i style={{ color: "aqua" }} className="fa-solid fa-user"></i>  </Link>{userinfo.name}</Link>
+                                            <>
+                                                <div style={{}}>
+                                                    <Link disabled style={{ color: "aqua", border: "1px solid aqua", borderRadius: "20px" }} className='btn' data-bs-dismiss="offcanvas" aria-current="page" to='/'>  <i style={{ color: "aqua" }} className="fa-solid fa-user"></i>  </Link>
+                                                </div>
+                                                <div style={{ color: "aqua", paddingTop: "5px" }}>
+                                                    {userinfo.name}
+                                                </div>
+                                            </>
+
+                                            :
+                                            <Link style={{ color: "aqua", border: "2px solid aqua", borderRadius: "20px" }} className='btn ms-2 mb-3' data-bs-dismiss="offcanvas" aria-current="page" to='/login'><i style={{ color: "aqua" }} className="fa-solid fa-user"></i></Link>
+                                        }
+                                    </div>
+
                                     <div className='d-flex justify-content-center mb-5'>
                                         <div className="searchBarDiv">
                                             {query.length === 0 ? <> <i className="fa-solid searchIcon fa-magnifying-glass"></i> </> : ""}
