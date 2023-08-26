@@ -8,7 +8,8 @@ const UserLogin = (props) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         // const response = await fetch("http://localhost:5000/api/userauth/login", {
-        const response = await fetch("https://trenzy-backend.onrender.com/api/userauth/login", {
+        // const response = await fetch("https://trenzy-backend.onrender.com/api/userauth/login", {
+        const response = await fetch("https://trenzybackend1.cyclic.cloud/api/userauth/login", {
             method: 'POST', 
             headers: {
                 'Content-Type': 'application/json'

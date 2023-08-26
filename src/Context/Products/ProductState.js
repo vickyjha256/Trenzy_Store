@@ -4,7 +4,8 @@ import Swal from "sweetalert2";
 
 const CartState = (props) => {
     // const host = "http://localhost:5000";
-    const host = "https://trenzy-backend.onrender.com";
+    // const host = "https://trenzy-backend.onrender.com";
+    const host = "https://trenzybackend1.cyclic.cloud";
     const [products, setproducts] = useState([]);
 
     // Add Product()

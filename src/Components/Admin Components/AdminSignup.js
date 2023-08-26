@@ -14,7 +14,8 @@ const AdminSignup = (props) => {
         }
         else {
             // const response = await fetch("http://localhost:5000/api/adminauth/createadmin", {
-            const response = await fetch("https://trenzy-backend.onrender.com/api/adminauth/createadmin", {
+            // const response = await fetch("https://trenzy-backend.onrender.com/api/adminauth/createadmin", {
+            const response = await fetch("https://trenzybackend1.cyclic.cloud/api/adminauth/createadmin", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
