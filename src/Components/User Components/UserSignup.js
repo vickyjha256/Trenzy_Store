@@ -30,8 +30,8 @@ const UserSignup = (props) => {
                 props.showAlert("Account Created Successfully.", "success");
                 // navigate("/");
                 // const response2 = await fetch("http://localhost:5000/api/userauth/login", {
-                // const response2 = await fetch("https://trenzy-backend.onrender.com/api/userauth/registerUser", {
-                const response2 = await fetch("https://trenzybackend1.cyclic.cloud/api/userauth/registerUser", {
+                // const response2 = await fetch("https://trenzy-backend.onrender.com/api/userauth/login", {
+                const response2 = await fetch("https://trenzybackend1.cyclic.cloud/api/userauth/login", {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
