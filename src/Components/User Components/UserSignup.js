@@ -29,9 +29,8 @@ const UserSignup = (props) => {
                 sessionStorage.setItem('usertoken', json.authtoken); // We use sessionStorage because it destroys data after ending session.
                 props.showAlert("Account Created Successfully.", "success");
                 // navigate("/");
-                // const response2 = await fetch("https://skynotes.herokuapp.com/api/auth/login", {
-                // const response2 = await fetch("https://notes-backend-render.onrender.com/api/auth/login", {
-                const response2 = await fetch("http://localhost:5000/api/userauth/login", {
+                // const response2 = await fetch("http://localhost:5000/api/userauth/login", {
+                const response2 = await fetch("https://trenzy-backend.onrender.com/api/userauth/registerUser", {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
