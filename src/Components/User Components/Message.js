@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Message = () => {
+const Message = (props) => {
     return (
         <>
             <div className='container-fluid'>

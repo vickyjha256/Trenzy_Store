@@ -12,9 +12,19 @@ const AdminProducts = (props) => {
     if (sessionStorage.getItem("token")) {
       // navigate("/admindashboard");
       getProducts();
+
+      props.setprogress(30);
+      props.setprogress(60);
+      props.setprogress(80);
+      props.setprogress(100);
     }
     else {
       navigate("/adminlogin");
+
+      props.setprogress(30);
+      props.setprogress(60);
+      props.setprogress(80);
+      props.setprogress(100);
     }
 
     // eslint-disable-next-line

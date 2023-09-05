@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const Footer = () => {
+const Footer = (props) => {
     return (
         <>
             <div id='footer' className='container-fluid'>

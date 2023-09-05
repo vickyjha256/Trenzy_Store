@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
 import ProductContext from '../../Context/Products/ProductContext'
 import { useNavigate } from 'react-router-dom';
+import Spinner from './Spinner';
 
 const WomenShoes = (props) => {
     const context = useContext(ProductContext);
-    const { products, fetchItems, addCart, id, setid, sizeFunc, addOrder, getUser, userinfo, setContactFunc, setAddressFunc, sweetAlert } = context;
+    const { products, fetchItems, addCart, id, setid, sizeFunc, addOrder, getUser, userinfo, setContactFunc, setAddressFunc, sweetAlert, loading } = context;
 
     useEffect(() => {
         if (props.shoetype === "women") {
@@ -19,6 +20,8 @@ const WomenShoes = (props) => {
             fetchItems("womenitems");
         }
 
+        props.setprogress(30);
+        props.setprogress(50);
     }, []);
     // console.log("Props.Shoetype: " + props.shoetype);
 
@@ -126,7 +129,10 @@ const WomenShoes = (props) => {
                     </div>
 
 
+                    {loading && <Spinner />}
                     {products.map((element) => {
+                        props.setprogress(70);
+                        props.setprogress(100);
                         return <div className='d-flex justify-content-center col-xxl-3 col-6 my-3' key={element._id}>
 
                             {/* <img style={{height: "100%", width: "100%"}} src={element.image} alt="" /> */}

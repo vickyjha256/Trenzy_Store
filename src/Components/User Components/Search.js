@@ -8,7 +8,7 @@ const Search = (props) => {
 
     return (
         <>
-            <SearchItem showAlert={showAlert} query={query} />
+            <SearchItem setprogress={props.setprogress} showAlert={showAlert} query={query} />
         </>
     )
 }

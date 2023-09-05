@@ -15,9 +15,19 @@ const Orders = (props) => {
             // navigate("/admindashboard");
             navigate("/orders");
             getOrder();
+
+            props.setprogress(30);
+            props.setprogress(60);
+            props.setprogress(80);
+            props.setprogress(100);
         } else {
             props.showAlert("Please login to see your ordered items !!", "danger");
             navigate("/login");
+
+            props.setprogress(30);
+            props.setprogress(60);
+            props.setprogress(80);
+            props.setprogress(100);
         }
     }, []);
 
@@ -36,6 +46,10 @@ const Orders = (props) => {
                         return <OrderedItems key={product._id} item={product} showAlert={showAlert} />
                     }
                 )}
+
+                {total_Items == 0 ? <div className="alert alert-warning row" role="alert">
+                    <h6 role='alert' className='alert-warning'>There are no orders, Please order something. </h6>
+                </div> : null}
             </div>
         </>
     )

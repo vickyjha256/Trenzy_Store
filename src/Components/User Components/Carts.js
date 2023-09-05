@@ -20,9 +20,19 @@ const Carts = (props) => {
             // navigate("/admindashboard");
             navigate("/carts");
             getCart();
+
+            props.setprogress(30);
+            props.setprogress(60);
+            props.setprogress(80);
+            props.setprogress(100);
         } else {
             props.showAlert("Please login to see your cart items !!", "danger");
             navigate("/login");
+
+            props.setprogress(30);
+            props.setprogress(60);
+            props.setprogress(80);
+            props.setprogress(100);
         }
     }, []);
 

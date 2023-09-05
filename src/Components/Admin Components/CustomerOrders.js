@@ -15,9 +15,19 @@ const CustomerOrders = (props) => {
       // navigate("/admindashboard");
       navigate("/ordermanagement");
       custOrders();
+
+      props.setprogress(30);
+      props.setprogress(60);
+      props.setprogress(80);
+      props.setprogress(100);
     } else {
       props.showAlert("Please login to see your Customer Orders !!", "danger");
       navigate("/adminlogin");
+
+      props.setprogress(30);
+      props.setprogress(60);
+      props.setprogress(80);
+      props.setprogress(100);
     }
   }, []);
 

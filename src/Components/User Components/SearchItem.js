@@ -13,6 +13,9 @@ const SearchItem = (props) => {
         } else {
             searchItems(props.query);
         }
+        props.setprogress(25);
+        props.setprogress(40);
+        props.setprogress(75);
     }, []);
     console.log("Props.Query: " + props.query);
     // console.log("Searched Product: " + searchedProduct);
@@ -122,6 +125,7 @@ const SearchItem = (props) => {
 
 
                     {searchedProduct.map((element) => {
+                        props.setprogress(100);
                         return <div className='d-flex justify-content-center col-xxl-3 col-6 my-3' key={element._id}>
                             {/* <img style={{height: "100%", width: "100%"}} src={element.image} alt="" /> */}
                             <div id='productcard' className="card">

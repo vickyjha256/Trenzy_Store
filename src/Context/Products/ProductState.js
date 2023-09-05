@@ -94,6 +94,7 @@ const CartState = (props) => {
 
     // --------------------- Fetching Items for client side. ----------------------
     // Get All Items for specific type men, women and filters(casual,formal,ethnic).
+    const [loading, setloading] = useState(true);
     const fetchItems = async (type) => {
         // API Call:
         const response = await fetch(`${host}/api/adminproducts/${type}`, {
@@ -106,6 +107,7 @@ const CartState = (props) => {
         const json = await response.json();
         // console.log(json); // This is for testing only.
         setproducts(json);
+        setloading(false);
     }
 
     const [searchedProduct, setsearchedProduct] = useState([]);
@@ -419,6 +421,7 @@ const CartState = (props) => {
             query, setquery,
             otpBoxToggle, setotpBoxToggle,
             toggleRP, settoggleRP,
+            loading,
 
         }}>
             {props.children}

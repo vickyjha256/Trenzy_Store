@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const Collection = () => {
+const Collection = (props) => {
     return (
         <>
             <div className='container-fluid my-2'>

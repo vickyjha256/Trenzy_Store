@@ -17,6 +17,9 @@ const Navbar = (props) => {
             getCart();
             getUser();
         }
+        // props.setprogress(35);
+        // props.setprogress(65);
+        // props.setprogress(100);
     }, []);
 
     let total_Cart_Items = carts.length;

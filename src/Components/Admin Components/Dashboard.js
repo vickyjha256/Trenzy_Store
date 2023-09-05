@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import ProductContext from '../../Context/Products/ProductContext';
 
-const Dashboard = () => {
+const Dashboard = (props) => {
   const context = useContext(ProductContext);
   const { getProducts } = context;
 
@@ -11,9 +11,19 @@ const Dashboard = () => {
     if (sessionStorage.getItem("token")) {
       // navigate("/admindashboard");
       getProducts();
+
+      props.setprogress(30);
+      props.setprogress(60);
+      props.setprogress(80);
+      props.setprogress(100);
     }
     else {
       navigate("/adminlogin");
+
+      props.setprogress(30);
+      props.setprogress(60);
+      props.setprogress(80);
+      props.setprogress(100);
     }
 
     // eslint-disable-next-line

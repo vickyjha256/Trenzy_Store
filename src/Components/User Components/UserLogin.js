@@ -10,7 +10,7 @@ const UserLogin = (props) => {
         // const response = await fetch("http://localhost:5000/api/userauth/login", {
         // const response = await fetch("https://trenzy-backend.onrender.com/api/userauth/login", {
         const response = await fetch("https://trenzybackend1.cyclic.cloud/api/userauth/login", {
-            method: 'POST', 
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -35,8 +35,8 @@ const UserLogin = (props) => {
     const onChange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value })
     }
-    
-    
+
+
     // const btmove = (e) => {
     //     let movingBtn = document.getElementById("outdiv");
     //     if (credentials.email || credentials.password === "") {
@@ -52,6 +52,10 @@ const UserLogin = (props) => {
     //         movingBtn.className = "d-flex justify-content-center";
     //     }
     // }
+
+    props.setprogress(30);
+    props.setprogress(60);
+    props.setprogress(100);
 
     return (
         <>

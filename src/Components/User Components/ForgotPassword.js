@@ -31,6 +31,11 @@ const ForgotPassword = (props) => {
     }
   }
 
+  props.setprogress(30);
+  props.setprogress(50);
+  props.setprogress(80);
+  props.setprogress(100);
+
   const onChange = (e) => {
     e.preventDefault();
     setcredentials({ ...credentials, [e.target.name]: e.target.value });

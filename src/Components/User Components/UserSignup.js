@@ -1,4 +1,4 @@
-import { React, useState } from 'react'
+import { React, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 
 const UserSignup = (props) => {
@@ -56,6 +56,11 @@ const UserSignup = (props) => {
             }
         }
     }
+
+    props.setprogress(30);
+    props.setprogress(60);
+    props.setprogress(100);
+
 
     const onChange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value })

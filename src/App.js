@@ -21,6 +21,7 @@ import CustomerOrders from './Components/Admin Components/CustomerOrders';
 import Dashboard from './Components/Admin Components/Dashboard';
 import Search from './Components/User Components/Search';
 import ForgotPassword from './Components/User Components/ForgotPassword';
+import LoadingBar from 'react-top-loading-bar';
 
 function App() {
   // const context = useContext(ProductContext);
@@ -36,42 +37,45 @@ function App() {
       setAlert(null)
     }, 1500);
   }
+
+  const [progress, setprogress] = useState(10);
   return (
     <>
       <CartState>
         <Router>
-          {sessionStorage.getItem("token") ? <> <AdminNavbar showAlert={showAlert} /> </> : <> <Navbar showAlert={showAlert} /> </>}
+          {sessionStorage.getItem("token") ? <> <AdminNavbar setprogress={setprogress} showAlert={showAlert} /> </> : <> <Navbar setprogress={setprogress} showAlert={showAlert} /> </>}
+          <LoadingBar color='#0dcaf0' progress={progress} />
           <Alert alert={alert} />
           {/* <div className=''> */}
           <Routes>
-            <Route exact path="/" element={<Home showAlert={showAlert} />} />
-            <Route exact path="/men" element={<MenShoes showAlert={showAlert} shoetype="men" />} />
-            <Route exact path="/women" element={<WomenShoes showAlert={showAlert} shoetype="women" />} />
-            <Route exact path="/casualmen" element={<MenShoes showAlert={showAlert} shoetype="casualmen" />} />
-            <Route exact path="/formalmen" element={<MenShoes showAlert={showAlert} shoetype="formalmen" />} />
-            <Route exact path="/ethnicmen" element={<MenShoes showAlert={showAlert} shoetype="ethnicmen" />} />
-            <Route exact path="/casualwomen" element={<WomenShoes showAlert={showAlert} shoetype="casualwomen" />} />
-            <Route exact path="/formalwomen" element={<WomenShoes showAlert={showAlert} shoetype="formalwomen" />} />
-            <Route exact path="/ethnicwomen" element={<WomenShoes showAlert={showAlert} shoetype="ethnicwomen" />} />
+            <Route exact path="/" element={<Home setprogress={setprogress} showAlert={showAlert} />} />
+            <Route exact path="/men" element={<MenShoes setprogress={setprogress} showAlert={showAlert} shoetype="men" />} />
+            <Route exact path="/women" element={<WomenShoes setprogress={setprogress} showAlert={showAlert} shoetype="women" />} />
+            <Route exact path="/casualmen" element={<MenShoes setprogress={setprogress} showAlert={showAlert} shoetype="casualmen" />} />
+            <Route exact path="/formalmen" element={<MenShoes setprogress={setprogress} showAlert={showAlert} shoetype="formalmen" />} />
+            <Route exact path="/ethnicmen" element={<MenShoes setprogress={setprogress} showAlert={showAlert} shoetype="ethnicmen" />} />
+            <Route exact path="/casualwomen" element={<WomenShoes setprogress={setprogress} showAlert={showAlert} shoetype="casualwomen" />} />
+            <Route exact path="/formalwomen" element={<WomenShoes setprogress={setprogress} showAlert={showAlert} shoetype="formalwomen" />} />
+            <Route exact path="/ethnicwomen" element={<WomenShoes setprogress={setprogress} showAlert={showAlert} shoetype="ethnicwomen" />} />
 
 
-            <Route exact path="/search" element={<Search showAlert={showAlert} />} />
-            <Route exact path="/forgotpassword" element={<ForgotPassword showAlert={showAlert} />} />
-            
+            <Route exact path="/search" element={<Search setprogress={setprogress} showAlert={showAlert} />} />
+            <Route exact path="/forgotpassword" element={<ForgotPassword setprogress={setprogress} showAlert={showAlert} />} />
 
-            <Route exact path="/message" element={<Message />} />
-            <Route exact path="/register" element={<UserSignup showAlert={showAlert} />} />
-            <Route exact path="/login" element={<UserLogin showAlert={showAlert} />} />
-            <Route exact path="/carts" element={<Carts showAlert={showAlert} />} />
-            <Route exact path="/orders" element={<Orders showAlert={showAlert} />} />
 
-            
-            <Route exact path="/createadmin" element={<AdminSignup showAlert={showAlert} />} />
-            <Route exact path="/adminlogin" element={<AdminLogin showAlert={showAlert} />} />
-            <Route exact path="/admindashboard" element={<Dashboard showAlert={showAlert} />} />
-            <Route exact path="/adminProducts" element={<AdminProducts showAlert={showAlert} />} />
-            <Route exact path="/ordermanagement" element={<CustomerOrders showAlert={showAlert} />} />
-            <Route exact path="/addproducts" element={<AddProducts showAlert={showAlert} />} />
+            <Route exact path="/message" element={<Message setprogress={setprogress} />} />
+            <Route exact path="/register" element={<UserSignup setprogress={setprogress} showAlert={showAlert} />} />
+            <Route exact path="/login" element={<UserLogin setprogress={setprogress} showAlert={showAlert} />} />
+            <Route exact path="/carts" element={<Carts setprogress={setprogress} showAlert={showAlert} />} />
+            <Route exact path="/orders" element={<Orders setprogress={setprogress} showAlert={showAlert} />} />
+
+
+            <Route exact path="/createadmin" element={<AdminSignup setprogress={setprogress} showAlert={showAlert} />} />
+            <Route exact path="/adminlogin" element={<AdminLogin setprogress={setprogress} showAlert={showAlert} />} />
+            <Route exact path="/admindashboard" element={<Dashboard setprogress={setprogress} showAlert={showAlert} />} />
+            <Route exact path="/adminProducts" element={<AdminProducts setprogress={setprogress} showAlert={showAlert} />} />
+            <Route exact path="/ordermanagement" element={<CustomerOrders setprogress={setprogress} showAlert={showAlert} />} />
+            <Route exact path="/addproducts" element={<AddProducts setprogress={setprogress} showAlert={showAlert} />} />
           </Routes>
           {/* </div> */}
         </Router>
