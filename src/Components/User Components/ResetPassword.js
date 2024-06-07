@@ -22,8 +22,8 @@ const ResetPassword = (props) => {
             props.showAlert("Passwords are not equal ⚠", "danger");
         } else {
             // const response = await fetch("http://localhost:5000/api/userauth/resetpassword", {
-            // const response = await fetch("https://trenzy-backend.onrender.com/api/userauth/resetpassword", {
-            const response = await fetch("https://trenzybackend1.cyclic.cloud/api/userauth/resetpassword", {
+            const response = await fetch("https://trenzy-backend.onrender.com/api/userauth/resetpassword", {
+            // const response = await fetch("https://trenzybackend1.cyclic.cloud/api/userauth/resetpassword", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

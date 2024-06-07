@@ -11,8 +11,8 @@ const ChangePassword = (props) => {
         }
         else {
             // const response = await fetch("http://localhost:5000/api/userauth/changepassword", {
-            // const response = await fetch("https://trenzy-backend.onrender.com/api/userauth/changepassword", {
-            const response = await fetch("https://trenzybackend1.cyclic.cloud/api/userauth/changepassword", {
+            const response = await fetch("https://trenzy-backend.onrender.com/api/userauth/changepassword", {
+            // const response = await fetch("https://trenzybackend1.cyclic.cloud/api/userauth/changepassword", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

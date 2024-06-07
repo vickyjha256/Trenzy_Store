@@ -1,15 +1,20 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ProductContext from '../../Context/Products/ProductContext';
 const CustomerOrderedItems = (props) => {
     const { delivDetail } = props;
     const context = useContext(ProductContext);
     const { orderUpdate } = context;
 
-    const [status, setstatus] = useState({ update: "onthway" });
+    const [status, setstatus] = useState({ update: "ontheway" });
 
     const onChange = (e) => {
         setstatus({ ...status, [e.target.name]: e.target.value });
     }
+
+    useEffect(() => {
+      setstatus({update: delivDetail.status});
+    }, [delivDetail])
+    
 
     console.log("Status: " + status.update);
 

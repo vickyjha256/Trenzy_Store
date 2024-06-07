@@ -14,8 +14,8 @@ const UserSignup = (props) => {
         }
         else {
             // const response = await fetch("http://localhost:5000/api/userauth/registerUser", {
-            // const response = await fetch("https://trenzy-backend.onrender.com/api/userauth/registerUser", {
-            const response = await fetch("https://trenzybackend1.cyclic.cloud/api/userauth/registerUser", {
+            const response = await fetch("https://trenzy-backend.onrender.com/api/userauth/registerUser", {
+            // const response = await fetch("https://trenzybackend1.cyclic.cloud/api/userauth/registerUser", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

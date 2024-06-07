@@ -9,8 +9,8 @@ const AdminLogin = (props) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         // const response = await fetch("http://localhost:5000/api/adminauth/adminlogin", {
-        // const response = await fetch("https://trenzy-backend.onrender.com/api/adminauth/adminlogin", {
-        const response = await fetch("https://trenzybackend1.cyclic.cloud/api/adminauth/adminlogin", {
+        const response = await fetch("https://trenzy-backend.onrender.com/api/adminauth/adminlogin", {
+        // const response = await fetch("https://trenzybackend1.cyclic.cloud/api/adminauth/adminlogin", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

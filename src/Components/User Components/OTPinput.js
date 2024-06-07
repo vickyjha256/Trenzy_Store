@@ -21,8 +21,8 @@ const OTPinput = (props) => {
         e.preventDefault();
 
         // const response = await fetch("http://localhost:5000/api/userauth/otpverify", {
-        // const response = await fetch("https://trenzy-backend.onrender.com/api/userauth/otpverify", {
-        const response = await fetch("https://trenzybackend1.cyclic.cloud/api/userauth/otpverify", {
+        const response = await fetch("https://trenzy-backend.onrender.com/api/userauth/otpverify", {
+        // const response = await fetch("https://trenzybackend1.cyclic.cloud/api/userauth/otpverify", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
